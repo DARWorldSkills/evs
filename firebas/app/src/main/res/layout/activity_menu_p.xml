@@ -9,12 +9,14 @@
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnNuevoPerfil"
-        android:layout_width="52dp"
+        android:layout_width="66dp"
         android:layout_height="60dp"
         android:layout_marginBottom="24dp"
         android:layout_marginEnd="16dp"
         android:src="@drawable/iconuevo"
         app:backgroundTint="@color/colorPrimary"
+        app:elevation="2dp"
+        app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 

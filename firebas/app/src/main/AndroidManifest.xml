@@ -9,17 +9,26 @@
         android:roundIcon="@drawable/un"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controllers.Splash">
+        <activity
+            android:name=".controllers.Splash"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity android:name=".controllers.MenuP" />
-        <activity android:name=".controllers.PrimerForm">
-        </activity>
+        <activity android:name=".controllers.PrimerForm" />
+        <activity android:name=".controllers.Encuesta" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity android:name=".controllers.EncuestaDos" />
+        <activity android:name=".controllers.Resultados" />
+        <activity android:name=".controllers.Riesgos"></activity>
     </application>
 
 </manifest>

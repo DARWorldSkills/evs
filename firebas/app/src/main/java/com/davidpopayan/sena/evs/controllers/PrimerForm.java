@@ -9,10 +9,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Period;
+import java.time.Year;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class PrimerForm extends AppCompatActivity {
@@ -22,7 +31,7 @@ public class PrimerForm extends AppCompatActivity {
     Button btnSiguiente;
     RadioButton rbtnCC, rbtnTI;
     EditText txtNombre, txtIdentificacion, txtEps, txtIps,txtNumero, txtDireccion, txtFechadenacimiento, txtEdad;
-
+    List<String> genero = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +42,44 @@ public class PrimerForm extends AppCompatActivity {
         inicializar();
         listarGenero();
         escucharRadioButtons();
+        ingresarValores();
 
+    }
+
+    private void ingresarValores() {
+        if (MenuP.ingresar==0){
+            Datos datos =MenuP.datos;
+            txtNombre.setText(datos.getNombreCompleto());
+            txtIdentificacion.setText(datos.getNumeroId());
+            txtEps.setText(datos.getNombreEPS());
+            txtIps.setText(datos.getiPS());
+            txtNumero.setText(datos.getTelefono());
+            txtDireccion.setText(datos.getDireccion());
+            txtFechadenacimiento.setText(datos.getFecNac());
+            Toast.makeText(this, ""+datos.getFecNac(), Toast.LENGTH_SHORT).show();
+            for (int i=0; i<genero.size();i++){
+                if (genero.get(i).substring(0,1).equals(datos.getGenero())){
+                    spinnerGenero.setSelection(i);
+                }
+            }
+            txtEdad.setText(Integer.toString(calcularEdad(datos.getFecNac())));
+
+        }
+    }
+
+    public int calcularEdad(String fechaNac){
+        Date date = new Date();
+        Date date1 = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            date = simpleDateFormat.parse(fechaNac);
+            int edad = date1.getYear()-date.getYear();
+            return edad;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 
     //Listamos los datos de genero

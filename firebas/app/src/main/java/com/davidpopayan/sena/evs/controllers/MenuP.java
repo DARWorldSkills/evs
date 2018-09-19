@@ -31,7 +31,8 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
     MenuItem buscardorItem;
     SearchView searchView;
-    Datos datos = new Datos();
+    public static Datos datos = new Datos();
+    public static int ingresar=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             public void onClick(View v) {
                 Intent intent = new Intent(MenuP.this, PrimerForm.class);
                 startActivity(intent);
+                ingresar=1;
             }
         });
 
@@ -68,20 +70,39 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
     private void inputAdapter() {
         ManagerDB managerDB = new ManagerDB(this);
-        List<Datos> datosList = managerDB.listaDatos();
+        final List<Datos> datosList = managerDB.listaDatos();
         AdapterDatos adapterDatos = new AdapterDatos(datosList);
         recyclerView.setAdapter(adapterDatos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setHasFixedSize(true);
+
+        adapterDatos.setNewListener(new AdapterDatos.OnItemClickListener() {
+            @Override
+            public void itemClick(int position) {
+                datos = datosList.get(position);
+                Intent intent = new Intent(MenuP.this,PrimerForm.class);
+                startActivity(intent);
+                ingresar=0;
+            }
+        });
     }
 
     private void inputAdapterBuscando(String identificacion) {
         ManagerDB managerDB = new ManagerDB(this);
-        List<Datos> datosList = managerDB.listaDatosPorIdentificacion(identificacion);
+        final List<Datos> datosList = managerDB.listaDatosPorIdentificacion(identificacion);
         AdapterDatos adapterDatos = new AdapterDatos(datosList);
         recyclerView.setAdapter(adapterDatos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         recyclerView.setHasFixedSize(true);
+        adapterDatos.setNewListener(new AdapterDatos.OnItemClickListener() {
+            @Override
+            public void itemClick(int position) {
+                datos = datosList.get(position);
+                Intent intent = new Intent(MenuP.this,PrimerForm.class);
+                startActivity(intent);
+                ingresar=0;
+            }
+        });
     }
 
     @Override

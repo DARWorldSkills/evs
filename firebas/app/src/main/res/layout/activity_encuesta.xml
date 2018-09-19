@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
-            android:id="@+id/siDeporte"
+            android:id="@+id/btnSiDeporte"
             android:layout_width="97dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -76,7 +76,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noDeporte"
+            android:id="@+id/btnNoDeporte"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <RadioButton
-            android:id="@+id/siVerduras"
+            android:id="@+id/btnTodosLosDias"
             android:layout_width="148dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -144,7 +144,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noVerduras"
+            android:id="@+id/btnNotodoslosdias"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"

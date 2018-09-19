@@ -38,6 +38,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         setContentView(R.layout.activity_menu_p);
 
         inicializar();
+        this.setTitle("Estilo de vida saludable");
 
         btnNuevo.setOnClickListener(new View.OnClickListener() {
             @Override

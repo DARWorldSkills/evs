@@ -28,7 +28,8 @@
 
         <activity android:name=".controllers.EncuestaDos" />
         <activity android:name=".controllers.Resultados" />
-        <activity android:name=".controllers.Riesgos"></activity>
+        <activity android:name=".controllers.Riesgos" />
+        <activity android:name=".controllers.datosPersonales"></activity>
     </application>
 
 </manifest>

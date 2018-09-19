@@ -50,7 +50,7 @@ public class PrimerForm extends AppCompatActivity {
 
     //Evento el cual nos ayuda a escuchar el boton
     public void siguiente(View view) {
-        Intent intent = new Intent(PrimerForm.this, Encuesta.class);
+        Intent intent = new Intent(PrimerForm.this, datosPersonales.class);
         startActivity(intent);
     }
 }

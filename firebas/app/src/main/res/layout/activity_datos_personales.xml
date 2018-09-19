@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/arbolfondo"
     android:layout_height="match_parent"
     tools:context=".controllers.datosPersonales">
 
@@ -26,7 +26,7 @@
         android:layout_height="47dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.786"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
         android:layout_height="42dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/icotalla"
         app:layout_constraintEnd_toStartOf="@+id/linearLayout"
         app:layout_constraintHorizontal_bias="1.0"
@@ -189,7 +189,99 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:ems="20"
-                android:hint="Perimetro Abdominal)"
+                android:hint="Perimetro Abdominal"
+                android:inputType="number"
+                android:textSize="15sp" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <ImageView
+
+
+        android:id="@+id/imageView16"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/icopabd"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout12"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout13"
+        android:layout_width="265dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout12">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_pas"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/campo_pas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:ems="20"
+                android:hint="Presión Arterial Sistolica PAS"
+                android:inputType="number"
+                android:textSize="15sp" />
+        </android.support.design.widget.TextInputLayout>
+
+    </LinearLayout>
+
+    <ImageView
+
+
+        android:id="@+id/imageView17"
+        android:layout_width="43dp"
+        android:layout_height="42dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/icopas"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout13"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+    <LinearLayout
+
+        android:id="@+id/linearLayout14"
+        android:layout_width="265dp"
+        android:layout_height="47dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.784"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout13">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_pd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/campo_pd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:ems="20"
+                android:hint="Presión Diastólica"
                 android:inputType="number"
                 android:textSize="15sp" />
         </android.support.design.widget.TextInputLayout>
@@ -204,10 +296,11 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/icopabd"
-        app:layout_constraintEnd_toStartOf="@+id/linearLayout12"
+        android:background="@drawable/icopd"
+        app:layout_constraintEnd_toStartOf="@+id/linearLayout14"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+
 
 </android.support.constraint.ConstraintLayout>

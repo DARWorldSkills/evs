@@ -10,10 +10,15 @@ import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
 
+import java.text.DecimalFormat;
+
 public class datosPersonales extends AppCompatActivity implements View.OnClickListener{
 
     EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd;
     Button btnCalcular, btnIr;
+    double altura,peso,pesof;
+    public static int Puntaje;
+    public static double imc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +95,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.btnCalcular:
 
-                Toast.makeText(this, "hola", Toast.LENGTH_SHORT).show();
-
+                calcularIMC();
+                ClasificacionIMC();
                 break;
 
             case R.id.btnSiguiente4:
@@ -99,4 +104,46 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 break;
         }
     }
+
+    //Formula para calcular el IMC de la persona
+    private double calcularIMC() {
+        altura = Double.parseDouble(txtAltura.getText().toString());
+        peso = Double.parseDouble(txtPeso.getText().toString());
+        pesof = altura/100;
+        imc = peso/(Math.pow(pesof,2));
+        DecimalFormat df = new DecimalFormat("#.00");
+        txtIMC.setText(df.format(imc));
+        return imc;
+    }
+
+    //Validamos en que estado esta la persona
+    private void ClasificacionIMC() {
+        if (calcularIMC() < 16){
+            Toast.makeText(this, "Delgadez Severa", Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 16 && calcularIMC() < 17){
+            Toast.makeText(this, "Delgadez moderada", Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 17 && calcularIMC() < 18.50){
+            Toast.makeText(this, "Delgadez aceptable", Toast.LENGTH_SHORT).show();
+        }
+        else  if (calcularIMC() > 18.50 && calcularIMC() < 25){
+            Toast.makeText(this, "Peso Normal", Toast.LENGTH_SHORT).show();
+        }
+
+        else if (calcularIMC() >25 && calcularIMC() < 30){
+            Toast.makeText(this, "Sobrepeso", Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 30 && calcularIMC() < 35){
+            Toast.makeText(this, "Obeso: Tipo I", Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 35 && calcularIMC() < 40){
+            Toast.makeText(this, "Obeso: Tipo II", Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() >40){
+            Toast.makeText(this, "Obeso: Tipo III", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }

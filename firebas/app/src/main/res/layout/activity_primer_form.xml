@@ -26,7 +26,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_nombre"
+                android:id="@+id/txtNombre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -57,10 +57,11 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_identidad"
+                android:id="@+id/txtIdentificacion"
                 android:layout_width="160dp"
                 android:layout_height="match_parent"
                 android:ems="20"
+                android:enabled="false"
                 android:hint="Identificación"
                 android:inputType="number"
                 android:textSize="15sp" />
@@ -73,12 +74,14 @@
             android:layout_height="match_parent">
 
             <RadioButton
+                android:id="@+id/rbtnCC"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="CC"
                 android:textSize="15sp" />
 
             <RadioButton
+                android:id="@+id/rbtnTI"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="TI" />
@@ -107,7 +110,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_eps"
+                android:id="@+id/txtEps"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="20"
@@ -139,7 +142,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_hospital"
+                android:id="@+id/txtIps"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="20"
@@ -170,7 +173,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_numero"
+                android:id="@+id/txtNumero"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="20"
@@ -201,7 +204,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_direccion"
+                android:id="@+id/txtDireccion"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="20"
@@ -233,10 +236,12 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_fechan"
+                android:id="@+id/txtFechadenacimiento"
                 android:layout_width="156dp"
                 android:layout_height="match_parent"
                 android:ems="20"
+                android:maxEms="3"
+                android:maxLength="3"
                 android:hint="Fecha de Nacimiento"
                 android:inputType="date"
                 android:textSize="15sp" />
@@ -248,8 +253,8 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_edad"
-                android:layout_width="163dp"
+                android:id="@+id/txtEdad"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:ems="20"
                 android:hint="Edad"

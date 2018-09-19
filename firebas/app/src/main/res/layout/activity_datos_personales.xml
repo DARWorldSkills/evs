@@ -15,7 +15,6 @@
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/icosiguiente"
-        android:onClick="irEncuenta"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -38,7 +37,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_altura"
+                android:id="@+id/txtAltura"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -83,7 +82,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_peso"
+                android:id="@+id/txtPeso"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -129,7 +128,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_imc"
+                android:id="@+id/txtIMC"
                 android:layout_width="176dp"
                 android:layout_height="match_parent"
                 android:ems="20"
@@ -140,6 +139,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
+            android:id="@+id/btnCalcular"
             style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -184,7 +184,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_pabd"
+                android:id="@+id/txtPABD"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -230,7 +230,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_pas"
+                android:id="@+id/txtPAS"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
@@ -276,7 +276,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/campo_pd"
+                android:id="@+id/txtPd"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"

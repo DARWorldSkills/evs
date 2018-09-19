@@ -7,17 +7,18 @@ import android.view.View;
 
 import com.davidpopayan.sena.evs.R;
 
-public class EncuestaDos extends AppCompatActivity {
+public class EncuestaTres extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_encuesta_dos);
+        setContentView(R.layout.activity_encuesta_tres);
         this.setTitle("Cuestionario");
     }
 
-    public void siguientetres(View view) {
-        Intent intent = new Intent(EncuestaDos.this, EncuestaTres.class);
+    public void resultado(View view) {
+
+        Intent intent = new Intent(EncuestaTres.this, Resultados.class);
         startActivity(intent);
     }
 }

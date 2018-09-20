@@ -22,6 +22,7 @@ public class Encuesta extends AppCompatActivity {
         inicializar();
     }
 
+    //Referenciamos los campos del layout
     private void inicializar() {
 
         btnSiDeporte = findViewById(R.id.btnSiDeporte);
@@ -31,12 +32,14 @@ public class Encuesta extends AppCompatActivity {
 
     }
 
+    //Evento del boton siguiente
     public void siguienteEn(View view) {
 
         validar();
 
     }
 
+    //Metodo que nos ayuda a validar que no falte ninguna respuesta
     private void validar() {
         int validar = 0;
 
@@ -50,11 +53,11 @@ public class Encuesta extends AppCompatActivity {
                 validar++;
                 action = "no";
             }
-            if (validar == 2){
+            if (validar == 1){
                 Intent intent = new Intent(Encuesta.this, EncuestaDos.class);
                 startActivity(intent);
             }else {
-                Toast.makeText(this, "Falta respuesta ", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Falta Respuesta ", Toast.LENGTH_SHORT).show();
             }
         }
 

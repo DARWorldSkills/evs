@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/arbolfondo"
     android:layout_height="match_parent"
     tools:context=".controllers.EncuestaTres">
 
@@ -70,7 +70,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView5">
 
         <RadioButton
-            android:id="@+id/Diabetes"
+            android:id="@+id/btnSiPadresDiabetes"
             android:layout_width="117dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -79,7 +79,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/ninguno"
+            android:id="@+id/btnNinguno"
             android:layout_width="62dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -88,7 +88,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noabuelos"
+            android:id="@+id/btnNoDiabetesAbuelo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -132,7 +132,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4">
 
         <RadioButton
-            android:id="@+id/siDiabetes"
+            android:id="@+id/btnSiDiabetes"
             android:layout_width="97dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -141,7 +141,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noDiabetes"
+            android:id="@+id/btnNoDiabetes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -199,7 +199,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <RadioButton
-            android:id="@+id/siFumas"
+            android:id="@+id/btnSiFumas"
             android:layout_width="97dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -208,7 +208,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noFumas"
+            android:id="@+id/btnNoFumas"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"

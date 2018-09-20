@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/fondo"
+    android:background="@drawable/arbolfondo"
     android:layout_height="match_parent"
     tools:context=".controllers.EncuestaDos">
 
@@ -67,7 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <RadioButton
-            android:id="@+id/siMedi"
+            android:id="@+id/btnSiMedicamentos"
             android:layout_width="97dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -76,7 +76,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noMedi"
+            android:id="@+id/btnNoMedicamentos"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -135,7 +135,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2">
 
         <RadioButton
-            android:id="@+id/siGlucosa"
+            android:id="@+id/btnSiGlucosa"
             android:layout_width="97dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"
@@ -144,7 +144,7 @@
             android:textSize="12sp" />
 
         <RadioButton
-            android:id="@+id/noGlucosa"
+            android:id="@+id/btnNoGlucosa"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fontFamily="@font/amiko"

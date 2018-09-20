@@ -46,6 +46,7 @@ public class PrimerForm extends AppCompatActivity {
 
     }
 
+    //Ingresamos los datos de la base de datos
     private void ingresarValores() {
         if (MenuP.ingresar==0){
             Datos datos =MenuP.datos;
@@ -56,7 +57,6 @@ public class PrimerForm extends AppCompatActivity {
             txtNumero.setText(datos.getTelefono());
             txtDireccion.setText(datos.getDireccion());
             txtFechadenacimiento.setText(datos.getFecNac());
-            Toast.makeText(this, ""+datos.getFecNac(), Toast.LENGTH_SHORT).show();
             for (int i=0; i<genero.size();i++){
                 if (genero.get(i).substring(0,1).equals(datos.getGenero())){
                     spinnerGenero.setSelection(i);
@@ -67,6 +67,7 @@ public class PrimerForm extends AppCompatActivity {
         }
     }
 
+    //Operacion la cual nos ayuda a calcular la edad de la persona
     public int calcularEdad(String fechaNac){
         Date date = new Date();
         Date date1 = new Date();
@@ -84,7 +85,7 @@ public class PrimerForm extends AppCompatActivity {
 
     //Listamos los datos de genero
     private void listarGenero() {
-        List<String>genero = new ArrayList<>();
+        genero = new ArrayList<>();
         genero.add("Masculino");
         genero.add("Femenino");
         genero.add("Indefinido");

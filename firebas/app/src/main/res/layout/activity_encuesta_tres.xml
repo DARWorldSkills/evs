@@ -7,8 +7,26 @@
     android:layout_height="match_parent"
     tools:context=".controllers.EncuestaTres">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="496dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent">
+
+
+
+        <Button
         android:id="@+id/btnSiguiente5"
         style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
         android:layout_width="53dp"
@@ -217,5 +235,8 @@
             android:textSize="12sp" />
 
     </RadioGroup>
+
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

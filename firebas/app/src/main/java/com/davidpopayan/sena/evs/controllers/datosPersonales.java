@@ -1,3 +1,4 @@
+
 package com.davidpopayan.sena.evs.controllers;
 
 import android.content.Intent;
@@ -14,11 +15,14 @@ import java.text.DecimalFormat;
 
 public class datosPersonales extends AppCompatActivity implements View.OnClickListener{
 
-    EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd;
-    Button btnCalcular, btnIr;
-    double altura,peso,pesof;
+    EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd,txtPresionArterial;
+    Button btnCalcular, btnIr, btnCalcularParterial;
+    double altura,peso,pesof, sistolica, diastolica;
+    int resultado;
     public static int Puntaje;
     public static double imc;
+    public static String tmp1, tmp2;
+    public static double res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,17 +32,21 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         this.setTitle("Datos Personales");
         inicializar();
         escuchar();
+
     }
 
+    //Evento de los botones
     private void escuchar() {
         btnCalcular.setOnClickListener(this);
         btnIr.setOnClickListener(this);
+        btnCalcularParterial.setOnClickListener(this);
     }
 
     //Referenciamos todos los elementos que vamos a utilizar
     private void inicializar() {
         btnCalcular = findViewById(R.id.btnCalcular);
         btnIr = findViewById(R.id.btnSiguiente4);
+        btnCalcularParterial = findViewById(R.id.btnCalcularParterial);
         ////////////////////////////////////////////////
         txtAltura = findViewById(R.id.txtAltura);
         txtPeso = findViewById(R.id.txtPeso);
@@ -46,6 +54,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         txtPABD = findViewById(R.id.txtPABD);
         txtPAS = findViewById(R.id.txtPAS);
         txtPd = findViewById(R.id.txtPd);
+        txtPresionArterial = findViewById(R.id.txtPresionArterial);
     }
 
     //Validamos que los campos no esten vacios
@@ -99,10 +108,56 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 ClasificacionIMC();
                 break;
 
+            case R.id.btnCalcularParterial:
+                calcularPrecionArterial();
+                clasificacionPrecionArterial();
+
+
+                break;
+
+
             case R.id.btnSiguiente4:
                 validar();
                 break;
         }
+    }
+
+    //Nivel de precion arterial de la persona
+    private void clasificacionPrecionArterial() {
+        if ( resultado < 70){
+            tmp2 = "Normal bajo";
+            Toast.makeText(this, "Normal bajo", Toast.LENGTH_SHORT).show();
+        }
+        else if (resultado >70 && resultado < 105){
+            tmp2 = "Normal alto";
+            Toast.makeText(this, "Normal alto", Toast.LENGTH_SHORT).show();
+        }
+        else if (resultado >105 && resultado < 300){
+            tmp2 = "Limite Alto";
+            Toast.makeText(this, "Limite Alto", Toast.LENGTH_SHORT).show();
+        }
+        else if (resultado == 0){
+            tmp2 = "No puedes tener la presión arterial en 0";
+            Toast.makeText(this, "No puedes tener la presión arterial en 0", Toast.LENGTH_SHORT).show();
+        }
+
+
+    }
+
+    //Formula para calcular la precionArterial
+    private void calcularPrecionArterial() {
+
+        sistolica = Double.parseDouble(txtPAS.getText().toString());
+        diastolica = Double.parseDouble(txtPd.getText().toString());
+
+        float tmp1 = (float) sistolica;
+        float tmp2 = (float) diastolica;
+
+        res = (tmp1 + (2*tmp2))/3;
+
+        resultado = (int) (sistolica / diastolica);
+        txtPresionArterial.setText(Double.toString(res));
+
     }
 
     //Formula para calcular el IMC de la persona
@@ -119,28 +174,35 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     //Validamos en que estado esta la persona
     private void ClasificacionIMC() {
         if (calcularIMC() < 16){
+            tmp1 = "Delgadez Severa";
             Toast.makeText(this, "Delgadez Severa", Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 16 && calcularIMC() < 17){
+            tmp1 = "Delgadez moderada";
             Toast.makeText(this, "Delgadez moderada", Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 17 && calcularIMC() < 18.50){
+            tmp1 = "Delgadez aceptable";
             Toast.makeText(this, "Delgadez aceptable", Toast.LENGTH_SHORT).show();
         }
         else  if (calcularIMC() > 18.50 && calcularIMC() < 25){
+            tmp1 = "Peso Normal";
             Toast.makeText(this, "Peso Normal", Toast.LENGTH_SHORT).show();
         }
-
         else if (calcularIMC() >25 && calcularIMC() < 30){
+            tmp1 = "Sobrepeso";
             Toast.makeText(this, "Sobrepeso", Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 30 && calcularIMC() < 35){
+            tmp1 = "Obeso: Tipo I";
             Toast.makeText(this, "Obeso: Tipo I", Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 35 && calcularIMC() < 40){
+            tmp1 = "Obeso: Tipo II";
             Toast.makeText(this, "Obeso: Tipo II", Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() >40){
+            tmp1 = "Obeso: Tipo III";
             Toast.makeText(this, "Obeso: Tipo III", Toast.LENGTH_SHORT).show();
         }
     }

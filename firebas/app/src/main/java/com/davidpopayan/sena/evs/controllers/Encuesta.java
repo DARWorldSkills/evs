@@ -35,8 +35,26 @@ public class Encuesta extends AppCompatActivity {
     //Evento del boton siguiente
     public void siguienteEn(View view) {
 
+        resultadoPersona();
         validar();
 
+    }
+
+    private void resultadoPersona() {
+
+        if (btnSiDeporte.isChecked()){
+            Toast.makeText(this, "Persona hace depore", Toast.LENGTH_SHORT).show();
+        }
+        else if (btnNoDeporte.isChecked()){
+            Toast.makeText(this, "Salud mala", Toast.LENGTH_SHORT).show();
+        }
+        else if (btnSiTodosLosDias.isChecked()){
+            Toast.makeText(this, "La persona se alimenta muy bien", Toast.LENGTH_SHORT).show();
+
+        }
+        else if (btnNotodoslosdia.isChecked()){
+            Toast.makeText(this, "La persona no se alimenta bien", Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Metodo que nos ayuda a validar que no falte ninguna respuesta

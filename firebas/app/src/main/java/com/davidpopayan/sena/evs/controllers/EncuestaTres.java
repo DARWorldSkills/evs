@@ -12,7 +12,9 @@ import com.davidpopayan.sena.evs.R;
 public class EncuestaTres extends AppCompatActivity {
 
     //Variables
-    RadioButton btnSiDiabetesPadres, btnNinguno, btnNoDiabetesAbuelos, btnSiDiabetes, btnNoDiabetes, btnSiFumas, btnNoFumas;
+    RadioButton btnSiDiabetesPadres, btnNinguno, btnSiDiabetesAbuelo, btnSiDiabetes, btnNoDiabetes, btnSiFumas, btnNoFumas;
+    int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
+    public static  int tmp3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,23 @@ public class EncuestaTres extends AppCompatActivity {
 
         //Creamos Metodos
         inicializar();
+
+    }
+
+    //Asignamos puntaje a cada pregunta de la encueta
+    private void resuladosPersonaE3() {
+        if (btnSiDiabetesPadres.isChecked()){
+            tmp3 = cinco;
+            Toast.makeText(this, ""+cinco, Toast.LENGTH_SHORT).show();
+        }
+        else if (btnSiDiabetesAbuelo.isChecked()){
+            tmp3 = tres;
+            Toast.makeText(this, ""+tres, Toast.LENGTH_SHORT).show();
+        }
+        else if (btnNinguno.isChecked()){
+            tmp3 = cero;
+            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Metodo para referenciar todos los elementos del layout
@@ -29,7 +48,7 @@ public class EncuestaTres extends AppCompatActivity {
 
         btnSiDiabetesPadres = findViewById(R.id.btnSiPadresDiabetes);
         btnNinguno = findViewById(R.id.btnNinguno);
-        btnNoDiabetesAbuelos = findViewById(R.id.btnNoDiabetesAbuelo);
+        btnSiDiabetesAbuelo = findViewById(R.id.btnSiDiabetesAbuelo);
         btnSiDiabetes = findViewById(R.id.btnSiDiabetes);
         btnNoDiabetes = findViewById(R.id.btnNoDiabetes);
         btnSiFumas = findViewById(R.id.btnSiFumas);
@@ -38,6 +57,7 @@ public class EncuestaTres extends AppCompatActivity {
 
     //Evento del boton siguiente
     public void resultado(View view) {
+        resuladosPersonaE3();
         validar();
     }
     //Validamos que los campos no estén vacios
@@ -51,7 +71,7 @@ public class EncuestaTres extends AppCompatActivity {
             if (btnNinguno.isChecked()){
                 validar++;
             }
-            if (btnNoDiabetesAbuelos.isChecked()){
+            if (btnSiDiabetesAbuelo.isChecked()){
                 validar++;
 
             }

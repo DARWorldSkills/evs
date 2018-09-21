@@ -12,6 +12,10 @@ import com.davidpopayan.sena.evs.R;
 public class Encuesta extends AppCompatActivity {
 
     RadioButton btnSiDeporte,btnNoDeporte, btnSiTodosLosDias, btnNotodoslosdia;
+    int cero = 0, uno =1 ,dos = 2,  cuatro = 4, seis =6;
+    public static int tmp, tmp2;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +44,25 @@ public class Encuesta extends AppCompatActivity {
 
     }
 
+    //Asignar valores a cada selector de la encuesta
     private void resultadoPersona() {
 
         if (btnSiDeporte.isChecked()){
-            Toast.makeText(this, "Persona hace depore", Toast.LENGTH_SHORT).show();
+            tmp = cero;
+            Toast.makeText(this, ""+tmp, Toast.LENGTH_SHORT).show();
         }
         else if (btnNoDeporte.isChecked()){
-            Toast.makeText(this, "Salud mala", Toast.LENGTH_SHORT).show();
+            tmp = dos;
+            Toast.makeText(this, ""+dos, Toast.LENGTH_SHORT).show();
         }
         else if (btnSiTodosLosDias.isChecked()){
-            Toast.makeText(this, "La persona se alimenta muy bien", Toast.LENGTH_SHORT).show();
+            tmp2 = cero;
+            Toast.makeText(this, "" +cero, Toast.LENGTH_SHORT).show();
 
         }
         else if (btnNotodoslosdia.isChecked()){
-            Toast.makeText(this, "La persona no se alimenta bien", Toast.LENGTH_SHORT).show();
+            tmp2 = uno;
+            Toast.makeText(this, ""+ uno, Toast.LENGTH_SHORT).show();
         }
     }
 

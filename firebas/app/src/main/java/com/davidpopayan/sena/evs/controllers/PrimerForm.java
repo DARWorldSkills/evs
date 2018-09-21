@@ -31,6 +31,9 @@ public class PrimerForm extends AppCompatActivity {
     Button btnSiguiente;
     RadioButton rbtnCC, rbtnTI;
     EditText txtNombre, txtIdentificacion, txtEps, txtIps,txtNumero, txtDireccion, txtFechadenacimiento, txtEdad;
+    int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
+    int edad;
+    public static int edadPuntaje;
     List<String> genero = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,7 +77,7 @@ public class PrimerForm extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             date = simpleDateFormat.parse(fechaNac);
-            int edad = date1.getYear()-date.getYear();
+            edad = date1.getYear()-date.getYear();
             return edad;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -114,9 +117,27 @@ public class PrimerForm extends AppCompatActivity {
 
     //Evento el cual nos ayuda a escuchar el boton
     public void siguiente(View view) {
+        asiganarPuntajes();
         validar();
-
-
+    }
+    //Asignamos puntaje dependiendo de la edad de la persona
+    private void asiganarPuntajes() {
+        if (edad< 45){
+            edadPuntaje = cero;
+            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+        }
+        else if (edad >45 && edad<54){
+            edadPuntaje = dos;
+            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+        }
+        else if (edad >55 && edad <64){
+            edadPuntaje = tres;
+            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+        }
+        else if (edad > 64){
+            edadPuntaje = cuatro;
+            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Validamos el tipo de identidicacion

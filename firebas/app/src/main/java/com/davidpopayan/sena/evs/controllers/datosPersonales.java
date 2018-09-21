@@ -19,7 +19,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     Button btnCalcular, btnIr, btnCalcularParterial;
     double altura,peso,pesof, sistolica, diastolica;
     int resultado;
-    public static int Puntaje;
+    int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
+    public static int puntaje, puntajePABD;
     public static double imc;
     public static String tmp1, tmp2;
     public static double res;
@@ -103,7 +104,6 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnCalcular:
-
                 calcularIMC();
                 ClasificacionIMC();
                 break;
@@ -111,14 +111,55 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
             case R.id.btnCalcularParterial:
                 calcularPrecionArterial();
                 clasificacionPrecionArterial();
-
-
                 break;
-
-
             case R.id.btnSiguiente4:
+                asignarPuntajes();
                 validar();
                 break;
+        }
+    }
+
+    //Asignamos puntajes dependiendo el IMC de la persona y el perimetro abdominal
+    private void asignarPuntajes() {
+        if (calcularIMC() < 25){
+            puntaje = cero;
+            Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 25 && calcularIMC() < 30){
+            puntaje = uno;
+            Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
+        }
+        else if (calcularIMC() > 30){
+            puntaje = tres;
+            Toast.makeText(this, ""+ puntaje, Toast.LENGTH_SHORT).show();
+        }
+        if (MenuP.datos.getGenero().equals("M")){
+           if (res < 94){
+               puntajePABD = cero;
+               Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+           }
+           else if (res > 94 && res <102){
+               puntajePABD = tres;
+               Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+           }
+           else if (res > 102){
+               puntajePABD = cuatro;
+               Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
+           }
+        }else {
+            if (res < 80){
+                puntajePABD = cero;
+                Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+            }
+            else if (res > 80 && res < 88){
+                puntajePABD = tres;
+                Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+            }
+            else if (res > 88){
+                puntajePABD = cuatro;
+                Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
+            }
+
         }
     }
 

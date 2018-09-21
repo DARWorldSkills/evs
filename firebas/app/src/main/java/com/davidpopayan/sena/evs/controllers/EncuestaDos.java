@@ -14,6 +14,8 @@ public class EncuestaDos extends AppCompatActivity {
 
     //Variables
     RadioButton btnSiMedicamentos, btnNoMedicamentos, btnSiGlucosa, btnNoGlucosa;
+    int cero = 0, uno =1 ,dos = 2,  cuatro = 4,cinco = 5, seis =6;
+    public static int tmp2, tmp3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,28 @@ public class EncuestaDos extends AppCompatActivity {
 
         //Creamos los metodos
         inicializar();
+
+    }
+
+    //Puntaje de la persona segun la encuesta
+    private void resultadosPersonaE2() {
+
+        if (btnSiGlucosa.isChecked()){
+            tmp2 = cinco;
+            Toast.makeText(this, ""+ cinco, Toast.LENGTH_SHORT).show();
+        }
+        else if (btnNoGlucosa.isChecked()){
+            tmp2 = cero;
+            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+        }
+        else if (btnSiMedicamentos.isChecked()){
+            tmp3 = dos;
+            Toast.makeText(this, ""+ dos, Toast.LENGTH_SHORT).show();
+        }
+        else if (btnNoMedicamentos.isChecked()){
+            tmp3 = cero;
+            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Referenciamos los elements que vamos a utilizar
@@ -35,6 +59,7 @@ public class EncuestaDos extends AppCompatActivity {
 
     //Evento del boton de siguiente
     public void siguientetres(View view) {
+        resultadosPersonaE2();
         validar();
     }
 

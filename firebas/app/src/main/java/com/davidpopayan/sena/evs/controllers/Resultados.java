@@ -14,8 +14,9 @@ public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
 
-    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA;
+    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD;
     double im, res;
+    int riesgoDiabetes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,17 @@ public class Resultados extends AppCompatActivity {
         obtenerResultadoImc();
         obtenerPresionArterial();
         estadoPresionA();
+        riesgoDiabetesF();
+    }
+
+    //Hacemos la sumatoria te todos los puntos de las encuentas y dependiendo a eso vemos que tan grave es el riesgo
+    private void riesgoDiabetesF() {
+
+        riesgoDiabetes = PrimerForm.edadPuntaje + datosPersonales.puntaje + datosPersonales.puntajePABD + Encuesta.tmp + Encuesta.tmp2
+                + EncuestaDos.tmp2 + EncuestaDos.tmp3 + EncuestaTres.tmp3;
+
+        txtPuntajeRiesgoD.setText(Integer.toString(riesgoDiabetes));
+
     }
 
     //Obtenemos de la clase datosPersonales el dato del estado de la presion arterial de la persona
@@ -63,6 +75,7 @@ public class Resultados extends AppCompatActivity {
         txtResultadoImc = findViewById(R.id.txtResultadoImc);
         txtPresionAF = findViewById(R.id.txtPresionA);
         txtEstadoPresionA = findViewById(R.id.txtEstadoPresionA);
+        txtPuntajeRiesgoD = findViewById(R.id.txtPuntajeRiesgoD);
     }
 
 }

@@ -20,7 +20,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     double altura,peso,pesof, sistolica, diastolica;
     int resultado;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
-    public static int puntaje, puntajePABD;
+    public static int puntaje, puntajePABD, puntajePresionS;
     public static double imc;
     public static String tmp1, tmp2;
     public static double res;
@@ -34,6 +34,32 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         inicializar();
         escuchar();
 
+
+    }
+
+    //Asiganamos puntajes dependiendo la presion sistoica del pasiente
+    private void puntajePresionSistolica() {
+
+        if (sistolica < 120){
+            puntajePresionS = cero;
+            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+        }
+        else if (sistolica >120 && sistolica < 129){
+            puntajePresionS = cero;
+            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+        }
+        else if (sistolica >129 &&  sistolica <139){
+            puntajePresionS = uno;
+            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+        }
+        else if (sistolica >139 && sistolica < 159){
+            puntajePresionS = dos;
+            Toast.makeText(this, ""+ puntajePresionS, Toast.LENGTH_SHORT).show();
+        }
+        else if (sistolica > 160){
+            puntajePresionS = tres;
+            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+        }
     }
 
     //Evento de los botones
@@ -114,7 +140,9 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btnSiguiente4:
                 asignarPuntajes();
+                puntajePresionSistolica();
                 validar();
+
                 break;
         }
     }

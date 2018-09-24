@@ -3,6 +3,7 @@ package com.davidpopayan.sena.evs.controllers;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
 
@@ -14,9 +15,9 @@ public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
 
-    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD;
+    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular;
     double im, res;
-    int riesgoDiabetes;
+    int riesgoDiabetes, riesgoCardioVascular;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +32,49 @@ public class Resultados extends AppCompatActivity {
         obtenerPresionArterial();
         estadoPresionA();
         riesgoDiabetesF();
+        calcularRiesgoCardiovascular();
+        RiesgoCardiovascularEnPorcentaje();
+    }
+
+    private void RiesgoCardiovascularEnPorcentaje() {
+        
+        if (MenuP.datos.getGenero().equals("M")){
+            if (riesgoCardioVascular < 0){
+                Toast.makeText(this, "3% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
+                Toast.makeText(this, "10% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
+                Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
+                Toast.makeText(this, "53% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            
+        }else {
+            if (riesgoCardioVascular < 0){
+                Toast.makeText(this, "2% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
+                Toast.makeText(this, "5% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
+                Toast.makeText(this, "8% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
+                Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+            }
+            
+        }
+    }
+
+    //Generamos la operacion para obtener el puntaje y saber cuanto es el porcentaje del  riesgo
+    private void calcularRiesgoCardiovascular() {
+        riesgoCardioVascular = PrimerForm.edadPuntaje + datosPersonales.puntajePresionS + EncuestaTres.tmpFuma + EncuestaTres.tmpDiabe;
+
+        txtRiesgoCardiovascular.setText(Integer.toString(riesgoCardioVascular));
+
     }
 
     //Hacemos la sumatoria te todos los puntos de las encuentas y dependiendo a eso vemos que tan grave es el riesgo
@@ -76,6 +120,7 @@ public class Resultados extends AppCompatActivity {
         txtPresionAF = findViewById(R.id.txtPresionA);
         txtEstadoPresionA = findViewById(R.id.txtEstadoPresionA);
         txtPuntajeRiesgoD = findViewById(R.id.txtPuntajeRiesgoD);
+        txtRiesgoCardiovascular = findViewById(R.id.txtRiesgoCardiovascular);
     }
 
 }

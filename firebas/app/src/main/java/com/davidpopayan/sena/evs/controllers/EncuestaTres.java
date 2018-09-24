@@ -14,7 +14,7 @@ public class EncuestaTres extends AppCompatActivity {
     //Variables
     RadioButton btnSiDiabetesPadres, btnNinguno, btnSiDiabetesAbuelo, btnSiDiabetes, btnNoDiabetes, btnSiFumas, btnNoFumas;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
-    public static  int tmp3;
+    public static  int tmp3, tmpFuma, tmpDiabe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +41,32 @@ public class EncuestaTres extends AppCompatActivity {
             tmp3 = cero;
             Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
         }
+        if (MenuP.datos.getGenero().equals("M")){
+            if (btnSiFumas.isChecked()){
+                tmpFuma = dos;
+            }else if (btnNoFumas.isChecked()){
+                tmpFuma = cero;
+            }
+            if (btnSiDiabetes.isChecked()){
+                tmpDiabe = dos;
+            }else if (btnNoDiabetes.isChecked()){
+                tmpDiabe = cero;
+            }
+        }else {
+            if (btnSiFumas.isChecked()){
+                tmpFuma = dos;
+            }else if (btnNoFumas.isChecked()){
+                tmpFuma = cero;
+            }
+            if (btnSiDiabetes.isChecked()){
+                tmpDiabe = cuatro;
+            }else if (btnNoDiabetes.isChecked()){
+                tmpDiabe = cero;
+            }
+
+        }
+
+
     }
 
     //Metodo para referenciar todos los elementos del layout

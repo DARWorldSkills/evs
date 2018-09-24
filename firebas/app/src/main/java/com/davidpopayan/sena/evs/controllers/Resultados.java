@@ -1,7 +1,9 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.davidpopayan.sena.evs.R;
@@ -78,4 +80,9 @@ public class Resultados extends AppCompatActivity {
         txtPuntajeRiesgoD = findViewById(R.id.txtPuntajeRiesgoD);
     }
 
+    public void finalizar(View view) {
+        Intent intent = new Intent(Resultados.this,MenuP.class);
+        startActivity(intent);
+        finish();
+    }
 }

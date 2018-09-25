@@ -62,35 +62,42 @@ public class Resultados extends AppCompatActivity {
 
     }
 
-    
+    //Vemos en que porcentaje esta la persona para tener Riesgos cardiovasculares
     private void RiesgoCardiovascularEnPorcentaje() {
-
-        if (MenuP.datos.getGenero().equals("M")){
+        if (MenuP.datos.getGenero().equals("Masculino")){
             if (riesgoCardioVascular < 0){
                 Toast.makeText(this, "3% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
             if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "10% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
             if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Medio Cardiovascular");
             }
             if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "53% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Alto Cardiovascular");
             }
 
         }else {
             if (riesgoCardioVascular < 0){
                 Toast.makeText(this, "2% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
             if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "5% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
             if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "8% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Medio Cardiovascular");
             }
             if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
+                txtRiesgoC.setText("Riesgo Alto Cardiovascular");
             }
 
         }
@@ -153,6 +160,7 @@ public class Resultados extends AppCompatActivity {
         txtRiesgoC = findViewById(R.id.txtRiesgoC);
     }
 
+    //Cargamos los datos
     private void inputData() {
         ManagerDB managerDB = new ManagerDB(this);
 
@@ -170,6 +178,7 @@ public class Resultados extends AppCompatActivity {
         }
     }
 
+    //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
         Intent intent = new Intent(Resultados.this,MenuP.class);
         startActivity(intent);

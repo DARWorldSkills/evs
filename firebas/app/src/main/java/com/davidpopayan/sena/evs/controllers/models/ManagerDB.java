@@ -81,7 +81,11 @@ public class ManagerDB {
         values.put("FECNAC",datos.getFecNac());
         values.put("EDAD",datos.getEdad());
         values.put("EDADCATEGORIZADA",datos.getEdadCategorizada());
-        values.put("GENERO",datos.getGenero());
+        if (datos.getGenero().equals("M")){
+            values.put("GENERO","Masculino");
+        }else {
+            values.put("GENERO","Femenino");
+        }
         values.put("TALLA",datos.getTalla());
         values.put("PESO",datos.getPeso());
         values.put("PERIMETROA",datos.getPerimetroAbdominal());

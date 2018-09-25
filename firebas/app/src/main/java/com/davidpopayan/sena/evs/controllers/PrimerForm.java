@@ -62,7 +62,7 @@ public class PrimerForm extends AppCompatActivity {
             txtDireccion.setText(datos.getDireccion());
             txtFechadenacimiento.setText(datos.getFecNac());
             for (int i=0; i<genero.size();i++){
-                if (genero.get(i).substring(0,1).equals(datos.getGenero())){
+                if (genero.get(i).equals(datos.getGenero())){
                     spinnerGenero.setSelection(i);
                 }
             }

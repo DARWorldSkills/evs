@@ -3,6 +3,7 @@ package com.davidpopayan.sena.evs.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,8 +66,8 @@ public class Resultados extends AppCompatActivity {
     //Vemos en que porcentaje esta la persona para tener Riesgos cardiovasculares
     private void RiesgoCardiovascularEnPorcentaje() {
         if (MenuP.datos.getGenero().equals("Masculino")){
+
             if (riesgoCardioVascular < 0){
-                Toast.makeText(this, "3% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
             if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){

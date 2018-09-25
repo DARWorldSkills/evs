@@ -47,6 +47,8 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     SearchView searchView;
     public static Datos datos = new Datos();
     public static int ingresar=0;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,7 +211,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         }
 
     }
-
 
     @Override
     public boolean onQueryTextSubmit(String query) {

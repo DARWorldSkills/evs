@@ -18,9 +18,10 @@ public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
 
-    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular;
+    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular, txtRD, txtRiesgoC;
     double im, res;
     int riesgoDiabetes, riesgoCardioVascular;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +39,30 @@ public class Resultados extends AppCompatActivity {
         calcularRiesgoCardiovascular();
         RiesgoCardiovascularEnPorcentaje();
         inputData();
+        RiesgoDiabetes();
     }
 
+    //Calculamos el riego que puede tener la persona
+    private void RiesgoDiabetes() {
+        if (riesgoDiabetes > 12){
+            txtRD.setText("Riesgo Alto");
+            Toast.makeText(this, "Riesgo Alto", Toast.LENGTH_SHORT).show();
+        }
+        else if (riesgoDiabetes >= 10){
+            Toast.makeText(this, "Riesgo Moderado", Toast.LENGTH_SHORT).show();
+            txtRD.setText("Riesgo Moderado");
+
+        }
+        else if (riesgoDiabetes > 8){
+            Toast.makeText(this, "Riesgo Bajo", Toast.LENGTH_SHORT).show();
+            txtRD.setText("Riesgo Bajo");
+
+        }
+
+
+    }
+
+    
     private void RiesgoCardiovascularEnPorcentaje() {
 
         if (MenuP.datos.getGenero().equals("M")){
@@ -74,15 +97,14 @@ public class Resultados extends AppCompatActivity {
     }
 
     //Generamos la operacion para obtener el puntaje y saber cuanto es el porcentaje del  riesgo
-
     private void calcularRiesgoCardiovascular() {
         riesgoCardioVascular = PrimerForm.edadPuntaje + datosPersonales.puntajePresionS + EncuestaTres.tmpFuma + EncuestaTres.tmpDiabe;
 
         txtRiesgoCardiovascular.setText(Integer.toString(riesgoCardioVascular));
 
     }
-    //Hacemos la sumatoria te todos los puntos de las encuentas y dependiendo a eso vemos que tan grave es el riesgo
 
+    //Hacemos la sumatoria te todos los puntos de las encuentas y dependiendo a eso vemos que tan grave es el riesgo
     private void riesgoDiabetesF() {
 
         riesgoDiabetes = PrimerForm.edadPuntaje + datosPersonales.puntaje + datosPersonales.puntajePABD + Encuesta.tmp + Encuesta.tmp2
@@ -90,34 +112,35 @@ public class Resultados extends AppCompatActivity {
 
         txtPuntajeRiesgoD.setText(Integer.toString(riesgoDiabetes));
 
-    }
-    //Obtenemos de la clase datosPersonales el dato del estado de la presion arterial de la persona
 
+    }
+
+    //Obtenemos de la clase datosPersonales el dato del estado de la presion arterial de la persona
     private void estadoPresionA() {
         txtEstadoPresionA.setText(datosPersonales.tmp2);
     }
-    //Obtenemos el resultado de la presion arterial que se calcula en los datos personales
 
+    //Obtenemos el resultado de la presion arterial que se calcula en los datos personales
     private void obtenerPresionArterial() {
 
         res = datosPersonales.res;
         res = Math.round(res * 100) / 100d;
         txtPresionAF.setText(Double.toString(res));
     }
-    //Vemos el estado de la persona
 
+    //Vemos el estado de la persona
     private void obtenerResultadoImc() {
         txtResultadoImc.setText(datosPersonales.tmp1);
     }
-    //Obtenemos de la clase datosPersonales el IMC de la persona
 
+    //Obtenemos de la clase datosPersonales el IMC de la persona
     private void obtenerImc() {
         im = datosPersonales.imc;
         im = Math.round(im * 100) / 100d;
         txtImcFinal.setText(Double.toString(im));
     }
-    //Referenciamos Todos los campos del layout
 
+    //Referenciamos Todos los campos del layout
     private void inicializar() {
 
         txtImcFinal = findViewById(R.id.txtImcFinal);
@@ -126,6 +149,8 @@ public class Resultados extends AppCompatActivity {
         txtEstadoPresionA = findViewById(R.id.txtEstadoPresionA);
         txtPuntajeRiesgoD = findViewById(R.id.txtPuntajeRiesgoD);
         txtRiesgoCardiovascular = findViewById(R.id.txtRiesgoCardiovascular);
+        txtRD = findViewById(R.id.txtRD);
+        txtRiesgoC = findViewById(R.id.txtRiesgoC);
     }
 
     private void inputData() {

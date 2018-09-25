@@ -8,13 +8,14 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
 public class EncuestaTres extends AppCompatActivity {
 
     //Variables
     RadioButton btnSiDiabetesPadres, btnNinguno, btnSiDiabetesAbuelo, btnSiDiabetes, btnNoDiabetes, btnSiFumas, btnNoFumas;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
-    public static  int tmp3;
+    public static  int tmp3, tmpFuma, tmpDiabe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,32 @@ public class EncuestaTres extends AppCompatActivity {
             tmp3 = cero;
             Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
         }
+        if (MenuP.datos.getGenero().equals("M")){
+            if (btnSiFumas.isChecked()){
+                tmpFuma = dos;
+            }else if (btnNoFumas.isChecked()){
+                tmpFuma = cero;
+            }
+            if (btnSiDiabetes.isChecked()){
+                tmpDiabe = dos;
+            }else if (btnNoDiabetes.isChecked()){
+                tmpDiabe = cero;
+            }
+        }else {
+            if (btnSiFumas.isChecked()){
+                tmpFuma = dos;
+            }else if (btnNoFumas.isChecked()){
+                tmpFuma = cero;
+            }
+            if (btnSiDiabetes.isChecked()){
+                tmpDiabe = cuatro;
+            }else if (btnNoDiabetes.isChecked()){
+                tmpDiabe = cero;
+            }
+
+        }
+
+
     }
 
     //Metodo para referenciar todos los elementos del layout
@@ -89,10 +116,44 @@ public class EncuestaTres extends AppCompatActivity {
             }
             if (validar == 3){
                 Intent intent = new Intent(EncuestaTres.this, Resultados.class);
+                inputData();
                 startActivity(intent);
             }else {
                 Toast.makeText(this, "Faltan Respuestas", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void inputData() {
+        Datos datos = MenuP.datos;
+        if (btnSiDiabetes.isChecked()){
+            datos.setDiabetes("SI");
+        }else {
+            datos.setDiabetes("NO");
+        }
+
+        if (btnSiFumas.isChecked()){
+            datos.setFuma("SI");
+        }else{
+            datos.setFuma("NO");
+        }
+
+        if (btnSiDiabetesPadres.isChecked()){
+            datos.setDiabetesFamiliares(btnSiDiabetesPadres.getText().toString());
+        }else {
+
+
+            if (btnSiDiabetesAbuelo.isChecked()) {
+                datos.setDiabetesFamiliares(btnSiDiabetesAbuelo.getText().toString());
+            }else {
+                datos.setDiabetesFamiliares("NO");
+            }
+
+        }
+
+
+
+        MenuP.datos= datos;
+
     }
 }

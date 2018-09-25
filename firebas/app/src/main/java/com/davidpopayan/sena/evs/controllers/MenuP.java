@@ -99,6 +99,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 datos = datosList.get(position);
                 Intent intent = new Intent(MenuP.this,PrimerForm.class);
                 startActivity(intent);
+                Toast.makeText(MenuP.this, ""+datos.getNumero(), Toast.LENGTH_SHORT).show();
                 ingresar=0;
             }
         });

@@ -102,7 +102,7 @@ public class ManagerDB {
         values.put("RIESGOCARDIO",datos.getRiesgoCardio());
         values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
-        db.update("DATOS",values,"NUMERO = "+datos.getNumero(),null);
+        db.update("DATOS",values,"NUMERO="+datos.getNumero(),null);
         closeDB();
     }
 

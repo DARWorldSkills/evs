@@ -34,6 +34,7 @@ public class PrimerForm extends AppCompatActivity {
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     int edad;
     public static int edadPuntaje;
+    Datos datos = new Datos();
     List<String> genero = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,10 +205,32 @@ public class PrimerForm extends AppCompatActivity {
             txtEdad.setError("Falta Campo");
         }
         if (validar == 8){
+            inputData();
             Intent intent = new Intent(PrimerForm.this, datosPersonales.class);
             startActivity(intent);
 
         }
+
+    }
+
+    public void inputData(){
+        datos = MenuP.datos;
+        datos.setNombreCompleto(txtNombre.getText().toString());
+        datos.setNumeroId(txtIdentificacion.getText().toString());
+        datos.setNombreEPS(txtEps.getText().toString());
+        datos.setiPS(txtIps.getText().toString());
+        datos.setTelefono(txtNumero.getText().toString());
+        datos.setDireccion(txtDireccion.getText().toString());
+        datos.setFecNac(txtFechadenacimiento.getText().toString());
+        datos.setEdad(edad);
+        datos.setGenero(spinnerGenero.getSelectedItem().toString());
+        if (rbtnCC.isChecked()){
+            datos.setTipoID("CC");
+        }else {
+            datos.setTipoID("TI");
+        }
+
+        MenuP.datos = datos;
 
     }
 }

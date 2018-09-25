@@ -30,7 +30,6 @@
 
         <activity android:name=".controllers.EncuestaDos" />
         <activity android:name=".controllers.Resultados" />
-        <activity android:name=".controllers.Riesgos" />
         <activity android:name=".controllers.datosPersonales" />
         <activity android:name=".controllers.EncuestaTres"></activity>
     </application>

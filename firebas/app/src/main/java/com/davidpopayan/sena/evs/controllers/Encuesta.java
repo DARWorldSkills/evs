@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
 public class Encuesta extends AppCompatActivity {
 
@@ -74,19 +75,36 @@ public class Encuesta extends AppCompatActivity {
             String action = "";
             if (btnSiDeporte.isChecked()){
                 validar++;
-                action = "si";
+                action = "Si";
             }
             if (btnNoDeporte.isChecked()){
                 validar++;
-                action = "no";
+                action = "No";
             }
             if (validar == 1){
                 Intent intent = new Intent(Encuesta.this, EncuestaDos.class);
+                inputData();
                 startActivity(intent);
             }else {
                 Toast.makeText(this, "Falta Respuesta ", Toast.LENGTH_SHORT).show();
             }
         }
 
+    }
+
+    private void inputData() {
+        Datos datos = MenuP.datos;
+        if (btnSiDeporte.isChecked()){
+            datos.setRealizarActividadFisicaD("SI");
+        }else {
+            datos.setRealizarActividadFisicaD("NO");
+        }
+
+        if (btnSiTodosLosDias.isChecked()){
+            datos.setFrecuenciaVerdurasFrutas("SI");
+        }else {
+            datos.setFrecuenciaVerdurasFrutas("NO");
+        }
+        MenuP.datos = datos;
     }
 }

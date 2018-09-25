@@ -68,7 +68,11 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.Holder> {
         public void connectData(Datos datos){
             txtIdentificacion.setText(datos.getNumeroId());
             txtNombre.setText(datos.getNombreCompleto());
-            txtEps.setText(datos.getNombreEPS().substring(0,datos.getNombreEPS().length()-16));
+            try {
+                txtEps.setText(datos.getNombreEPS().substring(0,datos.getNombreEPS().length()-16));
+            }catch (Exception e){
+
+            }
 
         }
 

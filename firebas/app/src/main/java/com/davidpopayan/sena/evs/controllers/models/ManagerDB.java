@@ -66,6 +66,46 @@ public class ManagerDB {
         closeDB();
     }
 
+
+    public void updateData(Datos datos){
+        ContentValues values = new ContentValues();
+        openWriteDB();
+        values.put("FECTAMITAJE",datos.getFecTamitaje());
+        values.put("NOMBREC",datos.getNombreCompleto());
+        values.put("TIPOID",datos.getTipoID());
+        values.put("NUMEROID",datos.getNumeroId());
+        values.put("EPS",datos.getNombreEPS());
+        values.put("IPS",datos.getiPS());
+        values.put("TELEFONO",datos.getTelefono());
+        values.put("DIRECCION",datos.getDireccion());
+        values.put("FECNAC",datos.getFecNac());
+        values.put("EDAD",datos.getEdad());
+        values.put("EDADCATEGORIZADA",datos.getEdadCategorizada());
+        values.put("GENERO",datos.getGenero());
+        values.put("TALLA",datos.getTalla());
+        values.put("PESO",datos.getPeso());
+        values.put("PERIMETROA",datos.getPerimetroAbdominal());
+        values.put("REALIZAAF",datos.getRealizarActividadFisicaD());
+        values.put("FRECUENCIAVF",datos.getFrecuenciaVerdurasFrutas());
+        values.put("MEDICAMENTOSH",datos.getMedicamentosHipertension());
+        values.put("GLUCOSAALTA",datos.getGlucosaAlta());
+        values.put("DIABETESFAM",datos.getDiabetesFamiliares());
+        values.put("IMC",datos.getImc());
+        values.put("CLASIFICACIONIMC",datos.getClasificacionIMC());
+        values.put("RIESGODIABETES",datos.getRiesgoDeDiabetes());
+        values.put("PRESIONAS",datos.getPresionAS());
+        values.put("PRESIONDIASTIOLICA",datos.getPresionDiastolica());
+        values.put("PRESIONARTERIAL",datos.getPresionArterial());
+        values.put("DIABETES",datos.getDiabetes());
+        values.put("FUMA",datos.getFuma());
+        values.put("PORCENTAJERIESGO",datos.getPorcentajeRiesgo());
+        values.put("RIESGOCARDIO",datos.getRiesgoCardio());
+        values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
+        values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
+        db.update("DATOS",values,"NUMERO="+datos.getNumero(),null);
+        closeDB();
+    }
+
     public List<Datos> listaDatos(){
         List<Datos> results  = new ArrayList<>();
         openReadDB();

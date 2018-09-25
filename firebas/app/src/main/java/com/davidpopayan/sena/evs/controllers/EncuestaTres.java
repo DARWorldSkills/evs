@@ -8,6 +8,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
 public class EncuestaTres extends AppCompatActivity {
 
@@ -115,10 +116,44 @@ public class EncuestaTres extends AppCompatActivity {
             }
             if (validar == 3){
                 Intent intent = new Intent(EncuestaTres.this, Resultados.class);
+                inputData();
                 startActivity(intent);
             }else {
                 Toast.makeText(this, "Faltan Respuestas", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void inputData() {
+        Datos datos = MenuP.datos;
+        if (btnSiDiabetes.isChecked()){
+            datos.setDiabetes("SI");
+        }else {
+            datos.setDiabetes("NO");
+        }
+
+        if (btnSiFumas.isChecked()){
+            datos.setFuma("SI");
+        }else{
+            datos.setFuma("NO");
+        }
+
+        if (btnSiDiabetesPadres.isChecked()){
+            datos.setDiabetesFamiliares(btnSiDiabetesPadres.getText().toString());
+        }else {
+
+
+            if (btnSiDiabetesAbuelo.isChecked()) {
+                datos.setDiabetesFamiliares(btnSiDiabetesAbuelo.getText().toString());
+            }else {
+                datos.setDiabetesFamiliares("NO");
+            }
+
+        }
+
+
+
+        MenuP.datos= datos;
+
     }
 }

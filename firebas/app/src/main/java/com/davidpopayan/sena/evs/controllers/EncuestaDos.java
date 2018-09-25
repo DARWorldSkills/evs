@@ -9,6 +9,7 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
 public class EncuestaDos extends AppCompatActivity {
 
@@ -76,10 +77,27 @@ public class EncuestaDos extends AppCompatActivity {
             }
             if (validar == 1){
                 Intent intent = new Intent(EncuestaDos.this, EncuestaTres.class);
+                inputData();
                 startActivity(intent);
             }else {
                 Toast.makeText(this, "Falta Respuesta", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void inputData() {
+        Datos datos = MenuP.datos;
+        if (btnSiMedicamentos.isChecked()){
+            datos.setMedicamentosHipertension("SI");
+        }else {
+            datos.setMedicamentosHipertension("NO");
+        }
+
+        if (btnSiGlucosa.isChecked()){
+            datos.setGlucosaAlta("SI");
+        }else {
+            datos.setGlucosaAlta("NO");
+        }
+        MenuP.datos= datos;
     }
 }

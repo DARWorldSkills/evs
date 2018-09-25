@@ -4,12 +4,14 @@ package com.davidpopayan.sena.evs.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
+import com.davidpopayan.sena.evs.controllers.models.Datos;
 
 import java.text.DecimalFormat;
 
@@ -17,13 +19,15 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
     EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd,txtPresionArterial;
     Button btnCalcular, btnIr, btnCalcularParterial;
-    double altura,peso,pesof, sistolica, diastolica;
+    double altura,peso,pesof, sistolica, diastolica, pas;
     int resultado;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     public static int puntaje, puntajePABD, puntajePresionS;
     public static double imc;
     public static String tmp1, tmp2;
     public static double res;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +124,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
             txtPd.setError("Falta Campo");
         }
         if (valida == 6){
+            inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
             startActivity(intent);
 
@@ -274,6 +279,23 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
             tmp1 = "Obeso: Tipo III";
             Toast.makeText(this, "Obeso: Tipo III", Toast.LENGTH_SHORT).show();
         }
+
+
+    }
+
+    public void inputData(){
+        Datos datos = MenuP.datos;
+        datos.setTalla((int) altura);
+        datos.setPeso((int) peso);
+        datos.setPresionAS(String.valueOf(sistolica));
+        datos.setPresionDiastolica(String.valueOf(diastolica));
+        datos.setClasificacionIMC(tmp1);
+        datos.setImc((int) imc);
+        datos.setPresionArterial(txtPresionArterial.getText().toString());
+        datos.setPerimetroAbdominal((int) pas);
+
+        MenuP.datos = datos;
+        Toast.makeText(this, ""+MenuP.datos.getNumero()+" asdasdasdasd", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -221,27 +221,60 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     //Formula para calcular la precionArterial
     private void calcularPrecionArterial() {
 
-        sistolica = Double.parseDouble(txtPAS.getText().toString());
-        diastolica = Double.parseDouble(txtPd.getText().toString());
+        if (txtPAS.getText().toString().length()>0){
+            if (txtPd.getText().toString().length()>0){
+                sistolica = Double.parseDouble(txtPAS.getText().toString());
+                diastolica = Double.parseDouble(txtPd.getText().toString());
 
-        float tmp1 = (float) sistolica;
-        float tmp2 = (float) diastolica;
+                float tmp1 = (float) sistolica;
+                float tmp2 = (float) diastolica;
 
-        res = (tmp1 + (2*tmp2))/3;
+                try {
+                    res = (tmp1 + (2 * tmp2)) / 3;
 
-        resultado = (int) (sistolica / diastolica);
-        txtPresionArterial.setText(Double.toString(res));
+                    resultado = (int) (sistolica / diastolica);
+                    txtPresionArterial.setText(Double.toString(res));
+                }catch (Exception e){
+                    Toast.makeText(this, "No ingrese valores negativos o de valor 0", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }else {
+                txtPd.setError("Por favor ingrese este campo");
+                Toast.makeText(this, "No se puede calcular la presión arterial porque faltan campos", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            txtPAS.setError("Por favor ingrese este campo");
+            Toast.makeText(this, "No se puede calcular la presión arterial porque faltan campos", Toast.LENGTH_SHORT).show();
+        }
+
 
     }
 
     //Formula para calcular el IMC de la persona
     private double calcularIMC() {
-        altura = Double.parseDouble(txtAltura.getText().toString());
-        peso = Double.parseDouble(txtPeso.getText().toString());
-        pesof = altura/100;
-        imc = peso/(Math.pow(pesof,2));
-        DecimalFormat df = new DecimalFormat("#.00");
-        txtIMC.setText(df.format(imc));
+        if (txtAltura.getText().toString().length()>0) {
+
+            if (txtPeso.getText().toString().length()>0) {
+                altura = Double.parseDouble(txtAltura.getText().toString());
+                peso = Double.parseDouble(txtPeso.getText().toString());
+                pesof = altura / 100;
+                try {
+                    imc = peso / (Math.pow(pesof, 2));
+                    DecimalFormat df = new DecimalFormat("#.00");
+                    txtIMC.setText(df.format(imc));
+                }catch (Exception e){
+                    Toast.makeText(this, "No ingrese valores negativos o de valor 0", Toast.LENGTH_SHORT).show();
+                }
+
+            }else {
+                txtPeso.setError("Por favor ingrese este campo");
+                Toast.makeText(this, "No se puede calcular la presión arterial porque faltan campos", Toast.LENGTH_SHORT).show();
+            }
+        }else {
+            txtAltura.setError("Por favor ingrese este campo");
+            Toast.makeText(this, "No se puede calcular la presión arterial porque faltan campos", Toast.LENGTH_SHORT).show();
+        }
         return imc;
     }
 
@@ -295,7 +328,6 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         datos.setPerimetroAbdominal((int) pas);
 
         MenuP.datos = datos;
-        Toast.makeText(this, ""+MenuP.datos.getNumero()+" asdasdasdasd", Toast.LENGTH_SHORT).show();
     }
 
 

@@ -70,15 +70,15 @@ public class Resultados extends AppCompatActivity {
             if (riesgoCardioVascular < 0){
                 txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
-            if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
+            if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "10% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
-            if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
+            if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Medio Cardiovascular");
             }
-            if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
+            if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "53% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Alto Cardiovascular");
             }
@@ -88,15 +88,15 @@ public class Resultados extends AppCompatActivity {
                 Toast.makeText(this, "2% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
-            if (riesgoCardioVascular > 0 && riesgoCardioVascular < 6){
+            if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "5% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
             }
-            if (riesgoCardioVascular >6 && riesgoCardioVascular < 9){
+            if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "8% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Medio Cardiovascular");
             }
-            if (riesgoCardioVascular > 9 && riesgoCardioVascular < 15){
+            if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
                 txtRiesgoC.setText("Riesgo Alto Cardiovascular");
             }

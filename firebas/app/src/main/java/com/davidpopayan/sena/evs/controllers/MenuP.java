@@ -2,11 +2,13 @@ package com.davidpopayan.sena.evs.controllers;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -22,6 +24,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -33,7 +37,11 @@ import com.opencsv.CSVWriter;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextListener{
@@ -174,41 +182,104 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
     private void exportarEnCSV() {
 
-        File exportDir = new File(Environment.getExternalStorageDirectory(), "");
-        if (!exportDir.exists())
-        {
-            exportDir.mkdirs();
-        }
+        final Dialog dialog = new Dialog(MenuP.this);
+        dialog.setContentView(R.layout.item_busqueda);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        final DatePicker datePicker = dialog.findViewById(R.id.calendario);
+        Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
+        Button btnCancelar =  dialog.findViewById(R.id.btnCancelar);
 
-        File file = new File(exportDir, "archivoCompleto.csv");
-        try
-        {
-            file.createNewFile();
-            CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
-            for (int i=0; i<datosList.size();i++) {
-                //Log.e("MainActivity", String.valueOf(datos.get(i).split(",")));
-                Datos tmpDatos = datosList.get(i);
-                String arrStr[] = {Integer.toString(tmpDatos.getNumero()),
-                tmpDatos.getFecTamitaje(),tmpDatos.getNombreCompleto(),tmpDatos.getTipoID(),tmpDatos.getNumeroId(),
-                tmpDatos.getNombreEPS(),tmpDatos.getiPS(),tmpDatos.getTelefono(),tmpDatos.getDireccion(),tmpDatos.getFecNac(),
-                Integer.toString(tmpDatos.getEdad()),tmpDatos.getGenero(),Integer.toString(tmpDatos.getTalla()),
-                        Integer.toString(tmpDatos.getPeso()),Integer.toString(tmpDatos.getPerimetroAbdominal()),tmpDatos.getRealizarActividadFisicaD(),
-                tmpDatos.getFrecuenciaVerdurasFrutas(),tmpDatos.getMedicamentosHipertension(),tmpDatos.getGlucosaAlta(),tmpDatos.getDiabetesFamiliares(),
-                        Integer.toString(tmpDatos.getImc()),tmpDatos.getClasificacionIMC(),tmpDatos.getRiesgoDeDiabetes(),tmpDatos.getPresionArterial(),
-                tmpDatos.getPresionDiastolica(),tmpDatos.getDiabetes(),tmpDatos.getFuma(),tmpDatos.getPorcentajeRiesgo(),tmpDatos.getRiesgoCardio(),
-                tmpDatos.getPacientePresentaR(),tmpDatos.getDetalleRiesgoPaciente()};
+        btnAceptar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mes = datePicker.getMonth()+1;
+                String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                Date date = new Date();
+                try {
+                    date =dateFormat.parse(fecha1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                String fecha = dateFormat1.format(date);
+                List<Datos> tmpListDatos = new ArrayList<>();
+                for (int i=0; i<datosList.size(); i++){
+                    tmpListDatos.add(datosList.get(i));
+                }
 
-                csvWrite.writeNext(arrStr);
+                System.out.println(tmpListDatos);
+                Iterator<Datos> it = tmpListDatos.iterator();
+                List<Datos> tmpDatos1 = new ArrayList<>();
+                while (it.hasNext()) {
+                    Datos current = it.next();
+                    if (!current.getFecTamitaje().equals(fecha)) {
+                        it.remove();
+                    }else {
+                        Toast.makeText(MenuP.this, ""+fecha, Toast.LENGTH_SHORT).show();
+                        tmpDatos1.add(current);
+                    }
+                }
+
+
+
+                File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+                if (!exportDir.exists())
+                {
+                    exportDir.mkdirs();
+                }
+
+                File file = new File(exportDir, "Tamitaje.csv");
+                try
+                {
+                    file.createNewFile();
+                    CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+                    for (int i=0; i<tmpDatos1.size();i++) {
+                        //Log.e("MainActivity", String.valueOf(datos.get(i).split(",")));
+                        Datos tmpDatos = tmpDatos1.get(i);
+                        String arrStr[] = {String.valueOf((tmpDatos.getNumero())),
+                                tmpDatos.getFecTamitaje(),tmpDatos.getNombreCompleto(),tmpDatos.getTipoID(),(tmpDatos.getNumeroId()),
+                                tmpDatos.getNombreEPS(),tmpDatos.getiPS(),(tmpDatos.getTelefono()),tmpDatos.getDireccion(),tmpDatos.getFecNac(),
+                                String.valueOf((tmpDatos.getEdad())),tmpDatos.getGenero(), String.valueOf((tmpDatos.getTalla())),
+                                String.valueOf((tmpDatos.getPeso())), String.valueOf((tmpDatos.getPerimetroAbdominal())),tmpDatos.getRealizarActividadFisicaD(),
+                                tmpDatos.getFrecuenciaVerdurasFrutas(),tmpDatos.getMedicamentosHipertension(),tmpDatos.getGlucosaAlta(),tmpDatos.getDiabetesFamiliares(),
+                                String.valueOf((tmpDatos.getImc())),tmpDatos.getClasificacionIMC(),tmpDatos.getRiesgoDeDiabetes(),tmpDatos.getPresionArterial(),
+                                (tmpDatos.getPresionDiastolica()),tmpDatos.getDiabetes(),tmpDatos.getFuma(),tmpDatos.getPorcentajeRiesgo(),tmpDatos.getRiesgoCardio(),
+                                tmpDatos.getPacientePresentaR(),tmpDatos.getDetalleRiesgoPaciente()};
+
+                        csvWrite.writeNext(arrStr);
+
+                    }
+                    csvWrite.close();
+                    //Toast.makeText(MenuP.this, "El archivo está en la dirección"+exportDir+"archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+
+                    dialog.cancel();
+                }
+                catch(Exception sqlEx)
+                {
+                    Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
+                }
+
+
 
             }
-            csvWrite.close();
-            Toast.makeText(this, "El archivo está en la dirección"+exportDir+"archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+        });
 
-        }
-        catch(Exception sqlEx)
-        {
-            Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
-        }
+
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+
+
+        dialog.show();
+
+
+
+
 
     }
 

@@ -14,6 +14,8 @@ import com.davidpopayan.sena.evs.controllers.models.ManagerDB;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Resultados extends AppCompatActivity {
 
@@ -168,6 +170,7 @@ public class Resultados extends AppCompatActivity {
         Toast.makeText(this, "Se ha guardado correctamente"+MenuP.datos.getNumero(), Toast.LENGTH_SHORT).show();
         switch (MenuP.ingresar){
             case 0:
+
 
                 managerDB.updateData(MenuP.datos);
                 break;

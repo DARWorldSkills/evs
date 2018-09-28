@@ -229,6 +229,9 @@ public class PrimerForm extends AppCompatActivity {
         }else {
             datos.setTipoID("TI");
         }
+        Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        datos.setFecTamitaje(dateFormat.format(date));
 
         MenuP.datos = datos;
 

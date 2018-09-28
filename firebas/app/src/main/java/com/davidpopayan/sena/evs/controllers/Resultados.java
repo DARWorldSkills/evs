@@ -59,10 +59,7 @@ public class Resultados extends AppCompatActivity {
         else if (riesgoDiabetes > 8){
             Toast.makeText(this, "Riesgo Bajo", Toast.LENGTH_SHORT).show();
             txtRD.setText("Riesgo Bajo");
-
         }
-
-
     }
 
     //Vemos en que porcentaje esta la persona para tener Riesgos cardiovasculares

@@ -211,27 +211,29 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
                 List<Datos> tmpDatos1 = new ArrayList<>();
-                while (it.hasNext()) {
-                    Datos current = it.next();
-                    if (!current.getFecTamitaje().equals(fecha)) {
-                        it.remove();
-                    }else {
-                        Toast.makeText(MenuP.this, ""+fecha, Toast.LENGTH_SHORT).show();
-                        tmpDatos1.add(current);
+                try {
+                    while (it.hasNext()) {
+                        Datos current = it.next();
+                        if (!current.getFecTamitaje().equals(fecha)) {
+                            it.remove();
+                        }else {
+                            Toast.makeText(MenuP.this, ""+fecha, Toast.LENGTH_SHORT).show();
+                            tmpDatos1.add(current);
+                        }
                     }
-                }
 
 
 
-                File exportDir = new File(Environment.getExternalStorageDirectory(), "");
-                if (!exportDir.exists())
-                {
-                    exportDir.mkdirs();
-                }
+                    File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+                    if (!exportDir.exists())
+                    {
+                        exportDir.mkdirs();
+                    }
 
-                File file = new File(exportDir, "Tamitaje.csv");
-                try
-                {
+                    File file = new File(exportDir, "Tamitaje.csv");
+
+
+                    Log.e("Hola","hola");
                     file.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
                     for (int i=0; i<tmpDatos1.size();i++) {
@@ -254,11 +256,12 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     //Toast.makeText(MenuP.this, "El archivo está en la dirección"+exportDir+"archivoCompleto.csv", Toast.LENGTH_SHORT).show();
 
                     dialog.cancel();
+
+                }catch (Exception e){
+                    Toast.makeText(MenuP.this, "No hay tamitajes registrados en  la fecha seleccionada", Toast.LENGTH_SHORT).show();
+                    Log.e("Error",e.getMessage());
                 }
-                catch(Exception sqlEx)
-                {
-                    Log.e("MainActivity", sqlEx.getMessage(), sqlEx);
-                }
+
 
 
 

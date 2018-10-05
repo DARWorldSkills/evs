@@ -3,6 +3,7 @@ package com.davidpopayan.sena.evs.controllers;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -125,7 +126,7 @@ public class PrimerForm extends AppCompatActivity {
     private void asiganarPuntajes() {
         if (edad< 45){
             edadPuntaje = cero;
-            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, ""+edadPuntaje+" ", Toast.LENGTH_SHORT).show();
         }
         else if (edad >45 && edad<54){
             edadPuntaje = dos;

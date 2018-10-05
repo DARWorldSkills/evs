@@ -64,6 +64,7 @@ public class Splash extends AppCompatActivity {
                     datos.setTelefono(strings[5]);
                     datos.setNombreEPS(strings[11]);
                     datos.setGenero(strings[4]);
+                    datos.setFecTamitaje("18/05/2018");
                     managerDB.inputData(datos);
 
                 }

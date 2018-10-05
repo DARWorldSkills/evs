@@ -233,7 +233,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     File file = new File(exportDir, "Tamitaje.csv");
 
 
-                    Log.e("Hola","hola");
                     file.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
                     for (int i=0; i<tmpDatos1.size();i++) {
@@ -253,12 +252,16 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
                     }
                     csvWrite.close();
-                    //Toast.makeText(MenuP.this, "El archivo está en la dirección"+exportDir+"archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+                    if (tmpDatos1.size()<1){
+                        Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(MenuP.this, "El archivo está en la dirección" + exportDir + "archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+                    }
 
                     dialog.cancel();
 
                 }catch (Exception e){
-                    Toast.makeText(MenuP.this, "No hay tamitajes registrados en  la fecha seleccionada", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MenuP.this, "No hay tamitajes registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     Log.e("Error",e.getMessage());
                 }
 

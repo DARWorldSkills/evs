@@ -283,22 +283,27 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         if (calcularIMC() < 16){
             tmp1 = "Delgadez Severa";
             Toast.makeText(this, "Delgadez Severa", Toast.LENGTH_SHORT).show();
+
         }
         else if (calcularIMC() > 16 && calcularIMC() < 17){
             tmp1 = "Delgadez moderada";
             Toast.makeText(this, "Delgadez moderada", Toast.LENGTH_SHORT).show();
+
         }
         else if (calcularIMC() > 17 && calcularIMC() < 18.50){
             tmp1 = "Delgadez aceptable";
             Toast.makeText(this, "Delgadez aceptable", Toast.LENGTH_SHORT).show();
+
         }
         else  if (calcularIMC() > 18.50 && calcularIMC() < 25){
             tmp1 = "Peso Normal";
             Toast.makeText(this, "Peso Normal", Toast.LENGTH_SHORT).show();
+
         }
         else if (calcularIMC() >25 && calcularIMC() < 30){
             tmp1 = "Sobrepeso";
             Toast.makeText(this, "Sobrepeso", Toast.LENGTH_SHORT).show();
+
         }
         else if (calcularIMC() > 30 && calcularIMC() < 35){
             tmp1 = "Obeso: Tipo I";
@@ -307,10 +312,12 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         else if (calcularIMC() > 35 && calcularIMC() < 40){
             tmp1 = "Obeso: Tipo II";
             Toast.makeText(this, "Obeso: Tipo II", Toast.LENGTH_SHORT).show();
+
         }
         else if (calcularIMC() >40){
             tmp1 = "Obeso: Tipo III";
             Toast.makeText(this, "Obeso: Tipo III", Toast.LENGTH_SHORT).show();
+
         }
 
 

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +22,7 @@ public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
 
+    public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
     TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular, txtRD, txtRiesgoC;
     double im, res;
     int riesgoDiabetes, riesgoCardioVascular;
@@ -35,30 +37,87 @@ public class Resultados extends AppCompatActivity {
         //Creamos Metodos
         inicializar();
         obtenerImc();
-        obtenerResultadoImc();
         obtenerPresionArterial();
-        estadoPresionA();
         riesgoDiabetesF();
         calcularRiesgoCardiovascular();
         RiesgoCardiovascularEnPorcentaje();
         inputData();
         RiesgoDiabetes();
+        DetalleDeImc();
+        DetallePresionArterial();
+        DetalleDiabetes();
+        DetalleRiesgoCardiovascular();
+
+    }
+
+    //Cambiamos la imagen dependiendo al tipo de riesgo cardiovascular que presenta
+    private void DetalleRiesgoCardiovascular() {
+
+
+    }
+
+    //Cambiamos la imagen para ver que riesgo tiene de tener diabetes
+    private void DetalleDiabetes() {
+
+        if (riesgoDiabetes > 12){
+            imgDiabetes.setImageResource(R.drawable.diabtestres);
+        }
+        else if (riesgoDiabetes >= 10){
+            imgDiabetes.setImageResource(R.drawable.diabetesdos);
+
+        }
+        else if (riesgoDiabetes > 8){
+            imgDiabetes.setImageResource(R.drawable.diabetesuno);
+        }
+    }
+
+
+    //Cambiamos la imagenes de la presion arterial
+    private void DetallePresionArterial() {
+
+        if (res <= 70){
+            imgArterial.setImageResource(R.drawable.arterialdo);
+        }else if (res > 70 && res <105){
+            imgArterial.setImageResource(R.drawable.arterialtres);
+        }else if (res > 105 && res < 300){
+            imgArterial.setImageResource(R.drawable.arterialcuatro);
+        }
+    }
+
+    //Cambiar la imagen del IMC
+    private void DetalleDeImc() {
+
+        if (im <= 18.5){
+            imgImcUno.setImageResource(R.drawable.imcuno);
+        }else if (im >18.5 && im < 25){
+            imgImcUno.setImageResource(R.drawable.imcdos);
+        }else if (im >25 && im < 30){
+            imgImcUno.setImageResource(R.drawable.imctercero);
+        }else if (im >30 && im < 40){
+            imgImcUno.setImageResource(R.drawable.imccuarto);
+        }else if (im >40 ){
+            imgImcUno.setImageResource(R.drawable.imccuarto);
+        }
+
     }
 
     //Calculamos el riego que puede tener la persona
     private void RiesgoDiabetes() {
         if (riesgoDiabetes > 12){
-            txtRD.setText("Riesgo Alto");
+
             Toast.makeText(this, "Riesgo Alto", Toast.LENGTH_SHORT).show();
+
         }
         else if (riesgoDiabetes >= 10){
             Toast.makeText(this, "Riesgo Moderado", Toast.LENGTH_SHORT).show();
-            txtRD.setText("Riesgo Moderado");
+
+
 
         }
         else if (riesgoDiabetes > 8){
             Toast.makeText(this, "Riesgo Bajo", Toast.LENGTH_SHORT).show();
-            txtRD.setText("Riesgo Bajo");
+
+
         }
     }
 
@@ -67,37 +126,45 @@ public class Resultados extends AppCompatActivity {
         if (MenuP.datos.getGenero().equals("Masculino")){
 
             if (riesgoCardioVascular < 0){
-                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiouno);
             }
             if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "10% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiodos);
             }
             if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Medio Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiotres);
             }
             if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "53% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Alto Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiocuatro);
             }
 
         }else {
             if (riesgoCardioVascular < 0){
                 Toast.makeText(this, "2% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiouno);
             }
             if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "5% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Bajo Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiodos);
             }
             if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "8% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Medio Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiotres);
             }
             if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-                txtRiesgoC.setText("Riesgo Alto Cardiovascular");
+
+                imgCardio.setImageResource(R.drawable.cardiocuatro);
             }
 
         }
@@ -107,7 +174,7 @@ public class Resultados extends AppCompatActivity {
     private void calcularRiesgoCardiovascular() {
         riesgoCardioVascular = PrimerForm.edadPuntaje + datosPersonales.puntajePresionS + EncuestaTres.tmpFuma + EncuestaTres.tmpDiabe;
 
-        txtRiesgoCardiovascular.setText(Integer.toString(riesgoCardioVascular));
+
 
     }
 
@@ -117,14 +184,9 @@ public class Resultados extends AppCompatActivity {
         riesgoDiabetes = PrimerForm.edadPuntaje + datosPersonales.puntaje + datosPersonales.puntajePABD + Encuesta.tmp + Encuesta.tmp2
                 + EncuestaDos.tmp2 + EncuestaDos.tmp3 + EncuestaTres.tmp3;
 
-        txtPuntajeRiesgoD.setText(Integer.toString(riesgoDiabetes));
 
 
-    }
 
-    //Obtenemos de la clase datosPersonales el dato del estado de la presion arterial de la persona
-    private void estadoPresionA() {
-        txtEstadoPresionA.setText(datosPersonales.tmp2);
     }
 
     //Obtenemos el resultado de la presion arterial que se calcula en los datos personales
@@ -132,32 +194,23 @@ public class Resultados extends AppCompatActivity {
 
         res = datosPersonales.res;
         res = Math.round(res * 100) / 100d;
-        txtPresionAF.setText(Double.toString(res));
-    }
 
-    //Vemos el estado de la persona
-    private void obtenerResultadoImc() {
-        txtResultadoImc.setText(datosPersonales.tmp1);
     }
 
     //Obtenemos de la clase datosPersonales el IMC de la persona
     private void obtenerImc() {
         im = datosPersonales.imc;
         im = Math.round(im * 100) / 100d;
-        txtImcFinal.setText(Double.toString(im));
+
     }
 
     //Referenciamos Todos los campos del layout
     private void inicializar() {
 
-        txtImcFinal = findViewById(R.id.txtImcFinal);
-        txtResultadoImc = findViewById(R.id.txtResultadoImc);
-        txtPresionAF = findViewById(R.id.txtPresionA);
-        txtEstadoPresionA = findViewById(R.id.txtEstadoPresionA);
-        txtPuntajeRiesgoD = findViewById(R.id.txtPuntajeRiesgoD);
-        txtRiesgoCardiovascular = findViewById(R.id.txtRiesgoCardiovascular);
-        txtRD = findViewById(R.id.txtRD);
-        txtRiesgoC = findViewById(R.id.txtRiesgoC);
+        imgImcUno = findViewById(R.id.imgImcUno);
+        imgArterial = findViewById(R.id.imgArterial);
+        imgDiabetes = findViewById(R.id.imgDiabetes);
+        imgCardio = findViewById(R.id.imgCardio);
     }
 
     //Cargamos los datos

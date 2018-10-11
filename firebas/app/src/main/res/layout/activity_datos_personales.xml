@@ -315,7 +315,7 @@
             <ImageView
 
 
-                android:id="@+id/imageView19"
+                android:id="@+id/imgImcUno"
                 android:layout_width="43dp"
                 android:layout_height="42dp"
                 android:layout_marginStart="8dp"
@@ -336,7 +336,7 @@
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView19"
+                app:layout_constraintStart_toEndOf="@+id/imgImcUno"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <EditText

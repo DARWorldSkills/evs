@@ -1,5 +1,6 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +16,7 @@ public class Encuesta extends AppCompatActivity {
     RadioButton btnSiDeporte,btnNoDeporte, btnSiTodosLosDias, btnNotodoslosdia;
     int cero = 0, uno =1 ,dos = 2,  cuatro = 4, seis =6;
     public static int tmp, tmp2;
-
+    public static Activity activity;
 
 
     @Override
@@ -23,7 +24,7 @@ public class Encuesta extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuesta);
         this.setTitle("Cuestionario");
-
+        activity = this;
         inicializar();
     }
 

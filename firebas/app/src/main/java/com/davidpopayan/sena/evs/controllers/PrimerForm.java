@@ -1,12 +1,18 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Spinner;
@@ -32,22 +38,28 @@ public class PrimerForm extends AppCompatActivity {
     Button btnSiguiente;
     RadioButton rbtnCC, rbtnTI;
     EditText txtNombre, txtIdentificacion, txtEps, txtIps,txtNumero, txtDireccion, txtFechadenacimiento, txtEdad;
+    Button btnInputFecNac;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     int edad;
     public static int edadPuntaje;
     Datos datos = new Datos();
     List<String> genero = new ArrayList<>();
+    public static Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primer_form);
 
         this.setTitle("Datos Personales");
+        activity= this;
         //Creamos Metodos
         inicializar();
         listarGenero();
         escucharRadioButtons();
         ingresarValores();
+        insertarFechaNac();
+
 
     }
 
@@ -72,14 +84,30 @@ public class PrimerForm extends AppCompatActivity {
         }
     }
 
+
+
+
     //Operacion la cual nos ayuda a calcular la edad de la persona
     public int calcularEdad(String fechaNac){
         Date date = new Date();
-        Date date1 = new Date();
+        Date now = new Date();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             date = simpleDateFormat.parse(fechaNac);
-            edad = date1.getYear()-date.getYear();
+            int nowMonth = now.getMonth()+1;
+            int nowYear = now.getYear()+1900;
+            edad = nowYear - date.getYear();
+            if (date.getMonth() > nowMonth) {
+                edad--;
+            }
+            else if (date.getMonth() == nowMonth) {
+                int nowDay = now.getDate();
+
+                if (date.getDay() > nowDay) {
+                    edad--;
+                }
+            }
+
             return edad;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -115,6 +143,7 @@ public class PrimerForm extends AppCompatActivity {
         txtEdad = findViewById(R.id.txtEdad);
         rbtnCC = findViewById(R.id.rbtnCC);
         rbtnTI = findViewById(R.id.rbtnTI);
+        btnInputFecNac = findViewById(R.id.btnInputFecNac);
     }
 
     //Evento el cual nos ayuda a escuchar el boton
@@ -155,6 +184,51 @@ public class PrimerForm extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 txtIdentificacion.setEnabled(true);
+            }
+        });
+    }
+
+    public void insertarFechaNac(){
+        btnInputFecNac.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                final Dialog dialog = new Dialog(PrimerForm.this);
+                dialog.setContentView(R.layout.item_busqueda);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                final DatePicker datePicker = dialog.findViewById(R.id.calendario);
+                Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
+                Button btnCancelar =  dialog.findViewById(R.id.btnCancelar);
+
+                btnAceptar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int mes = datePicker.getMonth()+1;
+                        String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        Date date = new Date();
+                        try {
+                            date =dateFormat.parse(fecha1);
+                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            txtFechadenacimiento.setText(format.format(date));
+                            calcularEdad(format.format(date));
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
+                        dialog.cancel();
+                    }
+                });
+
+                btnCancelar.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.cancel();
+                    }
+                });
+
+                dialog.setCancelable(false);
+                dialog.show();
             }
         });
     }

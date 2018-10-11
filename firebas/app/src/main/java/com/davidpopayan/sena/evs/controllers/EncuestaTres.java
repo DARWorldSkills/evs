@@ -1,5 +1,6 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,13 +17,13 @@ public class EncuestaTres extends AppCompatActivity {
     RadioButton btnSiDiabetesPadres, btnNinguno, btnSiDiabetesAbuelo, btnSiDiabetes, btnNoDiabetes, btnSiFumas, btnNoFumas;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     public static  int tmp3, tmpFuma, tmpDiabe;
-
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_encuesta_tres);
         this.setTitle("Cuestionario");
-
+        activity = this;
         //Creamos Metodos
         inicializar();
 

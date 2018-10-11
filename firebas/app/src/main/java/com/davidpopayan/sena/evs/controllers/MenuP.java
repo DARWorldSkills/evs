@@ -2,6 +2,7 @@ package com.davidpopayan.sena.evs.controllers;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
@@ -56,7 +57,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     public static Datos datos = new Datos();
     public static int ingresar=0;
 
-
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,7 +74,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 ingresar=1;
             }
         });
-
+        activity=this;
         inputAdapter();
     }
 

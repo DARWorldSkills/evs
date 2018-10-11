@@ -43,6 +43,15 @@ public class Resultados extends AppCompatActivity {
         RiesgoCardiovascularEnPorcentaje();
         inputData();
         RiesgoDiabetes();
+        finalizarActivities();
+    }
+
+    private void finalizarActivities() {
+        PrimerForm.activity.finish();
+        Encuesta.activity.finish();
+        EncuestaDos.activity.finish();
+        EncuestaTres.activity.finish();
+        datosPersonales.activity.finish();
     }
 
     //Calculamos el riego que puede tener la persona
@@ -181,8 +190,6 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
-        Intent intent = new Intent(Resultados.this,MenuP.class);
-        startActivity(intent);
         finish();
     }
 }

@@ -1,6 +1,7 @@
 
 package com.davidpopayan.sena.evs.controllers;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     public static String tmp1, tmp2;
     public static double res;
 
-
+    public static Activity activity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_datos_personales);
 
         this.setTitle("Datos Personales");
+        activity = this;
         inicializar();
         escuchar();
 

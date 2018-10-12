@@ -7,6 +7,8 @@ package com.davidpopayan.sena.evs.controllers.models;
 public class Usuario {
     private String username;
     private String contrasena;
+    private String rango;
+    private String activado;
 
     public Usuario() {
     }
@@ -26,4 +28,21 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
+
+    public String getRango() {
+        return rango;
+    }
+
+    public void setRango(String rango) {
+        this.rango = rango;
+    }
+
+    public String getActivado() {
+        return activado;
+    }
+
+    public void setActivado(String activado) {
+        this.activado = activado;
+    }
 }
+

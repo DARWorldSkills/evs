@@ -82,6 +82,15 @@ public class Splash extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 }else {
+
+                    if (sharedPreferences.getString("superuser","no").equals("si")) {
+                        MenuP.usuario.setRango("superuser");
+
+                    }else {
+                        MenuP.usuario.setRango("ninguno");
+                    }
+
+                    MenuP.usuario.setUsername(sharedPreferences.getString("username","0"));
                     Intent intent = new Intent(Splash.this, MenuP.class);
                     startActivity(intent);
                     finish();

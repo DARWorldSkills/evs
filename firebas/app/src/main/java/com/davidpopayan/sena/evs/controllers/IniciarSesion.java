@@ -29,6 +29,8 @@ public class IniciarSesion extends AppCompatActivity {
     Button btnIniciarSesion;
     List<Usuario> usuarioList=new ArrayList<>();
     SharedPreferences sharedPreferences;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,13 +91,23 @@ public class IniciarSesion extends AppCompatActivity {
                     if (usuarioList.get(i).getUsername().equals(nombre)){
                         bandera = true;
                         if (usuarioList.get(i).getContrasena().equals(clave)){
-                            i=usuarioList.size();
+                            MenuP.usuario = usuarioList.get(i);
                             Intent intent = new Intent(IniciarSesion.this,MenuP.class);
                             editor.putString("username",nombre);
                             editor.putString("contrasena",clave);
                             editor.putString("activado","si");
+                            editor.putString("online","si");
+                            if (MenuP.usuario.getRango().equals("superuser")) {
+                                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                                editor.putString("superuser", "si");
+
+                            }else {
+                                editor.putString("superuser", "no");
+                            }
+
                             editor.commit();
                             startActivity(intent);
+                            i=usuarioList.size();
                             finish();
 
 
@@ -114,6 +126,15 @@ public class IniciarSesion extends AppCompatActivity {
                             editor.putString("username",nombre);
                             editor.putString("contrasena",clave);
                             editor.putString("activado","si");
+                            editor.putString("online","no");
+                            if (sharedPreferences.getString("superuser","no").equals("si")) {
+                                editor.putString("superuser", "si");
+                                MenuP.usuario.setRango("superuser");
+
+                            }else {
+                                editor.putString("superuser", "no");
+                                MenuP.usuario.setRango("ninguno");
+                            }
                             editor.commit();
                             startActivity(intent);
                             finish();

@@ -132,7 +132,7 @@ public class Resultados extends AppCompatActivity {
     }
 
     //Vemos en que porcentaje esta la persona para tener Riesgos cardiovasculares
-    private void RiesgoCardiovascularEnPorcentaje() {
+    private void RiesgoCardiovascularEnPorcentaje()     {
         if (MenuP.datos.getGenero().equals("Masculino")){
 
             if (riesgoCardioVascular < 0){

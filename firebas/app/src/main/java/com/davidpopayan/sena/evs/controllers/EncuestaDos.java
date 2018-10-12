@@ -77,7 +77,7 @@ public class EncuestaDos extends AppCompatActivity {
             if (btnNoMedicamentos.isChecked()){
                 validar++;
             }
-            if (validar == 2){
+            if (validar == 1){
                 Intent intent = new Intent(EncuestaDos.this, EncuestaTres.class);
                 inputData();
                 startActivity(intent);

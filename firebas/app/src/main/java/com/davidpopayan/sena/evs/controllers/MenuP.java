@@ -7,9 +7,11 @@ import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -56,6 +58,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     SearchView searchView;
     public static Datos datos = new Datos();
     public static int ingresar=0;
+    File archivo;
 
     public static Activity activity;
     @Override
@@ -144,6 +147,16 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             exportarEnCSV();
 
         }
+        if (id == R.id.itemCerrarSesion){
+            SharedPreferences sharedPreferences;
+            sharedPreferences = getSharedPreferences("usuarios",MODE_PRIVATE);
+            final SharedPreferences.Editor editor =sharedPreferences.edit();
+            editor.putString("activado","no");
+            editor.commit();
+            Intent intent = new Intent(MenuP.this,IniciarSesion.class);
+            startActivity(intent);
+            finish();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -231,11 +244,11 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                         exportDir.mkdirs();
                     }
 
-                    File file = new File(exportDir, "Tamitaje.csv");
+                    archivo = new File(exportDir, "Tamitaje.csv");
 
 
-                    file.createNewFile();
-                    CSVWriter csvWrite = new CSVWriter(new FileWriter(file));
+                    archivo.createNewFile();
+                    CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
                     for (int i=0; i<tmpDatos1.size();i++) {
                         //Log.e("MainActivity", String.valueOf(datos.get(i).split(",")));
                         Datos tmpDatos = tmpDatos1.get(i);
@@ -257,6 +270,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(MenuP.this, "El archivo está en la dirección" + exportDir + "archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+                        enviarCorreo(String.valueOf(exportDir));
                     }
 
                     dialog.cancel();
@@ -286,6 +300,20 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
 
 
+
+
+    }
+
+    private void enviarCorreo(String direccion) {
+        File file = archivo;
+        Uri uri = Uri.fromFile(file);
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/csv");
+        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"rodseiya20008@gmail.com"});
+        intent.putExtra(Intent.EXTRA_SUBJECT,"Envio de archivo CSV");
+        intent.putExtra(Intent.EXTRA_TEXT,"Hola te envio este archivo ");
+        intent.putExtra(Intent.EXTRA_STREAM,uri);
+        startActivity(Intent.createChooser(intent,"Enviar email mediante"));
 
 
     }

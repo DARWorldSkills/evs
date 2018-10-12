@@ -41,6 +41,7 @@ public class PrimerForm extends AppCompatActivity {
     Button btnInputFecNac;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     int edad;
+    int tmpSiEdad=0;
     public static int edadPuntaje;
     Datos datos = new Datos();
     List<String> genero = new ArrayList<>();
@@ -95,7 +96,7 @@ public class PrimerForm extends AppCompatActivity {
         try {
             date = simpleDateFormat.parse(fechaNac);
             int nowMonth = now.getMonth()+1;
-            int nowYear = now.getYear()+1900;
+            int nowYear = now.getYear();
             edad = nowYear - date.getYear();
             if (date.getMonth() > nowMonth) {
                 edad--;
@@ -105,6 +106,8 @@ public class PrimerForm extends AppCompatActivity {
 
                 if (date.getDay() > nowDay) {
                     edad--;
+                }else {
+                    tmpSiEdad=-1;
                 }
             }
 
@@ -210,13 +213,21 @@ public class PrimerForm extends AppCompatActivity {
                         try {
                             date =dateFormat.parse(fecha1);
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                            txtFechadenacimiento.setText(format.format(date));
+
+
                             calcularEdad(format.format(date));
+
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
 
-                        dialog.cancel();
+                        if (date.after(new Date()) || dateFormat.format(date).equals(dateFormat.format(new Date())) ){
+                            Toast.makeText(PrimerForm.this, "Edad incorrecta", Toast.LENGTH_SHORT).show();
+                        }else {
+                            txtFechadenacimiento.setText(dateFormat.format(date));
+                            txtEdad.setText(Integer.toString(edad));
+                            dialog.cancel();
+                        }
                     }
                 });
 

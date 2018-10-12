@@ -35,19 +35,20 @@ public class EncuestaDos extends AppCompatActivity {
 
         if (btnSiGlucosa.isChecked()){
             tmp2 = cinco;
-            Toast.makeText(this, ""+ cinco, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ cinco, Toast.LENGTH_SHORT).show();
         }
         else if (btnNoGlucosa.isChecked()){
             tmp2 = cero;
-            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
         }
         else if (btnSiMedicamentos.isChecked()){
             tmp3 = dos;
-            Toast.makeText(this, ""+ dos, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ dos, Toast.LENGTH_SHORT).show();
         }
         else if (btnNoMedicamentos.isChecked()){
             tmp3 = cero;
-            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+
+            //Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -76,7 +77,7 @@ public class EncuestaDos extends AppCompatActivity {
             if (btnNoMedicamentos.isChecked()){
                 validar++;
             }
-            if (validar == 1){
+            if (validar == 2){
                 Intent intent = new Intent(EncuestaDos.this, EncuestaTres.class);
                 inputData();
                 startActivity(intent);

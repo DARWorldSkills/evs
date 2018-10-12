@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "331505754574",
+    "firebase_url": "https://xenon-hub-216321.firebaseio.com",
+    "project_id": "xenon-hub-216321",
+    "storage_bucket": "xenon-hub-216321.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:331505754574:android:96d11ed0568db832",
+        "android_client_info": {
+          "package_name": "com.davidpopayan.sena.evs"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "331505754574-3flqrsil30qdp7bna02sl3kq49l1cgf4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDQBhIxu4lCw_fqDFZCBPXxMPZxISlPBrU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

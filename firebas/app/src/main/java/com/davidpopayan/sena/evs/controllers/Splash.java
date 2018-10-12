@@ -1,6 +1,7 @@
 package com.davidpopayan.sena.evs.controllers;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,12 +22,14 @@ import java.util.TimerTask;
 
 public class Splash extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        sharedPreferences = getSharedPreferences("usuarios",MODE_PRIVATE);
 
         try {
             inputData();
@@ -74,9 +77,15 @@ public class Splash extends AppCompatActivity {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(Splash.this, MenuP.class);
-                startActivity(intent);
-                finish();
+                if (sharedPreferences.getString("username","0").equals("0") || sharedPreferences.getString("activado","no").equals("no")) {
+                    Intent intent = new Intent(Splash.this, IniciarSesion.class);
+                    startActivity(intent);
+                    finish();
+                }else {
+                    Intent intent = new Intent(Splash.this, MenuP.class);
+                    startActivity(intent);
+                    finish();
+                }
             }
         };
         Timer timer = new Timer();

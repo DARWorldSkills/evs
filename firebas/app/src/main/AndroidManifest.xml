@@ -33,7 +33,8 @@
         <activity android:name=".controllers.Resultados" />
         <activity android:name=".controllers.datosPersonales" />
         <activity android:name=".controllers.EncuestaTres" />
-        <activity android:name=".controllers.IniciarSesion"></activity>
+        <activity android:name=".controllers.IniciarSesion"
+            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
     </application>
 
 </manifest>

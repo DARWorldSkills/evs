@@ -33,7 +33,9 @@
         <activity android:name=".controllers.Resultados" />
         <activity android:name=".controllers.datosPersonales" />
         <activity android:name=".controllers.EncuestaTres" />
-        <activity android:name=".controllers.IniciarSesion"></activity>
+        <activity android:name=".controllers.IniciarSesion" />
+        <activity android:name=".controllers.BloqueoUsuarios" />
+        <activity android:name=".controllers.CrearUsuario"></activity>
     </application>
 
 </manifest>

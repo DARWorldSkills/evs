@@ -173,6 +173,12 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             startActivity(intent);
             finish();
         }
+
+        if (id==R.id.itemBloquear){
+            Intent intent = new Intent(MenuP.this,BloqueoUsuarios.class);
+            startActivity(intent);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 

@@ -36,6 +36,7 @@ import com.davidpopayan.sena.evs.R;
 import com.davidpopayan.sena.evs.controllers.models.AdapterDatos;
 import com.davidpopayan.sena.evs.controllers.models.Datos;
 import com.davidpopayan.sena.evs.controllers.models.ManagerDB;
+import com.davidpopayan.sena.evs.controllers.models.Usuario;
 import com.opencsv.CSVWriter;
 
 import java.io.File;
@@ -59,6 +60,8 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     public static Datos datos = new Datos();
     public static int ingresar=0;
     File archivo;
+    SharedPreferences preferences;
+    public static Usuario usuario = new Usuario();
 
     public static Activity activity;
     @Override
@@ -90,6 +93,19 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.buscar, menu);
         getMenuInflater().inflate(R.menu.exportar, menu);
+        preferences = getSharedPreferences("usuarios",MODE_PRIVATE);
+        try {
+            if (!usuario.getRango().equals("superuser")){
+                menu.getItem(2).setVisible(false);
+            }else {
+                menu.getItem(2).setVisible(true);
+            }
+        }catch (Exception e){
+            menu.getItem(2).setVisible(false);
+            Toast.makeText(activity, "asdasdasdsad", Toast.LENGTH_SHORT).show();
+
+        }
+
         buscardorItem = menu.findItem(R.id.itBuscar);
         searchView = (SearchView) buscardorItem.getActionView();
         searchView.setQueryHint("Busque por número de identificación");

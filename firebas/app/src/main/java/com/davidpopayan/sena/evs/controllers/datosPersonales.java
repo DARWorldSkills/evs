@@ -50,23 +50,23 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
         if (sistolica < 120){
             puntajePresionS = cero;
-            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
         }
         else if (sistolica >120 && sistolica < 129){
             puntajePresionS = cero;
-            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
         }
         else if (sistolica >129 &&  sistolica <139){
             puntajePresionS = uno;
-            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
         }
         else if (sistolica >139 && sistolica < 159){
             puntajePresionS = dos;
-            Toast.makeText(this, ""+ puntajePresionS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ puntajePresionS, Toast.LENGTH_SHORT).show();
         }
         else if (sistolica > 160){
             puntajePresionS = tres;
-            Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntajePresionS, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -242,41 +242,41 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     private void asignarPuntajes() {
         if (calcularIMC() < 25){
             puntaje = cero;
-            Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 25 && calcularIMC() < 30){
             puntaje = uno;
-            Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+puntaje, Toast.LENGTH_SHORT).show();
         }
         else if (calcularIMC() > 30){
             puntaje = tres;
-            Toast.makeText(this, ""+ puntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ puntaje, Toast.LENGTH_SHORT).show();
         }
         if (MenuP.datos.getGenero().equals("M")){
            if (res < 94){
                puntajePABD = cero;
-               Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
            }
            else if (res > 94 && res <102){
                puntajePABD = tres;
-               Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
            }
            else if (res > 102){
                puntajePABD = cuatro;
-               Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
+               //Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
            }
         }else {
             if (res < 80){
                 puntajePABD = cero;
-                Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
             }
             else if (res > 80 && res < 88){
                 puntajePABD = tres;
-                Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+puntajePABD, Toast.LENGTH_SHORT).show();
             }
             else if (res > 88){
                 puntajePABD = cuatro;
-                Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, ""+ puntajePABD, Toast.LENGTH_SHORT).show();
             }
 
         }

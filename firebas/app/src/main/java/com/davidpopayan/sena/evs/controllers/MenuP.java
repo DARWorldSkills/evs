@@ -102,7 +102,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             }
         }catch (Exception e){
             menu.getItem(2).setVisible(false);
-            Toast.makeText(activity, "asdasdasdsad", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -129,7 +128,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 datos = datosList.get(position);
                 Intent intent = new Intent(MenuP.this,PrimerForm.class);
                 startActivity(intent);
-                Toast.makeText(MenuP.this, ""+datos.getNumero(), Toast.LENGTH_SHORT).show();
                 ingresar=0;
             }
         });
@@ -253,7 +251,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                         if (!current.getFecTamitaje().equals(fecha)) {
                             it.remove();
                         }else {
-                            Toast.makeText(MenuP.this, ""+fecha, Toast.LENGTH_SHORT).show();
                             tmpDatos1.add(current);
                         }
                     }

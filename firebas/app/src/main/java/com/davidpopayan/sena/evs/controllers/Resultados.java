@@ -227,8 +227,8 @@ public class Resultados extends AppCompatActivity {
     private void inputData() {
         ManagerDB managerDB = new ManagerDB(this);
 
-        Toast.makeText(this, "Se ha guardado correctamente"+MenuP.datos.getNumero(), Toast.LENGTH_SHORT).show();
         MenuP.datos.setRealiza(MenuP.usuario.getNombre());
+        Toast.makeText(this, "Se ha guardado correctamente", Toast.LENGTH_SHORT).show();
         switch (MenuP.ingresar){
             case 0:
 

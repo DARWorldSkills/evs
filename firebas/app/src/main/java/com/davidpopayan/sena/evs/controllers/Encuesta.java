@@ -51,20 +51,20 @@ public class Encuesta extends AppCompatActivity {
 
         if (btnSiDeporte.isChecked()){
             tmp = cero;
-            Toast.makeText(this, ""+tmp, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+tmp, Toast.LENGTH_SHORT).show();
         }
         else if (btnNoDeporte.isChecked()){
             tmp = dos;
-            Toast.makeText(this, ""+dos, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+dos, Toast.LENGTH_SHORT).show();
         }
         else if (btnSiTodosLosDias.isChecked()){
             tmp2 = cero;
-            Toast.makeText(this, "" +cero, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "" +cero, Toast.LENGTH_SHORT).show();
 
         }
         else if (btnNotodoslosdia.isChecked()){
             tmp2 = uno;
-            Toast.makeText(this, ""+ uno, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ uno, Toast.LENGTH_SHORT).show();
         }
     }
 

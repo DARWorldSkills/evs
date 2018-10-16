@@ -33,15 +33,15 @@ public class EncuestaTres extends AppCompatActivity {
     private void resuladosPersonaE3() {
         if (btnSiDiabetesPadres.isChecked()){
             tmp3 = cinco;
-            Toast.makeText(this, ""+cinco, Toast.LENGTH_SHORT).show();
+            //oast.makeText(this, ""+cinco, Toast.LENGTH_SHORT).show();
         }
         else if (btnSiDiabetesAbuelo.isChecked()){
             tmp3 = tres;
-            Toast.makeText(this, ""+tres, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+tres, Toast.LENGTH_SHORT).show();
         }
         else if (btnNinguno.isChecked()){
             tmp3 = cero;
-            Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+ cero, Toast.LENGTH_SHORT).show();
         }
         if (MenuP.datos.getGenero().equals("M")){
             if (btnSiFumas.isChecked()){

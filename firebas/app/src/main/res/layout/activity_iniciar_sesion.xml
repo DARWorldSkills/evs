@@ -148,18 +148,21 @@
 
 
         <Button
-           android:background="@color/traspa"
+            android:id="@+id/txtRegistrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@color/traspa"
             android:fontFamily="sans-serif-medium"
             android:text="Registraté"
             android:textAllCaps="true" />
 
         <Button
-            android:background="@color/traspa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:background="@color/traspa"
             android:fontFamily="sans-serif-medium"
             android:text="Olvidaste tu contraseña?"
             android:textAllCaps="true" />

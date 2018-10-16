@@ -34,6 +34,8 @@ public class Datos {
     private String riesgoCardio;
     private String pacientePresentaR;
     private String detalleRiesgoPaciente;
+    private String realiza;
+
 
     public int getNumero() {
         return numero;
@@ -297,5 +299,13 @@ public class Datos {
 
     public void setDetalleRiesgoPaciente(String detalleRiesgoPaciente) {
         this.detalleRiesgoPaciente = detalleRiesgoPaciente;
+    }
+
+    public String getRealiza() {
+        return realiza;
+    }
+
+    public void setRealiza(String realiza) {
+        this.realiza = realiza;
     }
 }

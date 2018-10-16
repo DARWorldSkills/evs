@@ -77,6 +77,14 @@ public class EncuestaDos extends AppCompatActivity {
             if (btnNoMedicamentos.isChecked()){
                 validar++;
             }
+
+            if (btnSiGlucosa.isChecked()){
+                validar++;
+            }
+            if (btnNoGlucosa.isChecked()){
+                validar++;
+            }
+
             if (validar == 2){
                 Intent intent = new Intent(EncuestaDos.this, EncuestaTres.class);
                 inputData();

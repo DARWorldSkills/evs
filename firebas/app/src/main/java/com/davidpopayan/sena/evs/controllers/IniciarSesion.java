@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.davidpopayan.sena.evs.R;
@@ -29,6 +30,7 @@ public class IniciarSesion extends AppCompatActivity {
     Button btnIniciarSesion;
     List<Usuario> usuarioList=new ArrayList<>();
     SharedPreferences sharedPreferences;
+    TextView txtRegistrar;
 
 
     @Override
@@ -44,14 +46,18 @@ public class IniciarSesion extends AppCompatActivity {
         txtUsuario = findViewById(R.id.txtUsuario);
         txtContrasena = findViewById(R.id.txtContrasena);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
-
-
-
-
+        txtRegistrar = findViewById(R.id.txtRegistrar);
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verificar();
+            }
+        });
+        txtRegistrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(IniciarSesion.this, CrearUsuario.class);
+                startActivity(intent);
             }
         });
 
@@ -91,24 +97,30 @@ public class IniciarSesion extends AppCompatActivity {
                     if (usuarioList.get(i).getUsername().equals(nombre)){
                         bandera = true;
                         if (usuarioList.get(i).getContrasena().equals(clave)){
-                            MenuP.usuario = usuarioList.get(i);
-                            Intent intent = new Intent(IniciarSesion.this,MenuP.class);
-                            editor.putString("username",nombre);
-                            editor.putString("contrasena",clave);
-                            editor.putString("activado","si");
-                            editor.putString("online","si");
-                            if (MenuP.usuario.getRango().equals("superuser")) {
-                                Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-                                editor.putString("superuser", "si");
 
+                            if (usuarioList.get(i).getActivado().equals("si")) {
+                                MenuP.usuario = usuarioList.get(i);
+                                Intent intent = new Intent(IniciarSesion.this, MenuP.class);
+                                editor.putString("nombre", usuarioList.get(i).getNombre());
+                                editor.putString("username", nombre);
+                                editor.putString("contrasena", clave);
+                                editor.putString("activado", "si");
+                                editor.putString("online", "si");
+                                if (MenuP.usuario.getRango().equals("superuser")) {
+                                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
+                                    editor.putString("superuser", "si");
+
+                                } else {
+                                    editor.putString("superuser", "no");
+                                }
+
+                                editor.commit();
+                                startActivity(intent);
+                                i = usuarioList.size();
+                                finish();
                             }else {
-                                editor.putString("superuser", "no");
+                                Toast.makeText(this, "Este usuario se encuentra bloqueado, por favor hable con el administrador", Toast.LENGTH_SHORT).show();
                             }
-
-                            editor.commit();
-                            startActivity(intent);
-                            i=usuarioList.size();
-                            finish();
 
 
                         }else{
@@ -130,6 +142,7 @@ public class IniciarSesion extends AppCompatActivity {
                             if (sharedPreferences.getString("superuser","no").equals("si")) {
                                 editor.putString("superuser", "si");
                                 MenuP.usuario.setRango("superuser");
+                                MenuP.usuario.setUsername(sharedPreferences.getString("usuario","no disponible"));
 
                             }else {
                                 editor.putString("superuser", "no");

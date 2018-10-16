@@ -5,12 +5,21 @@ package com.davidpopayan.sena.evs.controllers.models;
  */
 
 public class Usuario {
+    private String nombre;
     private String username;
     private String contrasena;
     private String rango;
     private String activado;
 
     public Usuario() {
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getUsername() {

@@ -169,31 +169,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/til_eps"
+        <Spinner
+            android:id="@+id/spinnerEps"
             android:layout_width="0dp"
-            android:layout_height="53dp"
-            android:layout_marginStart="8dp"
+            android:layout_height="0dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.506"
             app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0">
-
-            <EditText
-                android:id="@+id/txtEps"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:ems="20"
-                android:hint="EPS"
-                android:inputType="text"
-                android:textSize="15sp" />
-
-        </android.support.design.widget.TextInputLayout>
+            app:layout_constraintTop_toTopOf="parent"></Spinner>
 
 
     </android.support.constraint.ConstraintLayout>

@@ -34,7 +34,7 @@ import java.util.List;
 public class PrimerForm extends AppCompatActivity {
 
     //Variables
-    Spinner spinnerGenero;
+    Spinner spinnerGenero, spinnerEps;
     Button btnSiguiente;
     RadioButton rbtnCC, rbtnTI;
     EditText txtNombre, txtIdentificacion, txtEps, txtIps,txtNumero, txtDireccion, txtFechadenacimiento, txtEdad;
@@ -45,6 +45,7 @@ public class PrimerForm extends AppCompatActivity {
     public static int edadPuntaje;
     Datos datos = new Datos();
     List<String> genero = new ArrayList<>();
+    List<String>eps = new ArrayList<>();
     public static Activity activity;
 
     @Override
@@ -60,8 +61,56 @@ public class PrimerForm extends AppCompatActivity {
         escucharRadioButtons();
         ingresarValores();
         insertarFechaNac();
+        listarEps();
 
 
+    }
+
+    private void listarEps() {
+        eps = new ArrayList<>();
+        eps.add("ASMET SALUD EPS");
+        eps.add("COOMEVA SALUD EPS");
+        eps.add("EMSSANAR EPS");
+        eps.add("SECRETARIA DE SALUD DEPARTAMENTAL");
+        eps.add("SALUD VIDA");
+        eps.add("SURA");
+        eps.add("NUEVA EPS");
+        eps.add("ASOCIASION INDIGENA ");
+        eps.add("SEGURAS DEL ESTADO");
+        eps.add("POSITIVA COMPAÑIA DE SEGUROS");
+        eps.add("CAPRECOM EPS");
+        eps.add("CONTRATO PARTICULAR");
+        eps.add("SERVICIO OCCIDENTAL DE SALUD");
+        eps.add("ALIANSALUD");
+        eps.add("ALIANZA MEDELLIN ANTIOQUIA ");
+        eps.add("ALIANZA SEGUROS");
+        eps.add("AXA COLPATRIA");
+        eps.add("CAFE SALUD");
+        eps.add("CAJA DE COMPENSACIÓN FAMILIAR");
+        eps.add("CAPITAL SALUD EPS");
+        eps.add("CAPRESOCA");
+        eps.add("SANITAS");
+        eps.add("COOSALUD");
+        eps.add("COMPENSAR");
+        eps.add("DTS SECRETARIA DE SALUD");
+        eps.add("COSMITET");
+        eps.add("CRUZ ROJA");
+        eps.add("LA EQUIDAD ARL");
+        eps.add("LA PREVISORA");
+        eps.add("LIBERTY SEGUROS");
+        eps.add("ENTIDAD PROMOTORA DE SALUD");
+        eps.add("CRUZ BLANCA");
+        eps.add("EPS Y MEDICINA PREPAGADA");
+        eps.add("MEDIMAS");
+        eps.add("MUNDIAL DE SEGUROS");
+        eps.add("POLICIA METROPOLITANA");
+        eps.add("POSITIVA");
+        eps.add("SEGUROS DE VIDA DE ESTADO");
+        eps.add("SOS INTERNATIONAL");
+        eps.add("UNIVERSIDAD DEL CAUCA UNIDAD DE SALUD");
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, eps);
+        spinnerEps.setAdapter(adapter);
     }
 
     //Ingresamos los datos de la base de datos
@@ -70,7 +119,7 @@ public class PrimerForm extends AppCompatActivity {
             Datos datos =MenuP.datos;
             txtNombre.setText(datos.getNombreCompleto());
             txtIdentificacion.setText(datos.getNumeroId());
-            txtEps.setText(datos.getNombreEPS());
+            //txtEps.setText(datos.getNombreEPS());
             txtIps.setText(datos.getiPS());
             txtNumero.setText(datos.getTelefono());
             txtDireccion.setText(datos.getDireccion());
@@ -133,12 +182,12 @@ public class PrimerForm extends AppCompatActivity {
     //Referenciamos todos los campos del layout que vamos a utilizar
     private void inicializar() {
         spinnerGenero = findViewById(R.id.spinnerGenero);
+        spinnerEps = findViewById(R.id.spinnerEps);
         //////////////////////////////////////////////
         btnSiguiente = findViewById(R.id.btnSiguiente);
         /////////////////////////////////////////////
         txtNombre = findViewById(R.id.txtNombre);
         txtIdentificacion = findViewById(R.id.txtIdentificacion);
-        txtEps = findViewById(R.id.txtEps);
         txtIps = findViewById(R.id.txtIps);
         txtNumero = findViewById(R.id.txtNumero);
         txtDireccion = findViewById(R.id.txtDireccion);
@@ -257,11 +306,7 @@ public class PrimerForm extends AppCompatActivity {
         }else{
             txtIdentificacion.setError("Falta Campo");
         }
-        if (txtEps.getText().toString().length()>0){
-            validar++;
-        }else{
-            txtEps.setError("Falta Campo");
-        }
+
         if (txtIps.getText().toString().length()>0){
             validar++;
         }else{
@@ -290,7 +335,7 @@ public class PrimerForm extends AppCompatActivity {
         }else{
             txtEdad.setError("Falta Campo");
         }
-        if (validar == 8){
+        if (validar == 7){
             inputData();
             Intent intent = new Intent(PrimerForm.this, datosPersonales.class);
             startActivity(intent);
@@ -305,7 +350,7 @@ public class PrimerForm extends AppCompatActivity {
         datos = MenuP.datos;
         datos.setNombreCompleto(txtNombre.getText().toString());
         datos.setNumeroId(txtIdentificacion.getText().toString());
-        datos.setNombreEPS(txtEps.getText().toString());
+        //datos.setNombreEPS(txtEps.getText().toString());
         datos.setiPS(txtIps.getText().toString());
         datos.setTelefono(txtNumero.getText().toString());
         datos.setDireccion(txtDireccion.getText().toString());

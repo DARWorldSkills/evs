@@ -27,6 +27,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     public static double imc;
     public static String tmp1, tmp2;
     public static double res;
+    public static double sist;
+    public static double diast;
 
     public static Activity activity;
 
@@ -93,8 +95,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     //Validamos que los campos no esten vacios
     private void validar() {
         int valida = 0;
-
-
+        
         if (txtAltura.getText().toString().length()>0){
             valida++;
         }else {
@@ -125,6 +126,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         }else {
             txtPd.setError("Falta Campo");
         }
+
+
         if (valida == 6){
             inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
@@ -142,15 +145,96 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.btnCalcularParterial:
-                calcularPrecionArterial();
-                clasificacionPrecionArterial();
+
+                obtenerDatoDiastolica();
+                validacionDeTipoPresionArterial();
+                validarNumeroPAS();
+
+
+                
+                //calcularPrecionArterial();
+                //clasificacionPrecionArterial();
                 break;
             case R.id.btnSiguiente4:
                 asignarPuntajes();
                 puntajePresionSistolica();
                 validar();
 
+
                 break;
+        }
+    }
+
+
+
+
+
+    //Validamos que la presion arterial sitolica no sea mayor a 180
+    private void validarNumeroPAS() {
+        if (sist >= 200) {
+            txtPAS.setError("No puede ser mayor de 200");
+        } else if (sist < 100 && diast > 80) {
+            txtPd.setError("No puede ser mayor a 80");
+
+
+        } else if (sist >= 100 && sist < 120 && diast > 80) {
+            txtPd.setError("No puede ser mayor a 80");
+        } else if (sist >= 100 && sist < 120 && diast < 70) {
+            txtPd.setError("No puede ser Menor a 70");
+
+
+        } else if (sist >= 120 && sist < 140 && diast > 90) {
+            txtPd.setError("No puede ser Mayor a 90");
+        } else if (sist >= 120 && sist < 140 && diast < 80){
+            txtPd.setError("No puede ser Menor a 80");
+
+
+        }else if (sist >=140 && diast >200) {
+            txtPd.setError("No puede ser mayor a 200");
+        }else if (sist >=140 && diast <90){
+            txtPd.setError("No puede ser Menor a 90");
+        }
+    }
+
+    //Vemos en que tipo de estado esta la persona
+    private void validacionDeTipoPresionArterial() {
+        
+        if (sist <100 && diast <80){
+            Toast.makeText(activity, "Hipotension", Toast.LENGTH_SHORT).show();
+        }else if (sist >= 100 && diast <= 80 && sist <120){
+            Toast.makeText(activity, "Presion Normal", Toast.LENGTH_SHORT).show();
+        }
+        else if (sist >= 120 && diast >=80 && sist <=140 && diast <=90){
+            Toast.makeText(activity, "Hipertension", Toast.LENGTH_SHORT).show();
+        }
+        else if (sist >= 140 && diast >=90){
+            Toast.makeText(activity, "Presion Arterial Alta", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
+
+
+
+    //Obtenemos el valor que el usuario ingresa en el campo de la presión sistolica
+    private void obtenerDatoDiastolica() {
+        if (txtPAS.getText().toString().length()>0) {
+            if (txtPd.getText().toString().length() > 0) {
+
+                try {
+                    sist = Double.parseDouble(txtPAS.getText().toString());
+                    diast = Double.parseDouble(txtPd.getText().toString());
+                } catch (Exception e) {
+                    Toast.makeText(activity, "Faltan Datos", Toast.LENGTH_SHORT).show();
+                }
+
+            } else {
+                txtPd.setError("Necesitas esté campo");
+            }
+
+        }else {
+            txtPAS.setError("Necesitas este campo");
         }
     }
 

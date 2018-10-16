@@ -25,6 +25,7 @@ public class Resultados extends AppCompatActivity {
     public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
     TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular, txtRD, txtRiesgoC;
     double im, res;
+    double sitolica, diastolica;
     int riesgoDiabetes, riesgoCardioVascular;
 
 
@@ -74,13 +75,18 @@ public class Resultados extends AppCompatActivity {
 
     //Cambiamos la imagenes de la presion arterial
     private void DetallePresionArterial() {
+        if (sitolica <100 && diastolica <80){
+            imgArterial.setImageResource(R.drawable.arterialuno);
 
-        if (res <= 70){
+        }else if (sitolica >= 100 && diastolica <= 80 && sitolica <120){
             imgArterial.setImageResource(R.drawable.arterialdo);
-        }else if (res > 70 && res <105){
+        }
+        else if (sitolica >= 120 && diastolica >=80 && sitolica <=140 && diastolica <=90){
             imgArterial.setImageResource(R.drawable.arterialtres);
-        }else if (res > 105 && res < 300){
+        }
+        else if (sitolica >= 140 && diastolica >=90){
             imgArterial.setImageResource(R.drawable.arterialcuatro);
+
         }
     }
 
@@ -184,8 +190,6 @@ public class Resultados extends AppCompatActivity {
     private void calcularRiesgoCardiovascular() {
         riesgoCardioVascular = PrimerForm.edadPuntaje + datosPersonales.puntajePresionS + EncuestaTres.tmpFuma + EncuestaTres.tmpDiabe;
 
-
-
     }
 
     //Hacemos la sumatoria te todos los puntos de las encuentas y dependiendo a eso vemos que tan grave es el riesgo
@@ -194,17 +198,13 @@ public class Resultados extends AppCompatActivity {
         riesgoDiabetes = PrimerForm.edadPuntaje + datosPersonales.puntaje + datosPersonales.puntajePABD + Encuesta.tmp + Encuesta.tmp2
                 + EncuestaDos.tmp2 + EncuestaDos.tmp3 + EncuestaTres.tmp3;
 
-
-
-
     }
 
     //Obtenemos el resultado de la presion arterial que se calcula en los datos personales
     private void obtenerPresionArterial() {
 
-        res = datosPersonales.res;
-        res = Math.round(res * 100) / 100d;
-
+        sitolica = datosPersonales.sist;
+        diastolica = datosPersonales.diast;
     }
 
     //Obtenemos de la clase datosPersonales el IMC de la persona

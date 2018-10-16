@@ -173,6 +173,12 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             startActivity(intent);
             finish();
         }
+
+        if (id==R.id.itemBloquear){
+            Intent intent = new Intent(MenuP.this,BloqueoUsuarios.class);
+            startActivity(intent);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -275,8 +281,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                                 String.valueOf((tmpDatos.getPeso())), String.valueOf((tmpDatos.getPerimetroAbdominal())),tmpDatos.getRealizarActividadFisicaD(),
                                 tmpDatos.getFrecuenciaVerdurasFrutas(),tmpDatos.getMedicamentosHipertension(),tmpDatos.getGlucosaAlta(),tmpDatos.getDiabetesFamiliares(),
                                 String.valueOf((tmpDatos.getImc())),tmpDatos.getClasificacionIMC(),tmpDatos.getRiesgoDeDiabetes(),tmpDatos.getPresionArterial(),
-                                (tmpDatos.getPresionDiastolica()),tmpDatos.getDiabetes(),tmpDatos.getFuma(),tmpDatos.getPorcentajeRiesgo(),tmpDatos.getRiesgoCardio(),
-                                tmpDatos.getPacientePresentaR(),tmpDatos.getDetalleRiesgoPaciente()};
+                                (tmpDatos.getPresionDiastolica()),tmpDatos.getDiabetes(),tmpDatos.getFuma(),tmpDatos.getRealiza()};
 
                         csvWrite.writeNext(arrStr);
 

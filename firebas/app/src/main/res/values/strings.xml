@@ -6,5 +6,10 @@
     <string name="ingreseNombreUsuario">Ingrese nombre de usuario</string>
     <string name="ingresecontrasena">Ingrese contraseña</string>
     <string name="iniciarSesion">Iniciar Sesión</string>
+    <string name="IngreseNombreC">Ingrese su nombre completo</string>
+    <string name="IngreseNombreU">Ingrese nombre de usuario</string>
+    <string name="ingreseClave">Ingrese contraseña para la cuenta</string>
+    <string name="ingresenuevamente">Ingrese nuevamente la contraseña</string>
+    <string name="crearCuenta">Crear cuenta</string>
 
 </resources>

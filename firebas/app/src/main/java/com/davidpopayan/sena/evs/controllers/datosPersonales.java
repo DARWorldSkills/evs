@@ -89,7 +89,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         txtPABD = findViewById(R.id.txtPABD);
         txtPAS = findViewById(R.id.txtPAS);
         txtPd = findViewById(R.id.txtPd);
-        txtPresionArterial = findViewById(R.id.txtPresionArterial);
+
     }
 
     //Validamos que los campos no esten vacios
@@ -417,7 +417,6 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         datos.setPresionDiastolica(String.valueOf(diastolica));
         datos.setClasificacionIMC(tmp1);
         datos.setImc((int) imc);
-        datos.setPresionArterial(txtPresionArterial.getText().toString());
         datos.setPerimetroAbdominal((int) pas);
 
         MenuP.datos = datos;

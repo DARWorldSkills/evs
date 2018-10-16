@@ -57,11 +57,11 @@ public class PrimerForm extends AppCompatActivity {
         activity= this;
         //Creamos Metodos
         inicializar();
+        listarEps();
         listarGenero();
         escucharRadioButtons();
         ingresarValores();
         insertarFechaNac();
-        listarEps();
 
 
     }
@@ -127,6 +127,12 @@ public class PrimerForm extends AppCompatActivity {
             for (int i=0; i<genero.size();i++){
                 if (genero.get(i).equals(datos.getGenero())){
                     spinnerGenero.setSelection(i);
+                }
+            }
+
+            for (int i=0; i<eps.size();i++){
+                if (eps.get(i).equals(datos.getNombreEPS())){
+                    spinnerEps.setSelection(i);
                 }
             }
             txtEdad.setText(Integer.toString(calcularEdad(datos.getFecNac())));
@@ -350,7 +356,7 @@ public class PrimerForm extends AppCompatActivity {
         datos = MenuP.datos;
         datos.setNombreCompleto(txtNombre.getText().toString());
         datos.setNumeroId(txtIdentificacion.getText().toString());
-        //datos.setNombreEPS(txtEps.getText().toString());
+        datos.setNombreEPS(spinnerEps.getSelectedItem().toString());
         datos.setiPS(txtIps.getText().toString());
         datos.setTelefono(txtNumero.getText().toString());
         datos.setDireccion(txtDireccion.getText().toString());

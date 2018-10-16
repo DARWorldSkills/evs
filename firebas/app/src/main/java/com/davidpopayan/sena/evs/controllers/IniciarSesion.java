@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -101,6 +102,7 @@ public class IniciarSesion extends AppCompatActivity {
                             if (usuarioList.get(i).getActivado().equals("si")) {
                                 MenuP.usuario = usuarioList.get(i);
                                 Intent intent = new Intent(IniciarSesion.this, MenuP.class);
+                                Log.e("Nombre",usuarioList.get(i).getNombre());
                                 editor.putString("nombre", usuarioList.get(i).getNombre());
                                 editor.putString("username", nombre);
                                 editor.putString("contrasena", clave);

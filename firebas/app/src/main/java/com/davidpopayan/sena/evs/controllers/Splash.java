@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.Window;
 
 import com.davidpopayan.sena.evs.R;
@@ -90,6 +92,8 @@ public class Splash extends AppCompatActivity {
                     }else {
                         MenuP.usuario.setRango("ninguno");
                     }
+                    MenuP.usuario.setNombre(sharedPreferences.getString("nombre","No disponible"));
+                    Log.e("nombre1",MenuP.usuario.getNombre());
 
                     MenuP.usuario.setUsername(sharedPreferences.getString("username","0"));
                     Intent intent = new Intent(Splash.this, MenuP.class);

@@ -158,19 +158,19 @@ public class PrimerForm extends AppCompatActivity {
     private void asiganarPuntajes() {
         if (edad< 45){
             edadPuntaje = cero;
-            Toast.makeText(this, ""+edadPuntaje+" ", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+edadPuntaje+" ", Toast.LENGTH_SHORT).show();
         }
         else if (edad >45 && edad<54){
             edadPuntaje = dos;
-            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
         }
         else if (edad >55 && edad <64){
             edadPuntaje = tres;
-            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
         }
         else if (edad > 64){
             edadPuntaje = cuatro;
-            Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, ""+edadPuntaje, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -295,6 +295,8 @@ public class PrimerForm extends AppCompatActivity {
             Intent intent = new Intent(PrimerForm.this, datosPersonales.class);
             startActivity(intent);
 
+        }else {
+            Toast.makeText(activity, "Faltan campos por ingresar", Toast.LENGTH_SHORT).show();
         }
 
     }

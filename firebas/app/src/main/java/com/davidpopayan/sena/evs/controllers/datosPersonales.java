@@ -29,7 +29,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     public static double res;
     public static double sist;
     public static double diast;
-
+    int validacion=1;
     public static Activity activity;
 
     @Override
@@ -128,11 +128,14 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        if (valida == 6){
+        if (valida == 6 && validacion==0){
             inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
             startActivity(intent);
 
+        }
+        if (validacion>0){
+            Toast.makeText(activity, "Por favor calcule la presión arterial", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -145,7 +148,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.btnCalcularParterial:
-
+                validacion=0;
                 obtenerDatoDiastolica();
                 validacionDeTipoPresionArterial();
                 validarNumeroPAS();
@@ -171,27 +174,37 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
     //Validamos que la presion arterial sitolica no sea mayor a 180
     private void validarNumeroPAS() {
+
         if (sist >= 200) {
+            validacion++;
             txtPAS.setError("No puede ser mayor de 200");
         } else if (sist < 100 && diast > 80) {
+            validacion++;
             txtPd.setError("No puede ser mayor a 80");
 
 
         } else if (sist >= 100 && sist < 120 && diast > 80) {
+            validacion++;
             txtPd.setError("No puede ser mayor a 80");
         } else if (sist >= 100 && sist < 120 && diast < 70) {
+            validacion++;
             txtPd.setError("No puede ser Menor a 70");
 
 
         } else if (sist >= 120 && sist < 140 && diast > 90) {
+            validacion++;
             txtPd.setError("No puede ser Mayor a 90");
         } else if (sist >= 120 && sist < 140 && diast < 80){
+            validacion++;
             txtPd.setError("No puede ser Menor a 80");
 
 
         }else if (sist >=140 && diast >200) {
+            validacion++;
             txtPd.setError("No puede ser mayor a 200");
+
         }else if (sist >=140 && diast <90){
+            validacion++;
             txtPd.setError("No puede ser Menor a 90");
         }
     }
@@ -226,6 +239,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                     sist = Double.parseDouble(txtPAS.getText().toString());
                     diast = Double.parseDouble(txtPd.getText().toString());
                 } catch (Exception e) {
+                    validacion++;
                     Toast.makeText(activity, "Faltan Datos", Toast.LENGTH_SHORT).show();
                 }
 
@@ -305,7 +319,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     }
 
     //Formula para calcular la precionArterial
-    private void calcularPrecionArterial() {
+    private void calcularPresionArterial() {
 
         if (txtPAS.getText().toString().length()>0){
             if (txtPd.getText().toString().length()>0){
@@ -413,8 +427,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         Datos datos = MenuP.datos;
         datos.setTalla((int) altura);
         datos.setPeso((int) peso);
-        datos.setPresionAS(String.valueOf(sistolica));
-        datos.setPresionDiastolica(String.valueOf(diastolica));
+        datos.setPresionAS(String.valueOf(sist));
+        datos.setPresionDiastolica(String.valueOf(diast));
         datos.setClasificacionIMC(tmp1);
         datos.setImc((int) imc);
         datos.setPerimetroAbdominal((int) pas);

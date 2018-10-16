@@ -1,97 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondoevs"
     tools:context=".controllers.CrearUsuario">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/IngreseNombreC" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtUser"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/IngreseNombreU" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtContrasena"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/ingreseClave"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
-
-    <Button
-        android:id="@+id/btnCrearUsuario"
+    <RelativeLayout
+        android:id="@+id/relative1"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:layout_centerInParent="true"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/crearCuenta"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout4" />
+        android:layout_height="wrap_content">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/textInputLayout4"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
 
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtConfirmar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/ingresenuevamente"
-            android:inputType="textPassword" />
-    </android.support.design.widget.TextInputLayout>
 
-</android.support.constraint.ConstraintLayout>
+            <LinearLayout
+                android:id="@+id/linear1"
+                android:layout_below="@id/txtLogin"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ingrese su nombre completo"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15sp"
+                    android:textAllCaps="true"
+                    />
+
+                <EditText
+                    android:id="@+id/txtNombre"
+                    android:layout_marginTop="5dp"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="15sp"
+                    android:background="@drawable/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp" />
+
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ingrese nombre de usuario"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:textAllCaps="true"
+                        />
+
+                    <EditText
+                        android:id="@+id/txtUser"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:background="@drawable/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ingrese su contraseña para la cuenta"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:textAllCaps="true"
+                        />
+
+                    <EditText
+                        android:id="@+id/txtContrasena"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:inputType="textPassword"
+                        android:paddingRight="15dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:background="@drawable/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Confirme contraseña"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:textAllCaps="true"
+                        />
+
+                    <EditText
+                        android:id="@+id/txtConfirmar"
+                        android:layout_marginTop="5dp"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:textSize="15sp"
+                        android:inputType="textPassword"
+                        android:background="@drawable/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnCrearUsuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/btn_login"
+                android:paddingRight="70dp"
+                android:paddingLeft="70dp"
+                android:text="@string/crearCuenta"
+                android:layout_below="@id/linear1"
+                android:layout_centerHorizontal="true"/>
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>

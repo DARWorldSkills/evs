@@ -14,7 +14,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +55,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     List<Datos> datosList=new ArrayList<>();
     FloatingActionButton btnNuevo;
     RecyclerView recyclerView;
-
+    ConstraintLayout constraintLayout;
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     MenuItem buscardorItem;
     SearchView searchView;
@@ -87,6 +89,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
         recyclerView = findViewById(R.id.recyclerView);
+        constraintLayout = findViewById(R.id.contenedor);
     }
 
     @Override
@@ -279,6 +282,11 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
+                        int enviados = managerDB.listarPorFecha(tmpDatos1,fecha);
+                        int noEnviados = datosList.size()-enviados;
+                        String mensaje ="Tamitajes enviados: "+enviados+"\n"+
+                                        "Tamitajes no enviados: "+noEnviados;
+                        Snackbar.make(constraintLayout,mensaje,Snackbar.LENGTH_LONG).show();
                         Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }

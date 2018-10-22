@@ -35,6 +35,7 @@ public class Datos {
     private String pacientePresentaR;
     private String detalleRiesgoPaciente;
     private String realiza;
+    private String enviado;
 
 
     public int getNumero() {
@@ -307,5 +308,13 @@ public class Datos {
 
     public void setRealiza(String realiza) {
         this.realiza = realiza;
+    }
+
+    public String getEnviado() {
+        return enviado;
+    }
+
+    public void setEnviado(String enviado) {
+        this.enviado = enviado;
     }
 }

@@ -168,10 +168,6 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-
-
-
-
     //Validamos que la presion arterial sitolica no sea mayor a 180
     private void validarNumeroPAS() {
 
@@ -214,20 +210,16 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         
         if (sist <100 && diast <80){
             Toast.makeText(activity, "Hipotension", Toast.LENGTH_SHORT).show();
-        }else if (sist >= 100 && diast <= 80 && sist <120){
+        }else if (sist >= 100 && diast <= 80 && sist <=129){
             Toast.makeText(activity, "Presion Normal", Toast.LENGTH_SHORT).show();
         }
-        else if (sist >= 120 && diast >=80 && sist <=140 && diast <=90){
-            Toast.makeText(activity, "Hipertension", Toast.LENGTH_SHORT).show();
+        else if (sist >= 130 && diast >=80 && sist <=139 && diast <=90){
+            Toast.makeText(activity, "Pre-Hipertension", Toast.LENGTH_SHORT).show();
         }
         else if (sist >= 140 && diast >=90){
             Toast.makeText(activity, "Presion Arterial Alta", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
-
 
 
     //Obtenemos el valor que el usuario ingresa en el campo de la presión sistolica

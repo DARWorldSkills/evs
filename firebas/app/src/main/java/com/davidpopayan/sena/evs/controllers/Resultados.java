@@ -81,7 +81,7 @@ public class Resultados extends AppCompatActivity {
         }else if (sitolica >= 100 && diastolica <= 80 && sitolica <120){
             imgArterial.setImageResource(R.drawable.a2);
         }
-        else if (sitolica >= 120 && diastolica >=80 && sitolica <=140 && diastolica <=90){
+        else if (sitolica >= 130 && diastolica >=80 && sitolica <=139 && diastolica <=90){
             imgArterial.setImageResource(R.drawable.a3);
         }
         else if (sitolica >= 140 && diastolica >=90){

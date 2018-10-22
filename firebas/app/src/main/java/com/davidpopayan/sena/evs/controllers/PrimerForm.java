@@ -34,9 +34,9 @@ import java.util.List;
 public class PrimerForm extends AppCompatActivity {
 
     //Variables
-    Spinner spinnerGenero, spinnerEps;
+    Spinner spinnerGenero, spinnerEps, spinnerIps;
     Button btnSiguiente;
-    RadioButton rbtnCC, rbtnTI;
+    RadioButton rbtnCC, rbtnTI, rbtnRC;
     EditText txtNombre, txtIdentificacion, txtEps, txtIps,txtNumero, txtDireccion, txtFechadenacimiento, txtEdad;
     Button btnInputFecNac;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
@@ -46,6 +46,7 @@ public class PrimerForm extends AppCompatActivity {
     Datos datos = new Datos();
     List<String> genero = new ArrayList<>();
     List<String>eps = new ArrayList<>();
+    List<String>ips= new ArrayList<>();
     public static Activity activity;
 
     @Override
@@ -59,10 +60,39 @@ public class PrimerForm extends AppCompatActivity {
         inicializar();
         listarEps();
         listarGenero();
+        listarIps();
         escucharRadioButtons();
         ingresarValores();
         insertarFechaNac();
 
+
+    }
+    private void listarIps() {
+        ips = new ArrayList<>();
+        ips.add("ASOCIACIÓN INDÍGENA DEL CAUCA IPSI");
+        ips.add("CAJA DE COMPENSACION FAMILIAR DEL CAUCA");
+        ips.add("CENTRO DE SALUD 31 DE MARZO - ESE POPAYAN");
+        ips.add("CENTRO DE SALUD DE PUEBLILLO POPAYAN ESE");
+        ips.add("CENTRO DE SALUD LOMA DE LA VIRGEN");
+        ips.add("CENTRO DE SALUD SUR OCCIDENTE POPAYAN ESE");
+        ips.add("CENTRO DE SALUD SUR ORIENTE POPAYAN ESE");
+        ips.add("CENTRO DE SALUD YANACONAS");
+        ips.add("CLINICA DE LA ESTANCIA SA");
+        ips.add("CLINICA SANTA GRACIA DUMIAN MEDICAL SAS");
+        ips.add("CORPORACION IPS SALUDCOOP");
+        ips.add("COSMITET LTDA CORPORACIÓ");
+        ips.add("CRUZ ROJA COLOMBIANA SECCIONAL CAUCA");
+        ips.add("DUMIAN MEDICAL SAS");
+        ips.add("EPS SANITAS CENTRO MEDICO POPAYAN");
+        ips.add("HOME HEALTH SALUD EN CASA SAS IPS");
+        ips.add("HOSPITAL MARIA OCCIDENTE ESE POPAYAN");
+        ips.add("HOSPITAL SUSANA LOPEZ DE VALENCIA ESE");
+        ips.add("HOSPITAL TORIBIO MAYA - ESE POPAYAN");
+        ips.add("HOSPITAL UNIVERSITARIO SAN JOSE DE POPAYAN");
+        ips.add("UNIDAD DE SALUD UNICAUCA");
+
+        ArrayAdapter adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, ips);
+        spinnerIps.setAdapter(adapter);
 
     }
 
@@ -120,10 +150,20 @@ public class PrimerForm extends AppCompatActivity {
             txtNombre.setText(datos.getNombreCompleto());
             txtIdentificacion.setText(datos.getNumeroId());
             //txtEps.setText(datos.getNombreEPS());
-            txtIps.setText(datos.getiPS());
+            //txtIps.setText(datos.getiPS());
             txtNumero.setText(datos.getTelefono());
             txtDireccion.setText(datos.getDireccion());
             txtFechadenacimiento.setText(datos.getFecNac());
+
+            if (txtIdentificacion.getText().toString().length()<1){
+
+                rbtnCC.setChecked(false);
+                txtIdentificacion.setEnabled(false);
+            }else {
+                rbtnCC.setChecked(true);
+                txtIdentificacion.setEnabled(true);
+            }
+
             for (int i=0; i<genero.size();i++){
                 if (genero.get(i).equals(datos.getGenero())){
                     spinnerGenero.setSelection(i);
@@ -139,9 +179,6 @@ public class PrimerForm extends AppCompatActivity {
 
         }
     }
-
-
-
 
     //Operacion la cual nos ayuda a calcular la edad de la persona
     public int calcularEdad(String fechaNac){
@@ -189,18 +226,19 @@ public class PrimerForm extends AppCompatActivity {
     private void inicializar() {
         spinnerGenero = findViewById(R.id.spinnerGenero);
         spinnerEps = findViewById(R.id.spinnerEps);
+        spinnerIps = findViewById(R.id.spinnerIps);
         //////////////////////////////////////////////
         btnSiguiente = findViewById(R.id.btnSiguiente);
         /////////////////////////////////////////////
         txtNombre = findViewById(R.id.txtNombre);
         txtIdentificacion = findViewById(R.id.txtIdentificacion);
-        txtIps = findViewById(R.id.txtIps);
         txtNumero = findViewById(R.id.txtNumero);
         txtDireccion = findViewById(R.id.txtDireccion);
         txtFechadenacimiento = findViewById(R.id.txtFechadenacimiento);
         txtEdad = findViewById(R.id.txtEdad);
         rbtnCC = findViewById(R.id.rbtnCC);
         rbtnTI = findViewById(R.id.rbtnTI);
+        rbtnRC = findViewById(R.id.rbtnRc);
         btnInputFecNac = findViewById(R.id.btnInputFecNac);
     }
 
@@ -231,6 +269,7 @@ public class PrimerForm extends AppCompatActivity {
 
     //Validamos el tipo de identidicacion
     public void escucharRadioButtons(){
+
         rbtnTI.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -239,6 +278,12 @@ public class PrimerForm extends AppCompatActivity {
         });
 
         rbtnCC.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                txtIdentificacion.setEnabled(true);
+            }
+        });
+        rbtnRC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 txtIdentificacion.setEnabled(true);
@@ -312,12 +357,6 @@ public class PrimerForm extends AppCompatActivity {
         }else{
             txtIdentificacion.setError("Falta Campo");
         }
-
-        if (txtIps.getText().toString().length()>0){
-            validar++;
-        }else{
-            txtIps.setError("Falta Campo");
-        }
         if (txtNumero.getText().toString().length()>0){
             validar++;
         }else{
@@ -341,7 +380,7 @@ public class PrimerForm extends AppCompatActivity {
         }else{
             txtEdad.setError("Falta Campo");
         }
-        if (validar == 7){
+        if (validar == 6){
             inputData();
             Intent intent = new Intent(PrimerForm.this, datosPersonales.class);
             startActivity(intent);
@@ -357,7 +396,6 @@ public class PrimerForm extends AppCompatActivity {
         datos.setNombreCompleto(txtNombre.getText().toString());
         datos.setNumeroId(txtIdentificacion.getText().toString());
         datos.setNombreEPS(spinnerEps.getSelectedItem().toString());
-        datos.setiPS(txtIps.getText().toString());
         datos.setTelefono(txtNumero.getText().toString());
         datos.setDireccion(txtDireccion.getText().toString());
         datos.setFecNac(txtFechadenacimiento.getText().toString());

@@ -31,6 +31,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -100,11 +101,18 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         try {
             if (!usuario.getRango().equals("superuser")){
                 menu.getItem(2).setVisible(false);
+                menu.getItem(3).setVisible(false);
             }else {
                 menu.getItem(2).setVisible(true);
+                menu.getItem(3).setVisible(true);
+            }
+
+            if (usuario.getRango().equals("administrador")){
+                menu.getItem(3).setVisible(true);
             }
         }catch (Exception e){
             menu.getItem(2).setVisible(false);
+            menu.getItem(3).setVisible(false);
 
         }
 
@@ -180,6 +188,12 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             startActivity(intent);
 
         }
+
+        if (id==R.id.itemCrearUsuario){
+            Intent intent = new Intent(MenuP.this,CrearUsuario.class);
+            startActivity(intent);
+
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -223,7 +237,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         dialog.setContentView(R.layout.item_busqueda);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final DatePicker datePicker = dialog.findViewById(R.id.calendario);
-        Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
+        final Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
         Button btnCancelar =  dialog.findViewById(R.id.btnCancelar);
 
         btnAceptar.setOnClickListener(new View.OnClickListener() {
@@ -286,7 +300,20 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                         int noEnviados = datosList.size()-enviados;
                         String mensaje ="Tamitajes enviados: "+enviados+"\n"+
                                         "Tamitajes no enviados: "+noEnviados;
-                        Snackbar.make(constraintLayout,mensaje,Snackbar.LENGTH_LONG).show();
+                        //Snackbar.make(constraintLayout,mensaje,Snackbar.LENGTH_LONG).show();
+                        final Dialog dialog1 = new Dialog(MenuP.this);
+                        dialog1.setContentView(R.layout.item_resultados);
+                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        TextView txtResultados = dialog1.findViewById(R.id.txtResultado);
+                        txtResultados.setText(mensaje);
+                        Button btnCancelar = dialog1.findViewById(R.id.btnCancelar);
+                        btnCancelar.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                dialog1.cancel();
+                            }
+                        });
+                        dialog1.show();
                         Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }

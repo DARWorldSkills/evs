@@ -67,14 +67,15 @@
 
                     <EditText
                         android:id="@+id/txtUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
                         android:layout_marginTop="5dp"
+                        android:background="@drawable/btn_login"
+                        android:fontFamily="sans-serif-medium"
+                        android:inputType="textPersonName"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:textSize="15sp"
-                        android:background="@drawable/btn_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="40dp" />
+                        android:textSize="15sp" />
 
 
 
@@ -132,23 +133,6 @@
                 android:layout_marginTop="50dp"
                 android:text="@string/iniciarSesion"
                 android:layout_below="@id/linear1"/>
-
-            <Button
-                android:id="@+id/txtRegistrar"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@drawable/btn_login"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                android:textSize="16sp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="10dp"
-                android:layout_below="@id/btnIniciarSesion"
-                android:fontFamily="sans-serif-medium"
-                android:text="Registraté"
-                android:textAllCaps="false" />
-
-
 
 
         </RelativeLayout>

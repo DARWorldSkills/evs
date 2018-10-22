@@ -47,18 +47,10 @@ public class IniciarSesion extends AppCompatActivity {
         txtUsuario = findViewById(R.id.txtUsuario);
         txtContrasena = findViewById(R.id.txtContrasena);
         btnIniciarSesion = findViewById(R.id.btnIniciarSesion);
-        txtRegistrar = findViewById(R.id.txtRegistrar);
         btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 verificar();
-            }
-        });
-        txtRegistrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(IniciarSesion.this, CrearUsuario.class);
-                startActivity(intent);
             }
         });
 
@@ -109,10 +101,12 @@ public class IniciarSesion extends AppCompatActivity {
                                 editor.putString("activado", "si");
                                 editor.putString("online", "si");
                                 if (MenuP.usuario.getRango().equals("superuser")) {
-                                    Toast.makeText(this, "", Toast.LENGTH_SHORT).show();
-                                    editor.putString("superuser", "si");
+                                    editor.putString("superuser", "superuser");
 
-                                } else {
+                                } else if (MenuP.usuario.getRango().equals("administrador")){
+                                    editor.putString("superuser", "administrador");
+
+                                }else {
                                     editor.putString("superuser", "no");
                                 }
 
@@ -141,15 +135,20 @@ public class IniciarSesion extends AppCompatActivity {
                             editor.putString("contrasena",clave);
                             editor.putString("activado","si");
                             editor.putString("online","no");
-                            if (sharedPreferences.getString("superuser","no").equals("si")) {
-                                editor.putString("superuser", "si");
+                            if (sharedPreferences.getString("superuser","no").equals("superuser")) {
+                                editor.putString("superuser", "superuser");
                                 MenuP.usuario.setRango("superuser");
                                 MenuP.usuario.setUsername(sharedPreferences.getString("usuario","no disponible"));
+
+                            }else if (sharedPreferences.getString("superuser","no").equals("superuser")) {
+                                editor.putString("superuser", "administrador");
+                                MenuP.usuario.setRango("administrador");
 
                             }else {
                                 editor.putString("superuser", "no");
                                 MenuP.usuario.setRango("ninguno");
                             }
+
                             editor.commit();
                             startActivity(intent);
                             finish();

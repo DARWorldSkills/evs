@@ -15,12 +15,19 @@
             app:showAsAction="collapseActionView"
             />
 
+        <item
+            android:id="@+id/itemCrearUsuario"
+            android:title="Crear usuario"
+            app:showAsAction="collapseActionView"
+            />
 
         <item
             android:id="@+id/itemCerrarSesion"
             android:title="Cerrar Sesión"
             app:showAsAction="collapseActionView"
             />
+
+
 
     </group>
 </menu>

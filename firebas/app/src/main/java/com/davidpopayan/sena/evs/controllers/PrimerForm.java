@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -24,13 +26,16 @@ import com.davidpopayan.sena.evs.controllers.models.Datos;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.Period;
 import java.time.Year;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+@RequiresApi(api = Build.VERSION_CODES.O)
 public class PrimerForm extends AppCompatActivity {
 
     //Variables
@@ -48,6 +53,7 @@ public class PrimerForm extends AppCompatActivity {
     List<String>eps = new ArrayList<>();
     List<String>ips= new ArrayList<>();
     public static Activity activity;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -187,19 +193,24 @@ public class PrimerForm extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
             date = simpleDateFormat.parse(fechaNac);
+            int diaDelMes = Integer.parseInt(simpleDateFormat.format(now).substring(0,2));
+            int diaNac=Integer.parseInt(simpleDateFormat.format(date).substring(0,2));
             int nowMonth = now.getMonth()+1;
             int nowYear = now.getYear();
             edad = nowYear - date.getYear();
+            Log.e("dada", String.valueOf(diaNac));
+            Log.e("dada", String.valueOf(diaDelMes));
             if (date.getMonth() > nowMonth) {
                 edad--;
             }
-            else if (date.getMonth() == nowMonth) {
-                int nowDay = now.getDate();
+            else if (date.getMonth()+1 == nowMonth) {
+                int nowDay = diaDelMes;
 
-                if (date.getDay() > nowDay) {
+                if (diaNac > nowDay) {
                     edad--;
+
                 }else {
-                    tmpSiEdad=-1;
+                    //edad=-1;
                 }
             }
 
@@ -313,7 +324,6 @@ public class PrimerForm extends AppCompatActivity {
                         try {
                             date =dateFormat.parse(fecha1);
                             SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
 
                             calcularEdad(format.format(date));
 

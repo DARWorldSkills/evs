@@ -86,11 +86,17 @@ public class Splash extends AppCompatActivity {
                     finish();
                 }else {
 
-                    if (sharedPreferences.getString("superuser","no").equals("si")) {
+                    if (sharedPreferences.getString("superuser","no").equals("superuser")) {
                         MenuP.usuario.setRango("superuser");
 
                     }else {
-                        MenuP.usuario.setRango("ninguno");
+                        if (sharedPreferences.getString("superuser","no").equals("administrador")){
+
+                            MenuP.usuario.setRango("administrador");
+
+                        }else {
+                            MenuP.usuario.setRango("ninguno");
+                        }
                     }
                     MenuP.usuario.setNombre(sharedPreferences.getString("nombre","No disponible"));
                     Log.e("nombre1",MenuP.usuario.getNombre());

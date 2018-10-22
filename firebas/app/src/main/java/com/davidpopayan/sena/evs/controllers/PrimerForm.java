@@ -357,6 +357,7 @@ public class PrimerForm extends AppCompatActivity {
         datos.setNombreCompleto(txtNombre.getText().toString());
         datos.setNumeroId(txtIdentificacion.getText().toString());
         datos.setNombreEPS(spinnerEps.getSelectedItem().toString());
+        Toast.makeText(activity, ""+spinnerEps.getSelectedItem().toString(), Toast.LENGTH_SHORT).show();
         datos.setiPS(txtIps.getText().toString());
         datos.setTelefono(txtNumero.getText().toString());
         datos.setDireccion(txtDireccion.getText().toString());

@@ -237,10 +237,9 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 }
                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 String fecha = dateFormat1.format(date);
-                List<Datos> tmpListDatos = new ArrayList<>();
-                for (int i=0; i<datosList.size(); i++){
-                    tmpListDatos.add(datosList.get(i));
-                }
+                ManagerDB managerDB = new ManagerDB(MenuP.this);
+                List<Datos> tmpListDatos = managerDB.listaDatos();
+
 
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
@@ -254,22 +253,15 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                             tmpDatos1.add(current);
                         }
                     }
-
-
-
-                    File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+                    File exportDir = new File(Environment.getExternalStorageDirectory(), "Tamitajes");
                     if (!exportDir.exists())
                     {
                         exportDir.mkdirs();
                     }
-
                     archivo = new File(exportDir, "Tamitaje.csv");
-
-
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
                     for (int i=0; i<tmpDatos1.size();i++) {
-                        //Log.e("MainActivity", String.valueOf(datos.get(i).split(",")));
                         Datos tmpDatos = tmpDatos1.get(i);
                         String arrStr[] = {String.valueOf((tmpDatos.getNumero())),
                                 tmpDatos.getFecTamitaje(),tmpDatos.getNombreCompleto(),tmpDatos.getTipoID(),(tmpDatos.getNumeroId()),
@@ -287,7 +279,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(MenuP.this, "El archivo está en la dirección" + exportDir + "archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }
 

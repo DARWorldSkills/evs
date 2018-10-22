@@ -396,6 +396,7 @@ public class PrimerForm extends AppCompatActivity {
         datos.setNombreCompleto(txtNombre.getText().toString());
         datos.setNumeroId(txtIdentificacion.getText().toString());
         datos.setNombreEPS(spinnerEps.getSelectedItem().toString());
+        datos.setiPS(spinnerIps.getSelectedItem().toString());
         datos.setTelefono(txtNumero.getText().toString());
         datos.setDireccion(txtDireccion.getText().toString());
         datos.setFecNac(txtFechadenacimiento.getText().toString());
@@ -403,8 +404,14 @@ public class PrimerForm extends AppCompatActivity {
         datos.setGenero(spinnerGenero.getSelectedItem().toString());
         if (rbtnCC.isChecked()){
             datos.setTipoID("CC");
-        }else {
+        }
+
+        if (rbtnTI.isChecked()){
             datos.setTipoID("TI");
+        }
+
+        if (rbtnRC.isChecked()){
+            datos.setTipoID("RC");
         }
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");

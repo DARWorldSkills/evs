@@ -69,7 +69,11 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.Holder> {
             txtIdentificacion.setText(datos.getNumeroId());
             txtNombre.setText(datos.getNombreCompleto());
             try {
+                if (datos.getNombreEPS().length()>25){
                 txtEps.setText(datos.getNombreEPS().substring(0,datos.getNombreEPS().length()-16));
+                }else {
+                    txtEps.setText(datos.getNombreEPS());
+                }
             }catch (Exception e){
 
             }

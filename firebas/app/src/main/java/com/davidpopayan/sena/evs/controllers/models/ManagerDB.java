@@ -211,7 +211,27 @@ public class ManagerDB {
         return  results;
     }
 
+    public int listarPorFecha(List<Datos> results, String fecha){
+        openWriteDB();
+        for (int i=0; i<results.size();i++){
+            ContentValues values = new ContentValues();
+            values.put("ENVIADO","SI");
+            db.update("DATOS",values,"NUMERO="+results.get(i).getNumero(),null);
+        }
 
+        int contador=0;
+        Cursor cursor1 = db.rawQuery("SELECT ENVIADO FROM DATOS WHERE ENVIADO='SI' AND FECTAMITAJE ='"+fecha+"';",null);
+        if (cursor1.moveToFirst()){
+            do {
+                contador++;
+            }while (cursor1.moveToNext());
+        }
+        cursor1.close();
+        closeDB();
+
+
+        return contador;
+    }
 
 
     public void closeDB(){

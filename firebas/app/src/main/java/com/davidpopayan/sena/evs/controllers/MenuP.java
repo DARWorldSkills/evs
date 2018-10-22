@@ -14,7 +14,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -53,7 +55,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     List<Datos> datosList=new ArrayList<>();
     FloatingActionButton btnNuevo;
     RecyclerView recyclerView;
-
+    ConstraintLayout constraintLayout;
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     MenuItem buscardorItem;
     SearchView searchView;
@@ -87,6 +89,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
         recyclerView = findViewById(R.id.recyclerView);
+        constraintLayout = findViewById(R.id.contenedor);
     }
 
     @Override
@@ -237,10 +240,9 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 }
                 SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
                 String fecha = dateFormat1.format(date);
-                List<Datos> tmpListDatos = new ArrayList<>();
-                for (int i=0; i<datosList.size(); i++){
-                    tmpListDatos.add(datosList.get(i));
-                }
+                ManagerDB managerDB = new ManagerDB(MenuP.this);
+                List<Datos> tmpListDatos = managerDB.listaDatos();
+
 
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
@@ -254,22 +256,15 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                             tmpDatos1.add(current);
                         }
                     }
-
-
-
-                    File exportDir = new File(Environment.getExternalStorageDirectory(), "");
+                    File exportDir = new File(Environment.getExternalStorageDirectory(), "Tamitajes");
                     if (!exportDir.exists())
                     {
                         exportDir.mkdirs();
                     }
-
                     archivo = new File(exportDir, "Tamitaje.csv");
-
-
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
                     for (int i=0; i<tmpDatos1.size();i++) {
-                        //Log.e("MainActivity", String.valueOf(datos.get(i).split(",")));
                         Datos tmpDatos = tmpDatos1.get(i);
                         String arrStr[] = {String.valueOf((tmpDatos.getNumero())),
                                 tmpDatos.getFecTamitaje(),tmpDatos.getNombreCompleto(),tmpDatos.getTipoID(),(tmpDatos.getNumeroId()),
@@ -287,7 +282,12 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(MenuP.this, "El archivo está en la dirección" + exportDir + "archivoCompleto.csv", Toast.LENGTH_SHORT).show();
+                        int enviados = managerDB.listarPorFecha(tmpDatos1,fecha);
+                        int noEnviados = datosList.size()-enviados;
+                        String mensaje ="Tamitajes enviados: "+enviados+"\n"+
+                                        "Tamitajes no enviados: "+noEnviados;
+                        Snackbar.make(constraintLayout,mensaje,Snackbar.LENGTH_LONG).show();
+                        Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }
 

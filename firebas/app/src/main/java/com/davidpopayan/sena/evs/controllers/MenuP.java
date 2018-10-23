@@ -56,7 +56,6 @@ import java.util.List;
 public class MenuP extends AppCompatActivity implements OnClickListener{
 
     List<Datos> datosList=new ArrayList<>();
-    FloatingActionButton btnNuevo;
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     public static Datos datos = new Datos();
     public static int ingresar=0;
@@ -64,7 +63,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     SharedPreferences preferences;
     public static Usuario usuario = new Usuario();
     EditText txtBusqueda;
-    Button btnBusqueda, btnExportar ,btnCerrarSesion;
+    Button btnBusqueda, btnExportar ,btnCerrarSesion, btnNuevo;
     public static Activity activity;
     public static MenuP menuP;
     @Override

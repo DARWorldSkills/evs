@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/cabin"
             android:text="EVS"
+            android:adjustViewBounds="true"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textColor="@color/colorPrimary"
@@ -37,6 +38,7 @@
             android:fontFamily="@font/cabin"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
+            android:adjustViewBounds="true"
             android:text="Estilo de vida saludable"
             android:layout_below="@+id/txtEvs"
             android:layout_height="wrap_content" />
@@ -45,40 +47,77 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="30dp"
             android:layout_below="@+id/txtCompleto">
 
 
             <LinearLayout
-                android:layout_marginTop="40dp"
                 android:id="@+id/linear1"
+                android:orientation="vertical"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
-                android:orientation="horizontal"
                 android:layout_height="wrap_content">
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/textInputLayout"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
                         android:id="@+id/txtBusqueda"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="Identificación" />
-                </android.support.design.widget.TextInputLayout>
+                        android:layout_height="50dp"
+                        android:background="@drawable/btn_login"
+                        android:hint="Identificación"
+                        android:maxEms="12"
+                        android:maxLength="12"
+                        android:maxLines="12"
+                        android:inputType="number"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/linearboton"
+                android:layout_below="@+id/linear1"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
                 <Button
                     android:id="@+id/btnBusqueda"
                     android:layout_width="50dp"
-                    android:adjustViewBounds="true"
                     android:layout_height="50dp"
-                    android:background="@drawable/iconsearch" />
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/iconsearch"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_toStartOf="@+id/btnNuevoPerfil"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnNuevoPerfil"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    app:layout_constraintEnd_toStartOf="@+id/btnBusqueda"
+                    android:adjustViewBounds="true"
+                    android:background="@drawable/iconuevo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
 
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:id="@+id/linear2"
-                android:layout_below="@+id/linear1"
+                android:layout_below="@+id/linearboton"
                 android:orientation="vertical"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
@@ -115,24 +154,5 @@
 
         </RelativeLayout>
     </RelativeLayout>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnNuevoPerfil"
-        android:layout_width="66dp"
-        android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
-        android:layout_marginEnd="16dp"
-        android:src="@drawable/iconuevo"
-        app:backgroundTint="@color/colorPrimary"
-        app:elevation="2dp"
-        app:fabSize="mini"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-
-
-
-
-
 
 </RelativeLayout>

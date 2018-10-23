@@ -317,7 +317,7 @@ public class PrimerForm extends AppCompatActivity {
                     public void onClick(View v) {
                         int mes = datePicker.getMonth()+1;
                         String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                         Date date = new Date();
                         try {
                             date =dateFormat.parse(fecha1);
@@ -424,6 +424,7 @@ public class PrimerForm extends AppCompatActivity {
         Date date = new Date();
         SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         datos.setFecTamitaje(dateFormat.format(date));
+
 
         MenuP.datos = datos;
 

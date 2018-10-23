@@ -189,7 +189,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
             public void onClick(View v) {
                 int mes = datePicker.getMonth()+1;
                 String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {
                     date =dateFormat.parse(fecha1);
@@ -200,7 +200,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 String fecha = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
-                Toast.makeText(MenuP.this, ""+tmpListDatos.size(), Toast.LENGTH_SHORT).show();
+                Log.e("asd",""+tmpListDatos.get(0).getFecTamitaje()+" "+fecha);
 
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
@@ -240,7 +240,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitajes", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }
 

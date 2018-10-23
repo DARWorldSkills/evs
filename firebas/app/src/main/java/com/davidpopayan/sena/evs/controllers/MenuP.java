@@ -51,11 +51,10 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class MenuP extends AppCompatActivity{
 
     List<Datos> datosList=new ArrayList<>();
     FloatingActionButton btnNuevo;
-    RecyclerView recyclerView;
     ConstraintLayout constraintLayout;
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     MenuItem buscardorItem;
@@ -86,12 +85,11 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         });
         activity=this;
         menuP=this;
-        inputAdapter();
     }
 
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
-        recyclerView = findViewById(R.id.recyclerView);
+
     }
 
     @Override
@@ -115,47 +113,9 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             menu.getItem(1).setVisible(false);
             menu.getItem(2).setVisible(false);
         }
-        buscardorItem = menu.findItem(R.id.itBuscar);
-        searchView = (SearchView) buscardorItem.getActionView();
-        searchView.setQueryHint("Busque por número de identificación");
-        searchView.setOnQueryTextListener(this);
+
 
         return true;
-    }
-    private void inputAdapter() {
-        ManagerDB managerDB = new ManagerDB(this);
-        datosList = managerDB.listaDatos();
-        AdapterDatos adapterDatos = new AdapterDatos(datosList);
-        recyclerView.setAdapter(adapterDatos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        recyclerView.setHasFixedSize(true);
-
-        adapterDatos.setNewListener(new AdapterDatos.OnItemClickListener() {
-            @Override
-            public void itemClick(int position) {
-                datos = datosList.get(position);
-                Intent intent = new Intent(MenuP.this,PrimerForm.class);
-                startActivity(intent);
-                ingresar=0;
-            }
-        });
-    }
-    private void inputAdapterBuscando(String identificacion) {
-        ManagerDB managerDB = new ManagerDB(this);
-        final List<Datos> datosList = managerDB.listaDatosPorIdentificacion(identificacion);
-        AdapterDatos adapterDatos = new AdapterDatos(datosList);
-        recyclerView.setAdapter(adapterDatos);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
-        recyclerView.setHasFixedSize(true);
-        adapterDatos.setNewListener(new AdapterDatos.OnItemClickListener() {
-            @Override
-            public void itemClick(int position) {
-                datos = datosList.get(position);
-                Intent intent = new Intent(MenuP.this,PrimerForm.class);
-                startActivity(intent);
-                ingresar=0;
-            }
-        });
     }
 
     @Override
@@ -163,21 +123,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
         int id = item.getItemId();
 
-        if (id == R.id.itemExportar){
-            pedirPermiso();
-            exportarEnCSV();
-
-        }
-        if (id == R.id.itemCerrarSesion){
-            SharedPreferences sharedPreferences;
-            sharedPreferences = getSharedPreferences("usuarios",MODE_PRIVATE);
-            final SharedPreferences.Editor editor =sharedPreferences.edit();
-            editor.putString("activado","no");
-            editor.commit();
-            Intent intent = new Intent(MenuP.this,IniciarSesion.class);
-            startActivity(intent);
-            finish();
-        }
 
         if (id==R.id.itemBloquear){
             Intent intent = new Intent(MenuP.this,BloqueoUsuarios.class);
@@ -324,16 +269,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        inputAdapterBuscando(newText);
-        return false;
-    }
 
 
     @Override

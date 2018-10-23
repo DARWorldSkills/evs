@@ -247,11 +247,7 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
-<<<<<<< HEAD
-        
-=======
         MenuP.menuP.generarAlerta();
->>>>>>> 840c23a1194c543ec757fa18fea9bdc16465c557
         finish();
     }
 }

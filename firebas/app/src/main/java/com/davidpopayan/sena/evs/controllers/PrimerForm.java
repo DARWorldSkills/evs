@@ -149,7 +149,7 @@ public class PrimerForm extends AppCompatActivity {
 
     //Ingresamos los datos de la base de datos
     private void ingresarValores() {
-        if (MenuP.ingresar==0){
+        if (MenuP.ingresar==0 || MenuP.ingresar==2){
             Datos datos =MenuP.datos;
             txtNombre.setText(datos.getNombreCompleto());
             txtIdentificacion.setText(datos.getNumeroId());
@@ -191,8 +191,8 @@ public class PrimerForm extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             date = simpleDateFormat.parse(fechaNac);
-            int diaDelMes = Integer.parseInt(simpleDateFormat.format(now).substring(0,2));
-            int diaNac=Integer.parseInt(simpleDateFormat.format(date).substring(0,2));
+            int diaDelMes = Integer.parseInt(simpleDateFormat.format(now).substring(3,5));
+            int diaNac=Integer.parseInt(simpleDateFormat.format(date).substring(3,5));
             int nowMonth = now.getMonth()+1;
             int nowYear = now.getYear();
             edad = nowYear - date.getYear();

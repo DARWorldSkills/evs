@@ -91,7 +91,7 @@ public class Splash extends AppCompatActivity {
                         MenuP.usuario.setRango("superuser");
 
                     }else {
-                        if (sharePreferences.getString("superuser","no").equals("administrador")){
+                        if (sharedPreferences.getString("superuser","no").equals("administrador")){
 
                             MenuP.usuario.setRango("administrador");
 

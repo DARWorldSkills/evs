@@ -200,7 +200,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 String fecha = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
-
+                Toast.makeText(MenuP.this, ""+tmpListDatos.size(), Toast.LENGTH_SHORT).show();
 
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
@@ -357,13 +357,15 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
             List<Datos> listarDatos = managerDB.listaDatosPorIdentificacion(txtBusqueda.getText().toString());
             List<Datos> listarDatos1 = managerDB.listaDatosPorIdentificacion1(txtBusqueda.getText().toString());
             if (listarDatos.size()>0){
+                Intent intent = new Intent(MenuP.this,PrimerForm.class);
                 if (listarDatos1.size()>0){
                     ingresar=0;
-                    datos=listarDatos.get(0);
+                    datos=listarDatos1.get(0);
                 }else {
-                    ingresar=1;
+                    ingresar=2;
                     datos=listarDatos.get(0);
                 }
+                startActivity(intent);
 
             }
 

@@ -242,6 +242,10 @@ public class Resultados extends AppCompatActivity {
 
                 managerDB.inputData(MenuP.datos);
                 break;
+
+            case 2:
+                managerDB.inputData(MenuP.datos);
+                break;
         }
     }
 

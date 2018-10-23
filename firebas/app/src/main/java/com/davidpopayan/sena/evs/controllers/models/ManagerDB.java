@@ -63,7 +63,7 @@ public class ManagerDB {
         values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
         values.put("REALIZA",datos.getRealiza());
-        db.insert("DATOS",null,values);
+        db.insert("DATOS1",null,values);
         closeDB();
     }
 
@@ -105,14 +105,14 @@ public class ManagerDB {
         values.put("RIESGOCARDIO",datos.getRiesgoCardio());
         values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
-        db.update("DATOS",values,"NUMERO="+datos.getNumero(),null);
+        db.update("DATOS1",values,"NUMERO="+datos.getNumero(),null);
         closeDB();
     }
 
     public List<Datos> listaDatos(){
         List<Datos> results  = new ArrayList<>();
         openReadDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM DATOS;",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM DATOS1;",null);
         if (cursor.moveToFirst()){
             do {
                 Datos datos = new Datos();
@@ -163,7 +163,7 @@ public class ManagerDB {
     public List<Datos> listaDatosPorIdentificacion(String identificacion){
         List<Datos> results  = new ArrayList<>();
         openReadDB();
-        Cursor cursor = db.rawQuery("SELECT * FROM DATOS WHERE NUMEROID LIKE '%"+identificacion+"%';",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM DATOS WHERE NUMEROID='"+identificacion+"';",null);
         if (cursor.moveToFirst()){
             do {
                 Datos datos = new Datos();
@@ -211,10 +211,63 @@ public class ManagerDB {
         return  results;
     }
 
+
+
+    public List<Datos> listaDatosPorIdentificacion1(String identificacion){
+        List<Datos> results  = new ArrayList<>();
+        openReadDB();
+        Cursor cursor = db.rawQuery("SELECT * FROM DATOS1 WHERE NUMEROID='"+identificacion+"';",null);
+        if (cursor.moveToFirst()){
+            do {
+                Datos datos = new Datos();
+                datos.setNumero(cursor.getInt(0));
+                datos.setFecTamitaje(cursor.getString(1));
+                datos.setNombreCompleto(cursor.getString(2));
+                datos.setTipoID(cursor.getString(3));
+                datos.setNumeroId(cursor.getString(4));
+                datos.setNombreEPS(cursor.getString(5));
+                datos.setiPS(cursor.getString(6));
+                datos.setTelefono(cursor.getString(7));
+                datos.setDireccion(cursor.getString(8));
+                datos.setFecNac(cursor.getString(9));
+                datos.setEdad(cursor.getInt(10));
+                datos.setEdadCategorizada(cursor.getString(11));
+                datos.setGenero(cursor.getString(12));
+                datos.setTalla(cursor.getInt(13));
+                datos.setPeso(cursor.getInt(14));
+                datos.setPerimetroAbdominal(cursor.getInt(15));
+                datos.setRealizarActividadFisicaD(cursor.getString(16));
+                datos.setFrecuenciaVerdurasFrutas(cursor.getString(17));
+                datos.setMedicamentosHipertension(cursor.getString(18));
+                datos.setGlucosaAlta(cursor.getString(19));
+                datos.setDiabetesFamiliares(cursor.getString(20));
+                datos.setImc(cursor.getInt(21));
+                datos.setClasificacionIMC(cursor.getString(22));
+                datos.setRiesgoDeDiabetes(cursor.getString(23));
+                datos.setPresionAS(cursor.getString(24));
+                datos.setPresionDiastolica(cursor.getString(25));
+                datos.setPresionArterial(cursor.getString(26));
+                datos.setDiabetes(cursor.getString(27));
+                datos.setFuma(cursor.getString(28));
+                datos.setPorcentajeRiesgo(cursor.getString(29));
+                datos.setRiesgoCardio(cursor.getString(30));
+                datos.setPacientePresentaR(cursor.getString(31));
+                datos.setDetalleRiesgoPaciente(cursor.getString(32));
+                datos.setRealiza(cursor.getString(33));
+
+                results.add(datos);
+
+            }while (cursor.moveToNext());
+        }
+        closeDB();
+        cursor.close();
+        return  results;
+    }
+    
     public int listarPorFecha(){
         openWriteDB();
         int contador=0;
-        Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS WHERE REALIZA !='Sistema';",null);
+        Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS1;",null);
         if (cursor1.moveToFirst()){
             do {
                 contador++;

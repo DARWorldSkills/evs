@@ -113,9 +113,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         }catch (Exception e){
             menu.getItem(2).setVisible(false);
             menu.getItem(3).setVisible(false);
-
         }
-
         buscardorItem = menu.findItem(R.id.itBuscar);
         searchView = (SearchView) buscardorItem.getActionView();
         searchView.setQueryHint("Busque por número de identificación");
@@ -123,9 +121,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
 
         return true;
     }
-
     private void inputAdapter() {
-
         ManagerDB managerDB = new ManagerDB(this);
         datosList = managerDB.listaDatos();
         AdapterDatos adapterDatos = new AdapterDatos(datosList);
@@ -143,7 +139,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             }
         });
     }
-
     private void inputAdapterBuscando(String identificacion) {
         ManagerDB managerDB = new ManagerDB(this);
         final List<Datos> datosList = managerDB.listaDatosPorIdentificacion(identificacion);
@@ -196,7 +191,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void pedirPermiso() {
 
         if (ContextCompat.checkSelfPermission(this,
@@ -215,7 +209,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 exportarEnCSV();
 
             } else {
-
                 // No explanation needed, we can request the permission.
 
                 ActivityCompat.requestPermissions(this,
@@ -227,7 +220,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 // result of the request.
             }
         }
-
 
     }
 
@@ -324,29 +316,15 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     Toast.makeText(MenuP.this, "No hay tamitajes registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     Log.e("Error",e.getMessage());
                 }
-
-
-
-
             }
         });
-
-
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.cancel();
             }
         });
-
-
-
         dialog.show();
-
-
-
-
-
     }
 
     private void enviarCorreo(String direccion) {

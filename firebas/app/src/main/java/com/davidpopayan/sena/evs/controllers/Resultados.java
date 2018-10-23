@@ -1,5 +1,6 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,9 +22,7 @@ import java.util.Date;
 public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
-
     public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
-    TextView txtImcFinal, txtResultadoImc, txtPresionAF, txtEstadoPresionA, txtPuntajeRiesgoD, txtRiesgoCardiovascular, txtRD, txtRiesgoC;
     double im, res;
     double sitolica, diastolica;
     int riesgoDiabetes, riesgoCardioVascular;
@@ -245,6 +244,7 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
+        
         finish();
     }
 }

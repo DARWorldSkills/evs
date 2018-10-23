@@ -76,39 +76,27 @@
 
             <LinearLayout
                 android:id="@+id/linearboton"
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
                 android:layout_below="@+id/linear1"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnBusqueda"
                     android:layout_width="50dp"
+                    android:layout_below="@+id/linear1"
                     android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/iconsearch"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_toStartOf="@+id/btnNuevoPerfil"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:background="@drawable/iconsearch" />
 
                 <Button
                     android:id="@+id/btnNuevoPerfil"
                     android:layout_width="50dp"
+                    android:layout_below="@+id/linear1"
                     android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"
-                    app:layout_constraintEnd_toStartOf="@+id/btnBusqueda"
-                    android:adjustViewBounds="true"
-                    android:background="@drawable/iconuevo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
+                    android:background="@drawable/iconuevo"/>
 
 
             </LinearLayout>

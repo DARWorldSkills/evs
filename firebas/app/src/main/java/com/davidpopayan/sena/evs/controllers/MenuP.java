@@ -29,8 +29,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -51,20 +53,18 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class MenuP extends AppCompatActivity{
+public class MenuP extends AppCompatActivity implements OnClickListener{
 
     List<Datos> datosList=new ArrayList<>();
     FloatingActionButton btnNuevo;
-    ConstraintLayout constraintLayout;
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
-    MenuItem buscardorItem;
-    SearchView searchView;
     public static Datos datos = new Datos();
     public static int ingresar=0;
     File archivo;
     SharedPreferences preferences;
     public static Usuario usuario = new Usuario();
-
+    EditText txtBusqueda;
+    Button btnBusqueda, btnExportar ,btnCerrarSesion;
     public static Activity activity;
     public static MenuP menuP;
     @Override
@@ -75,7 +75,7 @@ public class MenuP extends AppCompatActivity{
         inicializar();
         this.setTitle("Estilo de vida saludable");
 
-        btnNuevo.setOnClickListener(new View.OnClickListener() {
+        btnNuevo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuP.this, PrimerForm.class);
@@ -83,12 +83,19 @@ public class MenuP extends AppCompatActivity{
                 ingresar=1;
             }
         });
+        btnBusqueda.setOnClickListener(this);
+        btnExportar.setOnClickListener(this);
+        btnCerrarSesion.setOnClickListener(this);
         activity=this;
         menuP=this;
     }
 
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
+        txtBusqueda = findViewById(R.id.txtBusqueda);
+        btnBusqueda = findViewById(R.id.btnBusqueda);
+        btnExportar = findViewById(R.id.btnExportar);
+        btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
     }
 
@@ -152,7 +159,6 @@ public class MenuP extends AppCompatActivity{
                 // Show an expanation to the user *asynchronously* -- don't block
                 // this thread waiting for the user's response! After the user
                 // sees the explanation, try again to request the permission.
-                exportarEnCSV();
 
             } else {
                 // No explanation needed, we can request the permission.
@@ -178,7 +184,7 @@ public class MenuP extends AppCompatActivity{
         final Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
         Button btnCancelar =  dialog.findViewById(R.id.btnCancelar);
 
-        btnAceptar.setOnClickListener(new View.OnClickListener() {
+        btnAceptar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 int mes = datePicker.getMonth()+1;
@@ -246,7 +252,7 @@ public class MenuP extends AppCompatActivity{
                 }
             }
         });
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        btnCancelar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.cancel();
@@ -286,7 +292,7 @@ public class MenuP extends AppCompatActivity{
 
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-
+                    Toast.makeText(activity, "No se puede exportar el archivo por falta de permisos", Toast.LENGTH_SHORT).show();
                 }
                 return;
             }
@@ -305,7 +311,7 @@ public class MenuP extends AppCompatActivity{
         TextView txtResultados = dialog1.findViewById(R.id.txtResultado);
         txtResultados.setText(mensaje);
         Button btnCancelar = dialog1.findViewById(R.id.btnCancelar);
-        btnCancelar.setOnClickListener(new View.OnClickListener() {
+        btnCancelar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog1.cancel();
@@ -319,4 +325,52 @@ public class MenuP extends AppCompatActivity{
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnBusqueda:
+                generarBusqueda();
+                break;
+            case R.id.btnExportar:
+                pedirPermiso();
+                exportarEnCSV();
+
+                break;
+            case R.id.btnCerrarSesion:
+                cerrarSesion();
+                break;
+        }
+    }
+
+    public void cerrarSesion(){
+        SharedPreferences sharedPreferences =getSharedPreferences("usuarios",MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("activado","no");
+        Intent intent = new Intent(MenuP.this,IniciarSesion.class);
+        startActivity(intent);
+        finish();
+    }
+
+    public void generarBusqueda(){
+        if (txtBusqueda.getText().length()>0){
+            ManagerDB managerDB = new ManagerDB(this);
+            List<Datos> listarDatos = managerDB.listaDatosPorIdentificacion(txtBusqueda.getText().toString());
+            List<Datos> listarDatos1 = managerDB.listaDatosPorIdentificacion1(txtBusqueda.getText().toString());
+            if (listarDatos.size()>0){
+                if (listarDatos1.size()>0){
+                    ingresar=0;
+                    datos=listarDatos.get(0);
+                }else {
+                    ingresar=1;
+                    datos=listarDatos.get(0);
+                }
+
+            }
+
+
+
+        }else {
+            Toast.makeText(activity, "Por favor ingrese un número de documento valido", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

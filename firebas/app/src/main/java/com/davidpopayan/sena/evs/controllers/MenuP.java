@@ -92,7 +92,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
         recyclerView = findViewById(R.id.recyclerView);
-        constraintLayout = findViewById(R.id.contenedor);
     }
 
     @Override
@@ -102,19 +101,19 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
         preferences = getSharedPreferences("usuarios",MODE_PRIVATE);
         try {
             if (!usuario.getRango().equals("superuser")){
+                menu.getItem(1).setVisible(false);
                 menu.getItem(2).setVisible(false);
-                menu.getItem(3).setVisible(false);
             }else {
+                menu.getItem(1).setVisible(true);
                 menu.getItem(2).setVisible(true);
-                menu.getItem(3).setVisible(true);
             }
 
             if (usuario.getRango().equals("administrador")){
-                menu.getItem(3).setVisible(true);
+                menu.getItem(2).setVisible(true);
             }
         }catch (Exception e){
+            menu.getItem(1).setVisible(false);
             menu.getItem(2).setVisible(false);
-            menu.getItem(3).setVisible(false);
         }
         buscardorItem = menu.findItem(R.id.itBuscar);
         searchView = (SearchView) buscardorItem.getActionView();

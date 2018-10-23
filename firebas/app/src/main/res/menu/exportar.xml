@@ -3,12 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <group>
-        <item
-            android:id="@+id/itemExportar"
-            android:title="Exportar"
-            app:showAsAction="collapseActionView"
-            />
-
+        
         <item
             android:id="@+id/itemBloquear"
             android:title="Bloquear"
@@ -20,14 +15,5 @@
             android:title="Crear usuario"
             app:showAsAction="collapseActionView"
             />
-
-        <item
-            android:id="@+id/itemCerrarSesion"
-            android:title="Cerrar Sesión"
-            app:showAsAction="collapseActionView"
-            />
-
-
-
     </group>
 </menu>

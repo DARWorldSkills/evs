@@ -54,7 +54,7 @@ public class ManagerDB {
         values.put("CLASIFICACIONIMC",datos.getClasificacionIMC());
         values.put("RIESGODIABETES",datos.getRiesgoDeDiabetes());
         values.put("PRESIONAS",datos.getPresionAS());
-        values.put("PRESIONDIASTIOLICA",datos.getPresionDiastolica());
+        values.put("PRESIONDISATIOLICA",datos.getPresionDiastolica());
         values.put("PRESIONARTERIAL",datos.getPresionArterial());
         values.put("DIABETES",datos.getDiabetes());
         values.put("FUMA",datos.getFuma());
@@ -96,7 +96,7 @@ public class ManagerDB {
         values.put("CLASIFICACIONIMC",datos.getClasificacionIMC());
         values.put("RIESGODIABETES",datos.getRiesgoDeDiabetes());
         values.put("PRESIONAS",datos.getPresionAS());
-        values.put("PRESIONDIASTIOLICA",datos.getPresionDiastolica());
+        values.put("PRESIONDISATIOLICA",datos.getPresionDiastolica());
         values.put("PRESIONARTERIAL",datos.getPresionArterial());
         values.put("DIABETES",datos.getDiabetes());
         values.put("FUMA",datos.getFuma());
@@ -214,7 +214,7 @@ public class ManagerDB {
     public int listarPorFecha(){
         openWriteDB();
         int contador=0;
-        Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS WHERE ENVIADO='SI' AND REALIZA !='Sistema';",null);
+        Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS WHERE REALIZA !='Sistema';",null);
         if (cursor1.moveToFirst()){
             do {
                 contador++;

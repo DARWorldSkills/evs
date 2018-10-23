@@ -247,14 +247,14 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             public void onClick(View v) {
                 int mes = datePicker.getMonth()+1;
                 String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 Date date = new Date();
                 try {
                     date =dateFormat.parse(fecha1);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
                 String fecha = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
@@ -399,7 +399,10 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                 dialog1.cancel();
             }
         });
-        dialog1.show();
+        try {
+            dialog1.show();
+        }catch (Exception e) {
+        }
 
 
     }

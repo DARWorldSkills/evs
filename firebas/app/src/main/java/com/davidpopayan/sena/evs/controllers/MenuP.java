@@ -197,7 +197,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 String fecha = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
-                Log.e("asd",""+tmpListDatos.get(0).getFecTamitaje()+" "+fecha);
+                //Log.e("asd",""+tmpListDatos.get(0).getFecTamitaje()+" "+fecha);
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
                 List<Datos> tmpDatos1 = new ArrayList<>();
@@ -215,7 +215,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                     {
                         exportDir.mkdirs();
                     }
-                    archivo = new File(exportDir, "Tamitaje"+fecha+".csv");
+                    archivo = new File(exportDir, "Tamitaje "+fecha.substring(0,2)+"-"+fecha.substring(3,5)+"-"+fecha.substring(6,8)+".csv");
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
                     for (int i=0; i<tmpDatos1.size();i++) {

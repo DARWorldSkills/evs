@@ -70,7 +70,6 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_p);
-
         inicializar();
         this.setTitle("Estilo de vida saludable");
 
@@ -100,7 +99,6 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.buscar, menu);
         getMenuInflater().inflate(R.menu.exportar, menu);
         preferences = getSharedPreferences("usuarios",MODE_PRIVATE);
         try {

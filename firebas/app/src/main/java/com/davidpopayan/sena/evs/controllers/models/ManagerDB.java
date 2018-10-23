@@ -54,7 +54,7 @@ public class ManagerDB {
         values.put("CLASIFICACIONIMC",datos.getClasificacionIMC());
         values.put("RIESGODIABETES",datos.getRiesgoDeDiabetes());
         values.put("PRESIONAS",datos.getPresionAS());
-        values.put("PRESIONDIASTIOLICA",datos.getPresionDiastolica());
+        values.put("PRESIONDISATIOLICA",datos.getPresionDiastolica());
         values.put("PRESIONARTERIAL",datos.getPresionArterial());
         values.put("DIABETES",datos.getDiabetes());
         values.put("FUMA",datos.getFuma());
@@ -96,7 +96,7 @@ public class ManagerDB {
         values.put("CLASIFICACIONIMC",datos.getClasificacionIMC());
         values.put("RIESGODIABETES",datos.getRiesgoDeDiabetes());
         values.put("PRESIONAS",datos.getPresionAS());
-        values.put("PRESIONDIASTIOLICA",datos.getPresionDiastolica());
+        values.put("PRESIONDISATIOLICA",datos.getPresionDiastolica());
         values.put("PRESIONARTERIAL",datos.getPresionArterial());
         values.put("DIABETES",datos.getDiabetes());
         values.put("FUMA",datos.getFuma());
@@ -211,16 +211,10 @@ public class ManagerDB {
         return  results;
     }
 
-    public int listarPorFecha(List<Datos> results, String fecha){
+    public int listarPorFecha(){
         openWriteDB();
-        for (int i=0; i<results.size();i++){
-            ContentValues values = new ContentValues();
-            values.put("ENVIADO","SI");
-            db.update("DATOS",values,"NUMERO="+results.get(i).getNumero(),null);
-        }
-
         int contador=0;
-        Cursor cursor1 = db.rawQuery("SELECT ENVIADO FROM DATOS WHERE ENVIADO='SI' AND FECTAMITAJE ='"+fecha+"';",null);
+        Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS WHERE REALIZA !='Sistema';",null);
         if (cursor1.moveToFirst()){
             do {
                 contador++;

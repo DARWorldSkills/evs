@@ -67,6 +67,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
     public static Usuario usuario = new Usuario();
 
     public static Activity activity;
+    public static MenuP menuP;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,6 +85,7 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             }
         });
         activity=this;
+        menuP=this;
         inputAdapter();
     }
 
@@ -237,14 +239,14 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             public void onClick(View v) {
                 int mes = datePicker.getMonth()+1;
                 String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                 Date date = new Date();
                 try {
                     date =dateFormat.parse(fecha1);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                SimpleDateFormat dateFormat1 = new SimpleDateFormat("dd/MM/yyyy");
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
                 String fecha = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
@@ -288,24 +290,6 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
-                        int enviados = managerDB.listarPorFecha(tmpDatos1,fecha);
-                        int noEnviados = datosList.size()-enviados;
-                        String mensaje ="Tamitajes enviados: "+enviados+"\n"+
-                                        "Tamitajes no enviados: "+noEnviados;
-                        //Snackbar.make(constraintLayout,mensaje,Snackbar.LENGTH_LONG).show();
-                        final Dialog dialog1 = new Dialog(MenuP.this);
-                        dialog1.setContentView(R.layout.item_resultados);
-                        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                        TextView txtResultados = dialog1.findViewById(R.id.txtResultado);
-                        txtResultados.setText(mensaje);
-                        Button btnCancelar = dialog1.findViewById(R.id.btnCancelar);
-                        btnCancelar.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                dialog1.cancel();
-                            }
-                        });
-                        dialog1.show();
                         Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitaje", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
                     }
@@ -374,4 +358,31 @@ public class MenuP extends AppCompatActivity implements SearchView.OnQueryTextLi
             }
         }
     }
+
+    public void generarAlerta(){
+        ManagerDB managerDB = new ManagerDB(this);
+        int enviados = managerDB.listarPorFecha();
+        int noEnviados = datosList.size()-enviados;
+        String mensaje ="Tamitajes realizados: "+enviados+"\n"+
+                "Tamitajes no realizados: "+noEnviados;
+        final Dialog dialog1 = new Dialog(MenuP.this);
+        dialog1.setContentView(R.layout.item_resultados);
+        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView txtResultados = dialog1.findViewById(R.id.txtResultado);
+        txtResultados.setText(mensaje);
+        Button btnCancelar = dialog1.findViewById(R.id.btnCancelar);
+        btnCancelar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog1.cancel();
+            }
+        });
+        try {
+            dialog1.show();
+        }catch (Exception e) {
+        }
+
+
+    }
+
 }

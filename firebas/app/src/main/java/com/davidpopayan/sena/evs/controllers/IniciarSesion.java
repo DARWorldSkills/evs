@@ -39,6 +39,7 @@ public class IniciarSesion extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_iniciar_sesion);
         sharedPreferences = getSharedPreferences("usuarios",MODE_PRIVATE);
+        try {FirebaseDatabase.getInstance().setPersistenceEnabled(true);}catch (Exception e){}
         consultar();
         inizialite();
     }

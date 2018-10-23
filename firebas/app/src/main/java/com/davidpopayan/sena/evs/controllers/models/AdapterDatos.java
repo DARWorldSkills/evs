@@ -43,7 +43,11 @@ public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.Holder> {
 
     @Override
     public int getItemCount() {
-        return datosList.size();
+        if (datosList.size()>10000) {
+            return 10000;
+        }else {
+            return datosList.size();
+        }
     }
 
     public class Holder extends RecyclerView.ViewHolder {

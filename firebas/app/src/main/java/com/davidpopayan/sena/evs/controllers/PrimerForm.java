@@ -188,7 +188,7 @@ public class PrimerForm extends AppCompatActivity {
     public int calcularEdad(String fechaNac){
         Date date = new Date();
         Date now = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/dd/yyyy");
         try {
             date = simpleDateFormat.parse(fechaNac);
             int diaDelMes = Integer.parseInt(simpleDateFormat.format(now).substring(0,2));
@@ -213,7 +213,7 @@ public class PrimerForm extends AppCompatActivity {
             }
 
             return edad;
-        } catch (ParseException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -317,11 +317,11 @@ public class PrimerForm extends AppCompatActivity {
                     public void onClick(View v) {
                         int mes = datePicker.getMonth()+1;
                         String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
-                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
                         Date date = new Date();
                         try {
                             date =dateFormat.parse(fecha1);
-                            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
 
                             calcularEdad(format.format(date));
 
@@ -422,7 +422,7 @@ public class PrimerForm extends AppCompatActivity {
             datos.setTipoID("RC");
         }
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
         datos.setFecTamitaje(dateFormat.format(date));
 
         MenuP.datos = datos;

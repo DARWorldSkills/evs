@@ -2,10 +2,13 @@ package com.davidpopayan.sena.evs.controllers;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -244,7 +247,11 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
+<<<<<<< HEAD
         
+=======
+        MenuP.menuP.generarAlerta();
+>>>>>>> 840c23a1194c543ec757fa18fea9bdc16465c557
         finish();
     }
 }

@@ -53,9 +53,9 @@ public class Splash extends AppCompatActivity {
 
     private void inputData() throws IOException {
         ManagerDB managerDB = new ManagerDB(this);
-        List<Datos> list = managerDB.listaDatos();
+        //List<Datos> list = managerDB.listaDatos();
         Datos datos = new Datos();
-        if (list.size()<1){
+        /*if (list.size()<1){
             String linea;
             InputStream is = getResources().openRawResource(R.raw.datos);
             BufferedReader reader = new BufferedReader(new InputStreamReader(is));
@@ -75,7 +75,8 @@ public class Splash extends AppCompatActivity {
 
                 }
             }
-        }
+        }*/
+
 
         TimerTask timerTask = new TimerTask() {
             @Override
@@ -102,7 +103,7 @@ public class Splash extends AppCompatActivity {
                     Log.e("nombre1",MenuP.usuario.getNombre());
 
                     MenuP.usuario.setUsername(sharedPreferences.getString("username","0"));
-                    Intent intent = new Intent(Splash.this, MenuP.class);
+                    Intent intent = new Intent(Splash.this, PrimerForm.class);
                     startActivity(intent);
                     finish();
                 }

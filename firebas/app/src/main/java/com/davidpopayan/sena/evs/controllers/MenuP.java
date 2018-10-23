@@ -200,7 +200,6 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
                 Log.e("asd",""+tmpListDatos.get(0).getFecTamitaje()+" "+fecha);
-
                 System.out.println(tmpListDatos);
                 Iterator<Datos> it = tmpListDatos.iterator();
                 List<Datos> tmpDatos1 = new ArrayList<>();
@@ -218,7 +217,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                     {
                         exportDir.mkdirs();
                     }
-                    archivo = new File(exportDir, "Tamitaje.csv");
+                    archivo = new File(exportDir, "Tamitaje"+fecha+".csv");
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
                     for (int i=0; i<tmpDatos1.size();i++) {
@@ -236,11 +235,13 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
 
                     }
                     csvWrite.close();
+                    managerDB.modificarExportar(tmpDatos1);
                     if (tmpDatos1.size()<1){
                         Toast.makeText(MenuP.this, "No hay tamitaje registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
                     }else {
                         Toast.makeText(MenuP.this, "El archivo está en la carpeta Tamitajes", Toast.LENGTH_SHORT).show();
                         enviarCorreo(String.valueOf(exportDir));
+                        generarAlerta();
                     }
 
                     dialog.cancel();
@@ -300,10 +301,10 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
 
     public void generarAlerta(){
         ManagerDB managerDB = new ManagerDB(this);
-        int enviados = managerDB.listarPorFecha();
-        int noEnviados = datosList.size()-enviados;
-        String mensaje ="Tamitajes realizados: "+enviados+"\n"+
-                "Tamitajes no realizados: "+noEnviados;
+        int realizados = managerDB.realizados();
+        int exportados = managerDB.exportados();
+        String mensaje ="Tamitajes realizados: "+realizados+"\n"+
+                "Tamitajes exportados: "+exportados;
         final Dialog dialog1 = new Dialog(MenuP.this);
         dialog1.setContentView(R.layout.item_resultados);
         dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -366,6 +367,8 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 }
                 startActivity(intent);
 
+            }else {
+                Toast.makeText(activity, "El documento no está registrao en la base de datoss", Toast.LENGTH_SHORT).show();
             }
 
 

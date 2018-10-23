@@ -160,6 +160,18 @@ public class ManagerDB {
     }
 
 
+    public void modificarExportar(List<Datos> datosList){
+        openWriteDB();
+        for (int i=0; i<datosList.size();i++){
+            ContentValues values = new ContentValues();
+            values.put("ENVIADO","SI");
+            db.update("DATOS1",values,"NUMERO="+datosList.get(i).getNumero(),null);
+        }
+        closeDB();
+
+    }
+
+
     public List<Datos> listaDatosPorIdentificacion(String identificacion){
         List<Datos> results  = new ArrayList<>();
         openReadDB();
@@ -264,10 +276,27 @@ public class ManagerDB {
         return  results;
     }
     
-    public int listarPorFecha(){
+    public int realizados(){
         openWriteDB();
         int contador=0;
         Cursor cursor1 = db.rawQuery("SELECT REALIZA FROM DATOS1;",null);
+        if (cursor1.moveToFirst()){
+            do {
+                contador++;
+            }while (cursor1.moveToNext());
+        }
+        cursor1.close();
+        closeDB();
+
+
+        return contador;
+    }
+
+
+    public int exportados(){
+        openWriteDB();
+        int contador=0;
+        Cursor cursor1 = db.rawQuery("SELECT ENVIADO FROM DATOS1 WHERE ENVIADO='SI';",null);
         if (cursor1.moveToFirst()){
             do {
                 contador++;

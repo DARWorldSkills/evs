@@ -103,19 +103,20 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         preferences = getSharedPreferences("usuarios",MODE_PRIVATE);
         try {
             if (!usuario.getRango().equals("superuser")){
+                menu.getItem(0).setVisible(false);
                 menu.getItem(1).setVisible(false);
-                menu.getItem(2).setVisible(false);
             }else {
+                menu.getItem(0).setVisible(true);
                 menu.getItem(1).setVisible(true);
-                menu.getItem(2).setVisible(true);
             }
 
             if (usuario.getRango().equals("administrador")){
-                menu.getItem(2).setVisible(true);
+                menu.getItem(1).setVisible(true);
             }
         }catch (Exception e){
+            menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);
-            menu.getItem(2).setVisible(false);
+            //
         }
 
 

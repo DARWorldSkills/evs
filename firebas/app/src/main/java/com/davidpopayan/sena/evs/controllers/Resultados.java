@@ -83,10 +83,10 @@ public class Resultados extends AppCompatActivity {
 
     //Cambiamos la imagenes de la presion arterial
     private void DetallePresionArterial() {
-        if (sitolica <100 && diastolica <80){
+        if (sitolica <=100 && diastolica <80){
             Glide.with(this).load((R.drawable.a1)).crossFade().into(imgArterial);
 
-        }else if (sitolica >= 100 && diastolica >= 80 && diastolica <=90 && sitolica <129){
+        }else if (sitolica > 100 && diastolica >= 80 && diastolica <=90 && sitolica <129){
             Glide.with(this).load((R.drawable.a2)).crossFade().into(imgArterial);
         }
         else if (sitolica >= 130 && diastolica >=80 && sitolica <=139 && diastolica <=90){

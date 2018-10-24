@@ -10,6 +10,14 @@
     tools:context=".controllers.MenuP">
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/relative1"
         android:layout_marginRight="40dp"
         android:layout_marginLeft="40dp"

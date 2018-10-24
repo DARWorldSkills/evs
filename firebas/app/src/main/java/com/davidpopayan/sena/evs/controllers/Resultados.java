@@ -2,6 +2,8 @@ package com.davidpopayan.sena.evs.controllers;
 
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.davidpopayan.sena.evs.R;
 import com.davidpopayan.sena.evs.controllers.models.ManagerDB;
 
@@ -63,14 +66,17 @@ public class Resultados extends AppCompatActivity {
     private void DetalleDiabetes() {
 
         if (riesgoDiabetes > 12){
-            imgDiabetes.setImageResource(R.drawable.diabtestres);
+            Glide.with(this).load((R.drawable.diabtestres)).crossFade().into(imgDiabetes);
         }
         else if (riesgoDiabetes >= 10){
-            imgDiabetes.setImageResource(R.drawable.diabetesdos);
-
+            Glide.with(this).load((R.drawable.diabetesdos)).crossFade().into(imgDiabetes);
         }
         else if (riesgoDiabetes > 8){
-            imgDiabetes.setImageResource(R.drawable.diabetesuno);
+
+            Glide.with(this).load((R.drawable.diabetesuno)).crossFade().into(imgDiabetes);
+        }else {
+
+            Glide.with(this).load((R.drawable.diabetesuno)).crossFade().into(imgDiabetes);
         }
     }
 
@@ -78,16 +84,17 @@ public class Resultados extends AppCompatActivity {
     //Cambiamos la imagenes de la presion arterial
     private void DetallePresionArterial() {
         if (sitolica <100 && diastolica <80){
-            imgArterial.setImageResource(R.drawable.a1);
+            Glide.with(this).load((R.drawable.a1)).crossFade().into(imgArterial);
 
-        }else if (sitolica >= 100 && diastolica <= 80 && sitolica <120){
-            imgArterial.setImageResource(R.drawable.a2);
+        }else if (sitolica >= 100 && diastolica >= 80 && diastolica <=90 && sitolica <129){
+            Glide.with(this).load((R.drawable.a2)).crossFade().into(imgArterial);
         }
         else if (sitolica >= 130 && diastolica >=80 && sitolica <=139 && diastolica <=90){
-            imgArterial.setImageResource(R.drawable.a3);
+            Glide.with(this).load((R.drawable.a3)).crossFade().into(imgArterial);
         }
         else if (sitolica >= 140 && diastolica >=90){
-            imgArterial.setImageResource(R.drawable.a4);
+
+            Glide.with(this).load((R.drawable.a4)).crossFade().into(imgArterial);
 
         }
     }
@@ -96,15 +103,18 @@ public class Resultados extends AppCompatActivity {
     private void DetalleDeImc() {
 
         if (im <= 18.5){
-            imgImcUno.setImageResource(R.drawable.imcuno);
+            Glide.with(this).load((R.drawable.imcuno)).crossFade().into(imgImcUno);
         }else if (im >18.5 && im < 25){
-            imgImcUno.setImageResource(R.drawable.imcdos);
+            Glide.with(this).load((R.drawable.imcdos)).crossFade().into(imgImcUno);
         }else if (im >25 && im < 30){
-            imgImcUno.setImageResource(R.drawable.imctercero);
+
+            Glide.with(this).load((R.drawable.imctercero)).crossFade().into(imgImcUno);
         }else if (im >30 && im < 40){
-            imgImcUno.setImageResource(R.drawable.imccuarto);
+
+            Glide.with(this).load((R.drawable.imccuarto)).crossFade().into(imgImcUno);
         }else if (im >40 ){
-            imgImcUno.setImageResource(R.drawable.imccuarto);
+
+            Glide.with(this).load((R.drawable.imccuarto)).crossFade().into(imgImcUno);
         }
 
         finalizarActivities();
@@ -141,48 +151,46 @@ public class Resultados extends AppCompatActivity {
 
     //Vemos en que porcentaje esta la persona para tener Riesgos cardiovasculares
     private void RiesgoCardiovascularEnPorcentaje()     {
+
         if (MenuP.datos.getGenero().equals("Masculino")){
 
             if (riesgoCardioVascular < 0){
-
-                imgCardio.setImageResource(R.drawable.cardiouno);
+                Glide.with(this).load((R.drawable.cardiouno)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "10% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-
-                imgCardio.setImageResource(R.drawable.cardiodos);
+                Glide.with(this).load((R.drawable.cardiodos)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-
-                imgCardio.setImageResource(R.drawable.cardiotres);
+                Glide.with(this).load((R.drawable.cardiotres)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "53% de que sufras riesgos", Toast.LENGTH_SHORT).show();
-
-                imgCardio.setImageResource(R.drawable.cardiocuatro);
+                Glide.with(this).load((R.drawable.cardiocuatro)).crossFade().into(imgCardio);
             }
 
         }else {
             if (riesgoCardioVascular < 0){
                 Toast.makeText(this, "2% de que sufras riesgos", Toast.LENGTH_SHORT).show();
 
-                imgCardio.setImageResource(R.drawable.cardiouno);
+                Glide.with(this).load((R.drawable.cardiouno)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >= 0 && riesgoCardioVascular < 6){
                 Toast.makeText(this, "5% de que sufras riesgos", Toast.LENGTH_SHORT).show();
 
-                imgCardio.setImageResource(R.drawable.cardiodos);
+
+                Glide.with(this).load((R.drawable.cardiodos)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >=6 && riesgoCardioVascular < 9){
                 Toast.makeText(this, "8% de que sufras riesgos", Toast.LENGTH_SHORT).show();
 
-                imgCardio.setImageResource(R.drawable.cardiotres);
+                Glide.with(this).load((R.drawable.cardiotres)).crossFade().into(imgCardio);
             }
             if (riesgoCardioVascular >= 9 && riesgoCardioVascular < 15){
                 Toast.makeText(this, "20% de que sufras riesgos", Toast.LENGTH_SHORT).show();
 
-                imgCardio.setImageResource(R.drawable.cardiocuatro);
+                Glide.with(this).load((R.drawable.cardiocuatro)).crossFade().into(imgCardio);
             }
 
         }
@@ -207,6 +215,8 @@ public class Resultados extends AppCompatActivity {
 
         sitolica = datosPersonales.sist;
         diastolica = datosPersonales.diast;
+        Log.e("sistolica", String.valueOf(sitolica));
+        Log.e("diastolica", String.valueOf(diastolica));
     }
 
     //Obtenemos de la clase datosPersonales el IMC de la persona

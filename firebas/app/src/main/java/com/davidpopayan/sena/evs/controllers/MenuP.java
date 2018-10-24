@@ -118,8 +118,6 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
             menu.getItem(1).setVisible(false);
             //
         }
-
-
         return true;
     }
 

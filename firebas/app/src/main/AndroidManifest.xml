@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".controllers.MenuP" android:configChanges="screenSize|orientation"/>
+        <activity android:name=".controllers.MenuP"
+            android:configChanges="screenSize|orientation"
+            android:screenOrientation="portrait"/>
         <activity android:name=".controllers.PrimerForm" />
         <activity android:name=".controllers.Encuesta" />
 

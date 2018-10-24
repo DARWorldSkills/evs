@@ -210,7 +210,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         
         if (sist <100 && diast <80){
             Toast.makeText(activity, "Hipotension", Toast.LENGTH_SHORT).show();
-        }else if (sist >= 100 && diast <= 80 && sist <=129){
+        }else if (sist >= 100 && diast >= 80 && diast <=90&& sist <=129){
             Toast.makeText(activity, "Presion Normal", Toast.LENGTH_SHORT).show();
         }
         else if (sist >= 130 && diast >=80 && sist <=139 && diast <=90){

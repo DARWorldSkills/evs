@@ -340,13 +340,18 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     }
 
     public void cerrarSesion(){
-        SharedPreferences sharedPreferences =getSharedPreferences("usuarios",MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("activado","no");
-        editor.commit();
-        Intent intent = new Intent(MenuP.this,IniciarSesion.class);
-        startActivity(intent);
-        finish();
+        try {
+            SharedPreferences sharedPreferences =getSharedPreferences("usuarios",MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putString("activado","no");
+            editor.commit();
+            Intent intent = new Intent(MenuP.this,IniciarSesion.class);
+            startActivity(intent);
+            finish();
+        }catch (Exception e){
+            Toast.makeText(activity, "Por favor oprime de nuevo", Toast.LENGTH_SHORT).show();
+        }
+
     }
 
     public void generarBusqueda(){
@@ -358,9 +363,11 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 Intent intent = new Intent(MenuP.this,PrimerForm.class);
                 if (listarDatos1.size()>0){
                     ingresar=0;
+                    txtBusqueda.setText("");
                     datos=listarDatos1.get(0);
                 }else {
                     ingresar=2;
+                    txtBusqueda.setText("");
                     datos=listarDatos.get(0);
                 }
                 startActivity(intent);

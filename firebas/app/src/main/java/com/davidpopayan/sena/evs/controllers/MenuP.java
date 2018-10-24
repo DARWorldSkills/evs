@@ -116,7 +116,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         }catch (Exception e){
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);
-            //
+
         }
         return true;
     }
@@ -343,6 +343,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         SharedPreferences sharedPreferences =getSharedPreferences("usuarios",MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("activado","no");
+        editor.commit();
         Intent intent = new Intent(MenuP.this,IniciarSesion.class);
         startActivity(intent);
         finish();
@@ -365,7 +366,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 startActivity(intent);
 
             }else {
-                Toast.makeText(activity, "El documento no está registrao en la base de datoss", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "El documento no está registrao en la base de datos", Toast.LENGTH_SHORT).show();
             }
 
 

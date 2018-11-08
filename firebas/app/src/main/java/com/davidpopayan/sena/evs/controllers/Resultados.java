@@ -1,11 +1,18 @@
 package com.davidpopayan.sena.evs.controllers;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +38,9 @@ public class Resultados extends AppCompatActivity {
     public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
     double im, res;
     double sitolica, diastolica;
+    LocationManager locationManager;
+    Location location;
+    final int MY_LOCATION = 500;
     int riesgoDiabetes, riesgoCardioVascular;
 
 
@@ -40,6 +50,8 @@ public class Resultados extends AppCompatActivity {
         setContentView(R.layout.activity_resultados);
         this.setTitle("Resultados del paciente");
 
+        
+        //metodoCordenadas();
         //Creamos Metodos
         inicializar();
         obtenerImc();
@@ -55,6 +67,51 @@ public class Resultados extends AppCompatActivity {
         DetalleRiesgoCardiovascular();
 
     }
+
+    private void metodoCordenadas() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions
+                (this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_LOCATION);
+        {
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                    (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+
+            }
+
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 15000, 0, locationListener );
+
+
+        }
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location) {
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
 
     //Cambiamos la imagen dependiendo al tipo de riesgo cardiovascular que presenta
     private void DetalleRiesgoCardiovascular() {

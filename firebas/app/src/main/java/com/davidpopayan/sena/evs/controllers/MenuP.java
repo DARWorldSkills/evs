@@ -116,7 +116,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         }catch (Exception e){
             menu.getItem(0).setVisible(false);
             menu.getItem(1).setVisible(false);
-            //
+
         }
         return true;
     }
@@ -263,9 +263,9 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         Uri uri = Uri.fromFile(file);
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/csv");
-        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{"rodseiya20008@gmail.com"});
-        intent.putExtra(Intent.EXTRA_SUBJECT,"Envio de archivo CSV");
-        intent.putExtra(Intent.EXTRA_TEXT,"Hola te envio este archivo ");
+        intent.putExtra(Intent.EXTRA_EMAIL,new String[]{""});
+        intent.putExtra(Intent.EXTRA_SUBJECT,"");
+        intent.putExtra(Intent.EXTRA_TEXT,"");
         intent.putExtra(Intent.EXTRA_STREAM,uri);
         startActivity(Intent.createChooser(intent,"Enviar email mediante"));
 
@@ -373,7 +373,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 startActivity(intent);
 
             }else {
-                Toast.makeText(activity, "El documento no está registrao en la base de datoss", Toast.LENGTH_SHORT).show();
+                Toast.makeText(activity, "El documento no está registrao en la base de datos", Toast.LENGTH_SHORT).show();
             }
 
 

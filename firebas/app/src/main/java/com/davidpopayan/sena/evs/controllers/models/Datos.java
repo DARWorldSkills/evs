@@ -36,6 +36,8 @@ public class Datos {
     private String detalleRiesgoPaciente;
     private String realiza;
     private String enviado;
+    private String latitud;
+    private String longitud;
 
 
     public int getNumero() {
@@ -316,5 +318,21 @@ public class Datos {
 
     public void setEnviado(String enviado) {
         this.enviado = enviado;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(String latitud) {
+        this.latitud = latitud;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(String longitud) {
+        this.longitud = longitud;
     }
 }

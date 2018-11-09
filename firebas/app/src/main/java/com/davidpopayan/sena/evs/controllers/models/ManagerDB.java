@@ -154,6 +154,8 @@ public class ManagerDB {
                 datos.setPacientePresentaR(cursor.getString(31));
                 datos.setDetalleRiesgoPaciente(cursor.getString(32));
                 datos.setRealiza(cursor.getString(33));
+                datos.setLatitud(cursor.getString(35));
+                datos.setLongitud(cursor.getString(36));
                 results.add(datos);
 
             }while (cursor.moveToNext());

@@ -12,7 +12,9 @@ import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -35,6 +37,7 @@ import java.util.Date;
 public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
+    private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
     double im, res;
     double sitolica, diastolica;
@@ -59,7 +62,6 @@ public class Resultados extends AppCompatActivity {
         riesgoDiabetesF();
         calcularRiesgoCardiovascular();
         RiesgoCardiovascularEnPorcentaje();
-        inputData();
         RiesgoDiabetes();
         DetalleDeImc();
         DetallePresionArterial();
@@ -83,10 +85,10 @@ public class Resultados extends AppCompatActivity {
 
             }
 
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager = (LocationManager) Resultados.this.getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 15000, 0, locationListener );
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 15000, 0, locationListener );
-
+            inputData();
 
         }
     }
@@ -297,7 +299,20 @@ public class Resultados extends AppCompatActivity {
         ManagerDB managerDB = new ManagerDB(this);
 
         MenuP.datos.setRealiza(MenuP.usuario.getNombre());
-        Toast.makeText(this, "Se ha guardado correctamente", Toast.LENGTH_SHORT).show();
+        try {
+
+            MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
+            MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
+            Toast.makeText(this, "Se ha guardado correctamente", Toast.LENGTH_SHORT).show();
+        }catch (Exception e){
+            Toast.makeText(this, "No está activada la localización", Toast.LENGTH_SHORT).show();
+            Log.e("Datos",e.getMessage());
+            MenuP.datos.setLatitud("0.0");
+            MenuP.datos.setLongitud("0.0");
+            Log.e("Datos",MenuP.datos.getLatitud());
+            Log.e("Datos",MenuP.datos.getLongitud());
+        }
+
         switch (MenuP.ingresar){
             case 0:
 
@@ -318,7 +333,66 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
-        MenuP.menuP.generarAlerta();
-        finish();
+        pedirPermiso();
+
     }
+
+    private void pedirPermiso() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+
+            }
+
+        }else {
+            metodoCordenadas();
+            MenuP.menuP.generarAlerta();
+            finish();
+        }
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_READ_CONTACTS: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    metodoCordenadas();
+                    MenuP.menuP.generarAlerta();
+                    finish();
+
+                } else {
+
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(Resultados.this, "No se guardará la localización", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
 }

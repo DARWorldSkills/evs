@@ -63,6 +63,8 @@ public class ManagerDB {
         values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
         values.put("REALIZA",datos.getRealiza());
+        values.put("LATITUD",datos.getLatitud());
+        values.put("LONGITUD",datos.getLongitud());
         db.insert("DATOS1",null,values);
         closeDB();
     }
@@ -105,6 +107,8 @@ public class ManagerDB {
         values.put("RIESGOCARDIO",datos.getRiesgoCardio());
         values.put("PACIENTEPRESENTARIESGO",datos.getPacientePresentaR());
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
+        values.put("LATITUD",datos.getLatitud());
+        values.put("LONGITUD",datos.getLongitud());
         db.update("DATOS1",values,"NUMERO="+datos.getNumero(),null);
         closeDB();
     }
@@ -150,6 +154,8 @@ public class ManagerDB {
                 datos.setPacientePresentaR(cursor.getString(31));
                 datos.setDetalleRiesgoPaciente(cursor.getString(32));
                 datos.setRealiza(cursor.getString(33));
+                datos.setLatitud(cursor.getString(35));
+                datos.setLongitud(cursor.getString(36));
                 results.add(datos);
 
             }while (cursor.moveToNext());

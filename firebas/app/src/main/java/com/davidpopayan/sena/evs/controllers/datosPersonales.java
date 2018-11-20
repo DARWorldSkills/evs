@@ -18,14 +18,15 @@ import java.text.DecimalFormat;
 
 public class datosPersonales extends AppCompatActivity implements View.OnClickListener{
 
-    EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd,txtPresionArterial;
+    EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd,txtPresionArterial,txtGlucometria;
     Button btnCalcular, btnIr, btnCalcularParterial;
     double altura,peso,pesof, sistolica, diastolica, pas;
     int resultado;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     public static int puntaje, puntajePABD, puntajePresionS;
-    public static double imc;
+    public static double imc, glucometria;
     public static String tmp1, tmp2;
+    public static String glucosa;
     public static double res;
     public static double sist;
     public static double diast;
@@ -89,6 +90,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         txtPABD = findViewById(R.id.txtPABD);
         txtPAS = findViewById(R.id.txtPAS);
         txtPd = findViewById(R.id.txtPd);
+        txtGlucometria = findViewById(R.id.txtGlucometria);
 
     }
 
@@ -126,9 +128,14 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         }else {
             txtPd.setError("Falta Campo");
         }
+        if (txtGlucometria.getText().toString().length()>0){
+            valida++;
+        }else {
+            txtGlucometria.setError("Falta Campo");
+        }
 
 
-        if (valida == 6 && validacion==0){
+        if (valida == 7 && validacion==0){
             inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
             startActivity(intent);
@@ -159,6 +166,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 //clasificacionPrecionArterial();
                 break;
             case R.id.btnSiguiente4:
+                calcularGlucometria();
                 asignarPuntajes();
                 puntajePresionSistolica();
                 validar();
@@ -415,6 +423,26 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
     }
 
+    private void calcularGlucometria(){
+        glucometria= Float.parseFloat(txtGlucometria.getText().toString());
+        if (glucometria<70){
+            glucosa = "Baja (Hipoglicemia)";
+        }
+
+        if (glucometria>=70 && glucometria<120){
+            glucosa = "Normal";
+        }
+
+        if (glucometria>=120 && glucometria<180){
+            glucosa = "Elevada";
+        }
+
+        if (glucometria>=180){
+            glucosa = "Muy elevada";
+        }
+
+    }
+
     public void inputData(){
         Datos datos = MenuP.datos;
         datos.setTalla((int) altura);
@@ -423,8 +451,9 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         datos.setPresionDiastolica(String.valueOf(diast));
         datos.setClasificacionIMC(tmp1);
         datos.setImc((int) imc);
-        datos.setPerimetroAbdominal((int) pas);
-
+        datos.setPerimetroAbdominal(Integer.parseInt(txtPABD.getText().toString()));
+        datos.setGlucosaAlta(glucosa);
+        datos.setGlucometria(String.valueOf(glucometria));
         MenuP.datos = datos;
     }
 

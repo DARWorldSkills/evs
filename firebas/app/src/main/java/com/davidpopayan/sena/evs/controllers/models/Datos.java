@@ -38,6 +38,7 @@ public class Datos {
     private String enviado;
     private String latitud;
     private String longitud;
+    private String glucometria;
 
 
     public int getNumero() {
@@ -334,5 +335,13 @@ public class Datos {
 
     public void setLongitud(String longitud) {
         this.longitud = longitud;
+    }
+
+    public String getGlucometria() {
+        return glucometria;
+    }
+
+    public void setGlucometria(String glucometria) {
+        this.glucometria = glucometria;
     }
 }

@@ -65,6 +65,7 @@ public class ManagerDB {
         values.put("REALIZA",datos.getRealiza());
         values.put("LATITUD",datos.getLatitud());
         values.put("LONGITUD",datos.getLongitud());
+        values.put("GLUCOMETRIA",datos.getGlucometria());
         db.insert("DATOS1",null,values);
         closeDB();
     }
@@ -109,6 +110,7 @@ public class ManagerDB {
         values.put("DETALLEDP",datos.getDetalleRiesgoPaciente());
         values.put("LATITUD",datos.getLatitud());
         values.put("LONGITUD",datos.getLongitud());
+        values.put("GLUCOMETRIA",datos.getGlucometria());
         db.update("DATOS1",values,"NUMERO="+datos.getNumero(),null);
         closeDB();
     }
@@ -147,15 +149,16 @@ public class ManagerDB {
                 datos.setPresionAS(cursor.getString(24));
                 datos.setPresionDiastolica(cursor.getString(25));
                 datos.setPresionArterial(cursor.getString(26));
-                datos.setDiabetes(cursor.getString(27));
-                datos.setFuma(cursor.getString(28));
-                datos.setPorcentajeRiesgo(cursor.getString(29));
-                datos.setRiesgoCardio(cursor.getString(30));
-                datos.setPacientePresentaR(cursor.getString(31));
-                datos.setDetalleRiesgoPaciente(cursor.getString(32));
-                datos.setRealiza(cursor.getString(33));
-                datos.setLatitud(cursor.getString(35));
-                datos.setLongitud(cursor.getString(36));
+                datos.setGlucometria(cursor.getString(27));
+                datos.setDiabetes(cursor.getString(28));
+                datos.setFuma(cursor.getString(29));
+                datos.setPorcentajeRiesgo(cursor.getString(30));
+                datos.setRiesgoCardio(cursor.getString(31));
+                datos.setPacientePresentaR(cursor.getString(32));
+                datos.setDetalleRiesgoPaciente(cursor.getString(33));
+                datos.setRealiza(cursor.getString(34));
+                datos.setLatitud(cursor.getString(36));
+                datos.setLongitud(cursor.getString(37));
                 results.add(datos);
 
             }while (cursor.moveToNext());
@@ -212,13 +215,14 @@ public class ManagerDB {
                 datos.setPresionAS(cursor.getString(24));
                 datos.setPresionDiastolica(cursor.getString(25));
                 datos.setPresionArterial(cursor.getString(26));
-                datos.setDiabetes(cursor.getString(27));
-                datos.setFuma(cursor.getString(28));
-                datos.setPorcentajeRiesgo(cursor.getString(29));
-                datos.setRiesgoCardio(cursor.getString(30));
-                datos.setPacientePresentaR(cursor.getString(31));
-                datos.setDetalleRiesgoPaciente(cursor.getString(32));
-                datos.setRealiza(cursor.getString(33));
+                datos.setGlucometria(cursor.getString(27));
+                datos.setDiabetes(cursor.getString(28));
+                datos.setFuma(cursor.getString(29));
+                datos.setPorcentajeRiesgo(cursor.getString(30));
+                datos.setRiesgoCardio(cursor.getString(31));
+                datos.setPacientePresentaR(cursor.getString(32));
+                datos.setDetalleRiesgoPaciente(cursor.getString(33));
+                datos.setRealiza(cursor.getString(34));
 
                 results.add(datos);
 

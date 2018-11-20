@@ -217,6 +217,14 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                     archivo = new File(exportDir, "Tamitaje "+fecha.substring(0,2)+"-"+fecha.substring(3,5)+"-"+fecha.substring(6,8)+".csv");
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
+                    String titulos[] = {
+                            "Número","Fecha en tamitaje","Nombres","Tipo de identificación","Número de identificación","Nombre de EPS","Nombre de IPS","Télefono",
+                            "Dirección","Fecha de Nacimiento","Edad","Genero","Talla","Peso","Perimetro abdominal","Actividad Fisica","Frecuencia en Verduras y Frutas",
+                            "Medicamentos en hipertension","Glucometria","Nivel de glucosa","Diabetes en familiares","IMC","Clasificacion IMC","Riesgo de Diabetes","Presion arterial",
+                            "Presion Diastolica","Diabetes","Fuma","Latitud","Longitud","Realiza"
+                    };
+                    csvWrite.writeNext(titulos);
+
                     for (int i=0; i<tmpDatos1.size();i++) {
                         Datos tmpDatos = tmpDatos1.get(i);
                         String arrStr[] = {String.valueOf((tmpDatos.getNumero())),
@@ -224,7 +232,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                                 tmpDatos.getNombreEPS(),tmpDatos.getiPS(),(tmpDatos.getTelefono()),tmpDatos.getDireccion(),tmpDatos.getFecNac(),
                                 String.valueOf((tmpDatos.getEdad())),tmpDatos.getGenero(), String.valueOf((tmpDatos.getTalla())),
                                 String.valueOf((tmpDatos.getPeso())), String.valueOf((tmpDatos.getPerimetroAbdominal())),tmpDatos.getRealizarActividadFisicaD(),
-                                tmpDatos.getFrecuenciaVerdurasFrutas(),tmpDatos.getMedicamentosHipertension(),tmpDatos.getGlucosaAlta(),tmpDatos.getDiabetesFamiliares(),
+                                tmpDatos.getFrecuenciaVerdurasFrutas(),tmpDatos.getMedicamentosHipertension(),tmpDatos.getGlucometria(),tmpDatos.getGlucosaAlta(),tmpDatos.getDiabetesFamiliares(),
                                 String.valueOf((tmpDatos.getImc())),tmpDatos.getClasificacionIMC(),tmpDatos.getRiesgoDeDiabetes(),tmpDatos.getPresionArterial(),
                                 (tmpDatos.getPresionDiastolica()),tmpDatos.getDiabetes(),tmpDatos.getFuma(),tmpDatos.getLatitud(),tmpDatos.getLongitud(),tmpDatos.getRealiza()};
 

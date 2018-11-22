@@ -79,6 +79,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     private static boolean disponiblepGPS, bandera1, bandera2, bandera3;
     private static LocationManager locManager;
     private static String provider;
+    Date dateDesde= new Date();
 
 
     @Override
@@ -199,11 +200,23 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     private void exportarEnCSV() {
 
         final Dialog dialog = new Dialog(MenuP.this);
+        final Dialog dialog1 = new Dialog(MenuP.this);
         dialog.setContentView(R.layout.item_busqueda);
+        dialog1.setContentView(R.layout.item_busqueda);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog1.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         final DatePicker datePicker = dialog.findViewById(R.id.calendario);
         final Button btnAceptar =  dialog.findViewById(R.id.btnExportar);
+        TextView txtTitulo = dialog.findViewById(R.id.txtTitulo);
         Button btnCancelar =  dialog.findViewById(R.id.btnCancelar);
+
+        final DatePicker datePicker1 = dialog1.findViewById(R.id.calendario);
+        final Button btnAceptar1 =  dialog1.findViewById(R.id.btnExportar);
+        Button btnCancelar1 =  dialog1.findViewById(R.id.btnCancelar);
+        TextView txtTitulo1 = dialog1.findViewById(R.id.txtTitulo);
+
+        txtTitulo.setText("Desde");
+        txtTitulo1.setText("Hasta");
 
         btnAceptar.setOnClickListener(new OnClickListener() {
             @Override
@@ -211,14 +224,39 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 int mes = datePicker.getMonth()+1;
                 String fecha1 = datePicker.getDayOfMonth()+"/"+mes+"/"+datePicker.getYear();
                 SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                try {
+                    dateDesde =dateFormat.parse(fecha1);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                dialog1.show();
+                dialog.cancel();
+            }
+        });
+
+        btnCancelar.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.cancel();
+            }
+        });
+
+        btnAceptar1.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int mes = datePicker1.getMonth()+1;
+                String fecha1 = datePicker1.getDayOfMonth()+"/"+mes+"/"+datePicker1.getYear();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
                 Date date = new Date();
                 try {
                     date =dateFormat.parse(fecha1);
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-                SimpleDateFormat dateFormat1 = new SimpleDateFormat("MM/dd/yyyy");
-                String fecha = dateFormat1.format(date);
+                SimpleDateFormat dateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                String fecha = dateFormat.format(dateDesde);
+                String fechaD = dateFormat1.format(dateDesde);
+                String fechaH = dateFormat1.format(date);
                 ManagerDB managerDB = new ManagerDB(MenuP.this);
                 List<Datos> tmpListDatos = managerDB.listaDatos();
                 //Log.e("asd",""+tmpListDatos.get(0).getFecTamitaje()+" "+fecha);
@@ -226,20 +264,14 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 Iterator<Datos> it = tmpListDatos.iterator();
                 List<Datos> tmpDatos1 = new ArrayList<>();
                 try {
-                    while (it.hasNext()) {
-                        Datos current = it.next();
-                        if (!current.getFecTamitaje().equals(fecha)) {
-                            it.remove();
-                        }else {
-                            tmpDatos1.add(current);
-                        }
-                    }
+
+                    tmpDatos1= managerDB.exportarPorRangoDeFecha(fechaD,fechaH);
                     File exportDir = new File(Environment.getExternalStorageDirectory(), "Tamitajes");
                     if (!exportDir.exists())
                     {
                         exportDir.mkdirs();
                     }
-                    archivo = new File(exportDir, "Tamitaje "+fecha.substring(0,2)+"-"+fecha.substring(3,5)+"-"+fecha.substring(6,8)+".csv");
+                    archivo = new File(exportDir, "Tamitaje "+fecha.substring(0,2)+"-"+fecha.substring(3,5)+"-"+fecha.substring(6,10)+".csv");
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
 
@@ -275,7 +307,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                         generarAlerta();
                     }
 
-                    dialog.cancel();
+                    dialog1.cancel();
 
                 }catch (Exception e){
                     Toast.makeText(MenuP.this, "No hay tamitajes registrados en la fecha seleccionada", Toast.LENGTH_SHORT).show();
@@ -283,10 +315,10 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 }
             }
         });
-        btnCancelar.setOnClickListener(new OnClickListener() {
+        btnCancelar1.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.cancel();
+                dialog1.cancel();
             }
         });
         dialog.show();

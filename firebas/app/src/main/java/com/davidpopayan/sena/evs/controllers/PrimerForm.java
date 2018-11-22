@@ -422,7 +422,7 @@ public class PrimerForm extends AppCompatActivity {
             datos.setTipoID("RC");
         }
         Date date = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         datos.setFecTamitaje(dateFormat.format(date));
 
 

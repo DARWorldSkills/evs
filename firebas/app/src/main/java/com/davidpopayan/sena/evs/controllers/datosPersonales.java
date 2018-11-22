@@ -140,7 +140,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
 
        if (valida == 7 && validacion==0){
-      //      calcularGlucometria();
+            calcularGlucometria();
             inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
             startActivity(intent);

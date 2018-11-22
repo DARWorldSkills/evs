@@ -18,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -38,7 +39,7 @@ public class Resultados extends AppCompatActivity {
 
     //Declaracion de variables
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
-    public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
+    public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio,imgGlucosa;
     TextView txtGlucosa;
     double im, res;
     double sitolica, diastolica;
@@ -300,12 +301,27 @@ public class Resultados extends AppCompatActivity {
         imgArterial = findViewById(R.id.imgArterial);
         imgDiabetes = findViewById(R.id.imgDiabetes);
         imgCardio = findViewById(R.id.imgCardio);
+        imgGlucosa = findViewById(R.id.imgGlucosa);
         txtGlucosa = findViewById(R.id.txtGlucosa);
     }
 
     //Cargamos los datos
     private void inputData() {
-        txtGlucosa.setText("Su nivel de glucosa es: "+MenuP.datos.getGlucosaAlta());
+
+        if (MenuP.datos.getGlucosaAlta().equals("Baja (Hipoglicemia)")){
+            Glide.with(this).load((R.drawable.glucosa1)).crossFade().into(imgGlucosa);
+        }
+        if (MenuP.datos.getGlucosaAlta().equals("Normal")){
+            Glide.with(this).load((R.drawable.glucosa2)).crossFade().into(imgGlucosa);
+        }
+        if (MenuP.datos.getGlucosaAlta().equals("Elevada")){
+            Glide.with(this).load((R.drawable.glucosa3)).crossFade().into(imgGlucosa);
+        }
+        if (MenuP.datos.getGlucosaAlta().equals("Muy elevada")){
+            Glide.with(this).load((R.drawable.glucosa4)).crossFade().into(imgGlucosa);
+        }
+
+
         ManagerDB managerDB = new ManagerDB(this);
 
         MenuP.datos.setRealiza(MenuP.usuario.getNombre());

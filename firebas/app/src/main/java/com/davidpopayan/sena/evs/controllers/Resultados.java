@@ -39,12 +39,14 @@ public class Resultados extends AppCompatActivity {
     //Declaracion de variables
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
     public static  ImageView imgImcUno, imgArterial, imgDiabetes, imgCardio;
+    TextView txtGlucosa;
     double im, res;
     double sitolica, diastolica;
     LocationManager locationManager;
     Location location;
     final int MY_LOCATION = 500;
     int riesgoDiabetes, riesgoCardioVascular;
+    String diabetes;
 
 
     @Override
@@ -67,6 +69,7 @@ public class Resultados extends AppCompatActivity {
         DetallePresionArterial();
         DetalleDiabetes();
         DetalleRiesgoCardiovascular();
+        inputData();
 
     }
 
@@ -88,7 +91,7 @@ public class Resultados extends AppCompatActivity {
             locationManager = (LocationManager) Resultados.this.getSystemService(Context.LOCATION_SERVICE);
             locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 15000, 0, locationListener );
             location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-            inputData();
+
 
         }
     }
@@ -126,32 +129,37 @@ public class Resultados extends AppCompatActivity {
 
         if (riesgoDiabetes > 12){
             Glide.with(this).load((R.drawable.diabtestres)).crossFade().into(imgDiabetes);
+            diabetes="Alto";
+
         }
         else if (riesgoDiabetes >= 10){
             Glide.with(this).load((R.drawable.diabetesdos)).crossFade().into(imgDiabetes);
+            diabetes="Medio";
         }
         else if (riesgoDiabetes > 8){
 
             Glide.with(this).load((R.drawable.diabetesuno)).crossFade().into(imgDiabetes);
+            diabetes="Bajo";
         }else {
 
             Glide.with(this).load((R.drawable.diabetesuno)).crossFade().into(imgDiabetes);
+            diabetes="Bajo";
         }
     }
 
 
     //Cambiamos la imagenes de la presion arterial
     private void DetallePresionArterial() {
-        if (sitolica <=100 && diastolica <80){
+        if (sitolica <=100 && diastolica >=1){
             Glide.with(this).load((R.drawable.a1)).crossFade().into(imgArterial);
 
-        }else if (sitolica > 100 && diastolica >= 80 && diastolica <=90 && sitolica <129){
+        }else if (sitolica > 100 && diastolica >= 1 && diastolica >=1 && sitolica <129){
             Glide.with(this).load((R.drawable.a2)).crossFade().into(imgArterial);
         }
-        else if (sitolica >= 130 && diastolica >=80 && sitolica <=139 && diastolica <=90){
+        else if (sitolica >= 130 && diastolica >=1 && sitolica <=139 && diastolica >=1){
             Glide.with(this).load((R.drawable.a3)).crossFade().into(imgArterial);
         }
-        else if (sitolica >= 140 && diastolica >=90){
+        else if (sitolica >= 140 && diastolica >=1){
 
             Glide.with(this).load((R.drawable.a4)).crossFade().into(imgArterial);
 
@@ -292,17 +300,19 @@ public class Resultados extends AppCompatActivity {
         imgArterial = findViewById(R.id.imgArterial);
         imgDiabetes = findViewById(R.id.imgDiabetes);
         imgCardio = findViewById(R.id.imgCardio);
+        txtGlucosa = findViewById(R.id.txtGlucosa);
     }
 
     //Cargamos los datos
     private void inputData() {
+        txtGlucosa.setText("Su nivel de glucosa es: "+MenuP.datos.getGlucosaAlta());
         ManagerDB managerDB = new ManagerDB(this);
 
         MenuP.datos.setRealiza(MenuP.usuario.getNombre());
         try {
 
-            MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
-            MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
+            //MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
+            //MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
             Toast.makeText(this, "Se ha guardado correctamente", Toast.LENGTH_SHORT).show();
         }catch (Exception e){
             Toast.makeText(this, "No está activada la localización", Toast.LENGTH_SHORT).show();
@@ -312,6 +322,7 @@ public class Resultados extends AppCompatActivity {
             Log.e("Datos",MenuP.datos.getLatitud());
             Log.e("Datos",MenuP.datos.getLongitud());
         }
+        MenuP.datos.setRiesgoDeDiabetes(diabetes);
 
         switch (MenuP.ingresar){
             case 0:
@@ -333,7 +344,9 @@ public class Resultados extends AppCompatActivity {
 
     //Evento del boton que te devuelve al menu principal
     public void finalizar(View view) {
-        pedirPermiso();
+        //pedirPermiso();
+        MenuP.menuP.generarAlerta();
+        finish();
 
     }
 
@@ -367,8 +380,7 @@ public class Resultados extends AppCompatActivity {
 
         }else {
             metodoCordenadas();
-            MenuP.menuP.generarAlerta();
-            finish();
+
         }
     }
 

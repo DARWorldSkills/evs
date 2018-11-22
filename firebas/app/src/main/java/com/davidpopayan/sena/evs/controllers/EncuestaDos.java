@@ -104,9 +104,9 @@ public class EncuestaDos extends AppCompatActivity {
         }
 
         if (btnSiGlucosa.isChecked()){
-            datos.setGlucosaAlta("SI");
+            //datos.setGlucosaAlta("SI");
         }else {
-            datos.setGlucosaAlta("NO");
+            //datos.setGlucosaAlta("NO");
         }
         MenuP.datos= datos;
     }

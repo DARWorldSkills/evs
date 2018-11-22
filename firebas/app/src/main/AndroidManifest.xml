@@ -34,7 +34,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".controllers.EncuestaDos" />
-        <activity android:name=".controllers.Resultados" />
+        <activity android:name=".controllers.Resultados"
+            android:configChanges="screenSize|orientation"/>
         <activity android:name=".controllers.datosPersonales" />
         <activity android:name=".controllers.EncuestaTres" />
 

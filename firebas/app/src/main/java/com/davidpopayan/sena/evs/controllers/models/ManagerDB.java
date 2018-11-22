@@ -223,7 +223,6 @@ public class ManagerDB {
                 datos.setPacientePresentaR(cursor.getString(32));
                 datos.setDetalleRiesgoPaciente(cursor.getString(33));
                 datos.setRealiza(cursor.getString(34));
-
                 results.add(datos);
 
             }while (cursor.moveToNext());

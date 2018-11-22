@@ -19,17 +19,18 @@ import java.text.DecimalFormat;
 public class datosPersonales extends AppCompatActivity implements View.OnClickListener{
 
     EditText txtAltura, txtPeso, txtIMC, txtPABD, txtPAS, txtPd,txtPresionArterial,txtGlucometria;
-    Button btnCalcular, btnIr, btnCalcularParterial;
+    Button btnCalcular, btnIr, btnCalcularParterial,btnglucosa;
     double altura,peso,pesof, sistolica, diastolica, pas;
     int resultado;
     int cero = 0, uno =1 ,dos = 2, tres = 3, cuatro = 4,cinco = 5, seis =6;
     public static int puntaje, puntajePABD, puntajePresionS;
-    public static double imc, glucometria;
+    public static double imc,glucometria;
     public static String tmp1, tmp2;
-    public static String glucosa;
+    public static String glucosa,tipoPresion;
     public static double res;
     public static double sist;
     public static double diast;
+    int valida = 0;
     int validacion=1;
     public static Activity activity;
 
@@ -72,8 +73,10 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     }
 
     //Evento de los botones
-    private void escuchar() {
+    private void
+    escuchar() {
         btnCalcular.setOnClickListener(this);
+       btnglucosa.setOnClickListener(this);
         btnIr.setOnClickListener(this);
         btnCalcularParterial.setOnClickListener(this);
     }
@@ -82,6 +85,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
     private void inicializar() {
         btnCalcular = findViewById(R.id.btnCalcular);
         btnIr = findViewById(R.id.btnSiguiente4);
+        btnglucosa = findViewById(R.id.btnGlucosa);
         btnCalcularParterial = findViewById(R.id.btnCalcularParterial);
         ////////////////////////////////////////////////
         txtAltura = findViewById(R.id.txtAltura);
@@ -96,8 +100,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
     //Validamos que los campos no esten vacios
     private void validar() {
-        int valida = 0;
-        
+    //    int valida = 0;
+
         if (txtAltura.getText().toString().length()>0){
             valida++;
         }else {
@@ -135,7 +139,8 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         }
 
 
-        if (valida == 7 && validacion==0){
+       if (valida == 7 && validacion==0){
+      //      calcularGlucometria();
             inputData();
             Intent intent = new Intent(datosPersonales.this, Encuesta.class);
             startActivity(intent);
@@ -161,17 +166,19 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
                 validarNumeroPAS();
 
 
-                
+
                 //calcularPrecionArterial();
                 //clasificacionPrecionArterial();
                 break;
             case R.id.btnSiguiente4:
-                calcularGlucometria();
+
                 asignarPuntajes();
                 puntajePresionSistolica();
                 validar();
+                break;
 
-
+            case R.id.btnGlucosa:
+               mostrarGlucometria();
                 break;
         }
     }
@@ -182,50 +189,31 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         if (sist >= 200) {
             validacion++;
             txtPAS.setError("No puede ser mayor de 200");
-        } else if (sist < 100 && diast > 80) {
-            validacion++;
-            txtPd.setError("No puede ser mayor a 80");
-
-
-        } else if (sist >= 100 && sist < 120 && diast > 80) {
-            validacion++;
-            txtPd.setError("No puede ser mayor a 80");
-        } else if (sist >= 100 && sist < 120 && diast < 70) {
-            validacion++;
-            txtPd.setError("No puede ser Menor a 70");
-
-
-        } else if (sist >= 120 && sist < 140 && diast > 90) {
-            validacion++;
-            txtPd.setError("No puede ser Mayor a 90");
-        } else if (sist >= 120 && sist < 140 && diast < 80){
-            validacion++;
-            txtPd.setError("No puede ser Menor a 80");
-
 
         }else if (sist >=140 && diast >200) {
             validacion++;
             txtPd.setError("No puede ser mayor a 200");
 
-        }else if (sist >=140 && diast <90){
-            validacion++;
-            txtPd.setError("No puede ser Menor a 90");
         }
     }
 
     //Vemos en que tipo de estado esta la persona
     private void validacionDeTipoPresionArterial() {
-        
-        if (sist <=100 && diast <=80){
+
+        if (sist <=100 && diast >=1){
             Toast.makeText(activity, "Hipotension", Toast.LENGTH_SHORT).show();
-        }else if (sist > 100 && diast >= 80 && diast <=90&& sist <=129){
+            tipoPresion = "Hipotension";
+        }else if (sist > 100 && diast >= 1 && diast >=1&& sist <=129){
             Toast.makeText(activity, "Presion Normal", Toast.LENGTH_SHORT).show();
+            tipoPresion = "Presion Normal";
         }
-        else if (sist >= 130 && diast >=80 && sist <=139 && diast <=90){
+        else if (sist >= 130 && diast >=1 && sist <=139 && diast >=1){
             Toast.makeText(activity, "Pre-Hipertension", Toast.LENGTH_SHORT).show();
+            tipoPresion = "Pre-Hipertension";
         }
-        else if (sist >= 140 && diast >=90){
+        else if (sist >= 140 && diast >=1){
             Toast.makeText(activity, "Presion Arterial Alta", Toast.LENGTH_SHORT).show();
+            tipoPresion = "Presion Arterial Alta";
         }
     }
 
@@ -422,32 +410,36 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
 
 
     }
-
     private void calcularGlucometria(){
-        glucometria= Float.parseFloat(txtGlucometria.getText().toString());
-        if (glucometria<70){
-            glucosa = "Baja (Hipoglicemia)";
-        }
 
-        if (glucometria>=70 && glucometria<120){
-            glucosa = "Normal";
-        }
+        if(txtGlucometria.getText().toString().isEmpty()){
+            txtGlucometria.setError("Falta Llenar Campo Glucometria");
 
-        if (glucometria>=120 && glucometria<180){
-            glucosa = "Elevada";
-        }
+        } else {
 
-        if (glucometria>=180){
-            glucosa = "Muy elevada";
+
+          glucometria = Float.parseFloat(txtGlucometria.getText().toString());
+            if (glucometria < 70) {
+                glucosa = "Baja (Hipoglicemia)";
+            }
+            if (glucometria >= 70 && glucometria < 120) {
+                glucosa = "Normal";
+            }
+            if (glucometria >= 120 && glucometria < 180) {
+                glucosa = "Elevada";
+            }
+            if (glucometria >= 180) {
+                glucosa = "Muy elevada";
+            }
         }
 
     }
-
     public void inputData(){
         Datos datos = MenuP.datos;
         datos.setTalla((int) altura);
         datos.setPeso((int) peso);
         datos.setPresionAS(String.valueOf(sist));
+        datos.setPresionArterial(tipoPresion);
         datos.setPresionDiastolica(String.valueOf(diast));
         datos.setClasificacionIMC(tmp1);
         datos.setImc((int) imc);
@@ -456,6 +448,7 @@ public class datosPersonales extends AppCompatActivity implements View.OnClickLi
         datos.setGlucometria(String.valueOf(glucometria));
         MenuP.datos = datos;
     }
-
-
-}
+    private void mostrarGlucometria() {
+    calcularGlucometria();
+        Toast.makeText(activity, "SU GLUCOSA ES " + glucosa, Toast.LENGTH_SHORT).show();
+    }}

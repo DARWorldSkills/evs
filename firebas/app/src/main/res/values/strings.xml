@@ -11,5 +11,6 @@
     <string name="ingreseClave">Ingrese contraseña para la cuenta</string>
     <string name="ingresenuevamente">Ingrese nuevamente la contraseña</string>
     <string name="crearCuenta">Crear cuenta</string>
+    <string name="gps">GPS: No activado</string>
 
 </resources>

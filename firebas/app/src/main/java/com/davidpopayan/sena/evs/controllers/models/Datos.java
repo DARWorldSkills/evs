@@ -344,4 +344,5 @@ public class Datos {
     public void setGlucometria(String glucometria) {
         this.glucometria = glucometria;
     }
+
 }

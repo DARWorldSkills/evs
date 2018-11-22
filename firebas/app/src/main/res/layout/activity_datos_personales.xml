@@ -240,6 +240,23 @@
                     android:textSize="15sp" />
             </android.support.design.widget.TextInputLayout>
 
+            <Button
+                android:id="@+id/btnGlucosa"
+                style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+                android:layout_width="119dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="Calcular"
+
+                android:textColor="@color/colorPrimary"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
         </android.support.constraint.ConstraintLayout>
 
 
@@ -450,8 +467,4 @@
 
 
     </android.support.constraint.ConstraintLayout>
-
-
-
-
 </ScrollView>

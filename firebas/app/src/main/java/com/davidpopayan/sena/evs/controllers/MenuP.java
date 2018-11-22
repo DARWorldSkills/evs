@@ -11,6 +11,9 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
@@ -57,7 +60,10 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
 
     List<Datos> datosList=new ArrayList<>();
     private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=100;
-    public static Datos datos = new Datos();
+    private final int MY_PERMISSIONS=101;
+    final int MY_LOCATION = 500;
+    public static Datos
+            datos = new Datos();
     public static int ingresar=0;
     File archivo;
     SharedPreferences preferences;
@@ -66,19 +72,35 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     Button btnBusqueda, btnExportar ,btnCerrarSesion, btnNuevo;
     public static Activity activity;
     public static MenuP menuP;
+    private static String modoGPS="";
+    LocationManager locationManager;
+    Location location;
+    TextView txtGPS;
+    private static boolean disponiblepGPS, bandera1, bandera2, bandera3;
+    private static LocationManager locManager;
+    private static String provider;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_p);
+        bandera1=true;
+        bandera2=true;
+        bandera3=true;
         inicializar();
         this.setTitle("Estilo de vida saludable");
 
         btnNuevo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuP.this, PrimerForm.class);
-                startActivity(intent);
-                ingresar=1;
+                if (disponiblepGPS==true){
+                    Intent intent = new Intent(MenuP.this, PrimerForm.class);
+                    startActivity(intent);
+                    ingresar = 1;
+                }else {
+                    Toast.makeText(MenuP.this, "Por favor active el GPS", Toast.LENGTH_SHORT).show();
+                }
             }
         });
         btnBusqueda.setOnClickListener(this);
@@ -86,11 +108,14 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         btnCerrarSesion.setOnClickListener(this);
         activity=this;
         menuP=this;
+        pedirPermisoGPS();
+        gpsConstante();
     }
 
     private void inicializar() {
         btnNuevo = findViewById(R.id.btnNuevoPerfil);
         txtBusqueda = findViewById(R.id.txtBusqueda);
+        txtGPS = findViewById(R.id.txtGPS);
         btnBusqueda = findViewById(R.id.btnBusqueda);
         btnExportar = findViewById(R.id.btnExportar);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
@@ -140,6 +165,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void pedirPermiso() {
 
         if (ContextCompat.checkSelfPermission(this,
@@ -170,7 +196,6 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         }
 
     }
-
     private void exportarEnCSV() {
 
         final Dialog dialog = new Dialog(MenuP.this);
@@ -217,6 +242,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                     archivo = new File(exportDir, "Tamitaje "+fecha.substring(0,2)+"-"+fecha.substring(3,5)+"-"+fecha.substring(6,8)+".csv");
                     archivo.createNewFile();
                     CSVWriter csvWrite = new CSVWriter(new FileWriter(archivo));
+
                     String titulos[] = {
                             "Número","Fecha en tamitaje","Nombres","Tipo de identificación","Número de identificación","Nombre de EPS","Nombre de IPS","Télefono",
                             "Dirección","Fecha de Nacimiento","Edad","Genero","Talla","Peso","Perimetro abdominal","Actividad Fisica","Frecuencia en Verduras y Frutas",
@@ -301,6 +327,16 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
                 }
                 return;
             }
+
+            case MY_PERMISSIONS:{
+                if (grantResults.length>0 && grantResults[0]== PackageManager.PERMISSION_GRANTED){
+                    metodoCordenadas();
+                }else {
+                    Toast.makeText(activity, "No se ha activado el GPS", Toast.LENGTH_SHORT).show();
+                }
+
+
+            }
         }
     }
 
@@ -334,7 +370,11 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnBusqueda:
-                generarBusqueda();
+                if (disponiblepGPS) {
+                    generarBusqueda();
+                }else {
+                    Toast.makeText(MenuP.this, "Por favor active el GPS", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.btnExportar:
                 pedirPermiso();
@@ -363,7 +403,7 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
     }
 
     public void generarBusqueda(){
-        if (txtBusqueda.getText().length()>0){
+        if (txtBusqueda.getText().length()>0 && disponiblepGPS==true){
             ManagerDB managerDB = new ManagerDB(this);
             List<Datos> listarDatos = managerDB.listaDatosPorIdentificacion(txtBusqueda.getText().toString());
             List<Datos> listarDatos1 = managerDB.listaDatosPorIdentificacion1(txtBusqueda.getText().toString());
@@ -389,5 +429,221 @@ public class MenuP extends AppCompatActivity implements OnClickListener{
         }else {
             Toast.makeText(activity, "Por favor ingrese un número de documento valido", Toast.LENGTH_SHORT).show();
         }
+    }
+
+
+    private void pedirPermisoGPS() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSIONS);
+
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                // Show an expanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+
+            } else {
+                // No explanation needed, we can request the permission.
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS);
+
+                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+
+            }
+
+        }else {
+            metodoCordenadas();
+
+        }
+
+    }
+
+
+    private void metodoCordenadas() {
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) ActivityCompat.requestPermissions
+                (this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, MY_LOCATION);
+        {
+
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission
+                    (this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
+                return;
+
+            }
+
+
+            try {
+
+                locationManager = (LocationManager) MenuP.this.getSystemService(Context.LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(locationManager.NETWORK_PROVIDER, 10000, 0, locationListener );
+                location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                if (!(location.getLongitude()>0.0 && location.getLatitude()>0.0)){
+                    disponiblepGPS=true;
+                    txtGPS.setText("Ubicación: "+location.getLatitude()+","+location.getLongitude());
+                }else{
+                    disponiblepGPS=false;
+                    txtGPS.setText("El GPS está desactivado");
+                }
+                MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
+                MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
+
+            } catch (Exception ex) {
+                txtGPS.setText("El GPS está desactivado");
+                Log.e("Error en Network","Error obteniendo NETWORK_PROVIDER.");
+            }
+
+
+            //Determina si el GPS_PROVIDER esta disponible:
+            try {
+                locationManager = (LocationManager) MenuP.this.getSystemService(Context.LOCATION_SERVICE);
+                locationManager.requestLocationUpdates(locationManager.GPS_PROVIDER, 10000, 0, locationListener );
+                location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                if (!(location.getLongitude()>=0.0 && location.getLatitude()>=0.0)){
+                    disponiblepGPS=true;
+                    txtGPS.setText("Ubicación: "+location.getLatitude()+","+location.getLongitude());
+                }else{
+                    disponiblepGPS=false;
+                    txtGPS.setText("El GPS está desactivado");
+                }
+                MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
+                MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
+
+            } catch (Exception ex) {
+                Log.e("Error en GPS","Error obteniendo GPS_PROVIDER.");
+                txtGPS.setText("El GPS está desactivado");
+            }
+
+
+        }
+    }
+
+    LocationListener locationListener = new LocationListener() {
+        @Override
+        public void onLocationChanged(Location location1) {
+            try {
+                location=location1;
+                if (!(location.getLongitude()>0.0 && location.getLatitude()>0.0)){
+                    disponiblepGPS=true;
+                    txtGPS.setText("Ubicación: "+location.getLatitude()+","+location.getLongitude());
+                }else{
+                    disponiblepGPS=false;
+                    txtGPS.setText("El GPS está desactivado");
+                }
+                MenuP.datos.setLatitud(Double.toString(location.getLatitude()));
+                MenuP.datos.setLongitud(Double.toString(location.getLongitude()));
+            }catch (Exception e){
+                Log.e("Error localizacion",e.getMessage());
+            }
+
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+            if (status>1){
+                disponiblepGPS=true;
+            }else {
+                disponiblepGPS=false;
+                txtGPS.setText("El GPS está desactivado");
+            }
+            disponiblepGPS=false;
+            txtGPS.setText("El GPS está desactivado");
+
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+
+    private void gpsConstante() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (bandera1){
+                    try {
+                        Thread.sleep(150);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (bandera2) {
+                                if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                                    if (txtGPS.getText().equals("El GPS está desactivado") ){
+                                        pedirPermisoGPS();
+                                        if (bandera3){
+                                            Toast.makeText(MenuP.this, "Por favor espere hasta que parezca su ubicación", Toast.LENGTH_LONG).show();
+                                            bandera3=false;
+                                        }
+
+                                    }else {
+                                        disponiblepGPS = true;
+                                    }
+
+                                }else {
+                                    txtGPS.setText("El GPS está desactivado");
+                                    disponiblepGPS = false;
+                                    bandera3=true;
+                                }
+
+                            }
+                        }
+                    });
+
+                }
+            }
+        });
+        thread.start();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        bandera2=true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        bandera2=true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        bandera2=false;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        bandera2=false;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bandera1=false;
     }
 }
